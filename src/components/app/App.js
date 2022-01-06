@@ -1,5 +1,7 @@
 import React from 'react'
-import { Auth } from '../../pages/auth/Auth'
+import Auth from '../../pages/auth/Auth'
+import { observer } from 'mobx-react'
+import {Diag} from "../../pages/diag/Diag";
 
 class App extends React.Component{
 
@@ -10,10 +12,10 @@ class App extends React.Component{
     render(){
       return (
           <div className='container'>
-              <Auth/>
+              <Diag/>
           </div>
       );
     }
 }
 
-export default App;
+export default observer(App);

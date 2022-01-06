@@ -1,0 +1,34 @@
+[
+    {
+        "name":"smile",
+        "text": "Улыбка"
+    },
+    {
+        "name":"tube",
+        "text": "Трубочка"
+    },
+    {
+        "name":"fence",
+        "text": "Заборчик"
+    },
+    {
+        "name":"paddle",
+        "text": "Лопатка"
+    },
+    {
+        "name":"cup",
+        "text": "Чашечка"
+    },
+    {
+        "name":"horse",
+        "text": "Лошадка"
+    },
+    {
+        "name":"swing",
+        "text": "Качели"
+    },
+    {
+        "name":"watch",
+        "text": "Часики"
+    }
+]
