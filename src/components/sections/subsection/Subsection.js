@@ -1,9 +1,8 @@
 import React from 'react'
-import {observer} from 'mobx-react'
-import classNames from 'classnames'
-import DiagStore from "../../../stores/DiagStore.js"
+import {connect} from 'react-redux'
+import {setActiveItem} from "../../../pages/diag/diagActions";
 
-const Subsection = observer(class Subsection extends React.Component {
+export default class Subsection extends React.Component {
 
   constructor(props){
     super(props)
@@ -13,15 +12,14 @@ const Subsection = observer(class Subsection extends React.Component {
     e.preventDefault()
     const { name } = this.props
     const { value } = e.target
-    DiagStore.SensoMotorStore.setActive(name, value)
+    this.props.setActiveItem(name, Number(value))
   }
 
   render() {
-    const { data, name, title, instruction } = this.props
-    const { subsectionsData } = DiagStore.SensoMotorStore
+    const { data, title, instruction, store } = this.props
     return (
       <div className="subsection">
-        <p>Активный:{name ? subsectionsData[name].activeId : 0}</p>
+        <p>{store.activeItem}</p>
         <div className="subsection_header">
           <h2>{title}</h2>
         </div>
@@ -32,10 +30,10 @@ const Subsection = observer(class Subsection extends React.Component {
           <div style={{"display": "flex"}}>
             { data.map((item, index) =>
               <button
-                style={subsectionsData[name].activeId === index ? {"border": "2px solid red"} : null}
                 onClick={this.handleClick}
                 key={index}
                 value={item.id}
+                style={store.activeItem === item.id ? {"border": "2px red solid"} : null}
               />)}
           </div>
         </div>
@@ -47,7 +45,6 @@ const Subsection = observer(class Subsection extends React.Component {
     );
   }
 }
-)
 
 function Buttons(props){
 
@@ -68,5 +65,3 @@ function Buttons(props){
     </div>
   )
 }
-
-export default Subsection

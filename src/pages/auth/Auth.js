@@ -1,9 +1,8 @@
 import React from 'react'
-import {LoginForm} from '../../components/loginForm/LoginForm'
-import {observer} from "mobx-react/dist/index";
+import LoginForm from '../../components/loginForm/LoginForm'
 
 
-class Auth extends React.Component{
+export default class Auth extends React.Component{
 
     constructor(props){
         super(props)
@@ -18,5 +17,3 @@ class Auth extends React.Component{
         )
     }
 }
-
-export default observer(Auth);

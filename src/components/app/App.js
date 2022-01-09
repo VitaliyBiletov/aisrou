@@ -1,9 +1,8 @@
 import React from 'react'
 import Auth from '../../pages/auth/Auth'
-import { observer } from 'mobx-react'
 import {Diag} from "../../pages/diag/Diag";
 
-class App extends React.Component{
+export default class App extends React.Component{
 
     constructor(props){
         super(props)
@@ -17,5 +16,3 @@ class App extends React.Component{
       );
     }
 }
-
-export default observer(App);
