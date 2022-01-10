@@ -1,8 +1,18 @@
 import React from 'react'
+import {classNames} from 'classnames'
+import './style.sass'
+import _ from 'lodash'
 import {connect} from 'react-redux'
-import {setActiveItem} from "../../../pages/diag/diagActions";
+import {setActiveItem, setNextItem, setValueItem} from "../../../pages/diag/diagActions";
 
-export default class Subsection extends React.Component {
+const buttonsData = [
+  {id:0, color: "red"},
+  {id:1, color: "yellow"},
+  {id:2, color: "blue"},
+  {id:3, color: "green"},
+]
+
+class Subsection extends React.Component {
 
   constructor(props){
     super(props)
@@ -15,8 +25,17 @@ export default class Subsection extends React.Component {
     this.props.setActiveItem(name, Number(value))
   }
 
+  handleButtonClick = (e) => {
+    e.preventDefault()
+    const { name, data, store } = this.props
+    const count = data.length
+    this.props.setValueItem(store.activeItem, name, Number(e.target.value))
+    this.props.setNextItem(name, count)
+  }
+
   render() {
-    const { data, title, instruction, store } = this.props
+    const { data, name, title, instruction, store } = this.props
+    console.log(store)
     return (
       <div className="subsection">
         <p>{store.activeItem}</p>
@@ -33,35 +52,30 @@ export default class Subsection extends React.Component {
                 onClick={this.handleClick}
                 key={index}
                 value={item.id}
-                style={store.activeItem === item.id ? {"border": "2px red solid"} : null}
+                style={item.id === store.activeItem ? {'border': '2px solid red'} : null}
               />)}
           </div>
         </div>
         <div>
 
         </div>
-        <div><Buttons /></div>
+        <div style={{"display": "flex"}}>
+          { buttonsData.map((item, index) => <button onClick={this.handleButtonClick} style={{"backgroundColor": item.color}} value={item.id} key={index}>{item.id}</button>) }
+        </div>
       </div>
     );
   }
 }
 
-function Buttons(props){
-
-  const buttonsData = [
-    {id:0, color: "red"},
-    {id:1, color: "yellow"},
-    {id:2, color: "blue"},
-    {id:3, color: "green"},
-  ]
-
-  const handleClick = (e) => {
-    e.preventDefault()
-  }
-
-  return (
-    <div style={{"display": "flex"}}>
-      { buttonsData.map((item, index) => <button onClick={handleClick} style={{"backgroundColor": item.color}} key={index}>{item.id}</button>) }
-    </div>
-  )
+const mapStateToProps = (state, ownProps) => {
+  const { sensMotor } = state.diag
+  return { store: sensMotor[ownProps.name] }
 }
+
+const mapDispatchToProps = {
+  setActiveItem,
+  setNextItem,
+  setValueItem
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Subsection)
