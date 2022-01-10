@@ -1,9 +1,8 @@
 import React from 'react'
 import {classNames} from 'classnames'
 import './style.sass'
-import _ from 'lodash'
 import {connect} from 'react-redux'
-import {setActiveItem, setNextItem, setValueItem} from "../../../pages/diag/diagActions";
+import {setValueItem} from "./subsectionActions";
 
 const buttonsData = [
   {id:0, color: "red"},
@@ -16,51 +15,69 @@ class Subsection extends React.Component {
 
   constructor(props){
     super(props)
+    this.state = {
+      activeItem: 0,
+    }
   }
 
   handleClick = (e) => {
     e.preventDefault()
-    const { name } = this.props
     const { value } = e.target
-    this.props.setActiveItem(name, Number(value))
+    this.setState({activeItem: Number(value)})
+  }
+
+  setNextItem = (index, length) => {
+    return index < length - 1 ?
+      this.setState({activeItem: index + 1}) :
+      this.setState({activeItem: 0})
   }
 
   handleButtonClick = (e) => {
     e.preventDefault()
-    const { name, data, store } = this.props
-    const count = data.length
-    this.props.setValueItem(store.activeItem, name, Number(e.target.value))
-    this.props.setNextItem(name, count)
+    const { name, data } = this.props
+    const { activeItem } = this.state
+    const length = data.length
+    this.props.setValueItem(activeItem, name, Number(e.target.value))
+    this.setNextItem(activeItem, length)
   }
 
   render() {
-    const { data, name, title, instruction, store } = this.props
-    console.log(store)
+    const { data, title, instruction, store } = this.props
+
     return (
       <div className="subsection">
-        <p>{store.activeItem}</p>
-        <div className="subsection_header">
-          <h2>{title}</h2>
+        <div className="subsection__header">
+          <h2 className='subsection__header_h2'>{title}</h2>
         </div>
-        <div className="subsection_description">
-          <p>{instruction}</p>
+        <div className="subsection__description">
+          <p className='subsection__description_p'>{instruction}</p>
         </div>
-        <div className="subsection_status-bar">
-          <div style={{"display": "flex"}}>
-            { data.map((item, index) =>
+        <div className="subsection__status-section">
+          { data.map((item, index) =>{
+            const result = store.find(i=>i.id === item.id)
+            const color = result ? buttonsData.find(b=>result.value === b.id).color : 'white'
+            return (
               <button
+                className={`subsection__btn-status subsection__btn-status_${color}`}
                 onClick={this.handleClick}
                 key={index}
                 value={item.id}
-                style={item.id === store.activeItem ? {'border': '2px solid red'} : null}
-              />)}
-          </div>
-        </div>
-        <div>
+                style={item.id === this.state.activeItem ? {'border': '2px solid red'} : null}
+              />
+            )
+          }
+          )}
+         </div>
+        <div className='subsection__content-section'>
 
         </div>
-        <div style={{"display": "flex"}}>
-          { buttonsData.map((item, index) => <button onClick={this.handleButtonClick} style={{"backgroundColor": item.color}} value={item.id} key={index}>{item.id}</button>) }
+        <div className='subsection__points-section'>
+          { buttonsData.map((item, index) =>
+            <button
+              className={`subsection__btn-point subsection__btn-point_${item.color}`}
+              onClick={this.handleButtonClick}
+              value={item.id}
+              key={index}>{item.id}</button>) }
         </div>
       </div>
     );
@@ -68,13 +85,10 @@ class Subsection extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { sensMotor } = state.diag
-  return { store: sensMotor[ownProps.name] }
+  return {store: state.diag.subsections[ownProps.name]}
 }
 
 const mapDispatchToProps = {
-  setActiveItem,
-  setNextItem,
   setValueItem
 }
 

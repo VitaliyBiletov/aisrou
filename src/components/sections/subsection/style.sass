@@ -1,2 +1,64 @@
-.red
-  background-color: red
+$red: #ff0005
+$green: #008000
+$blue: #1e90ff
+$yellow: #ffff00
+
+=flex($direction)
+  display: flex
+  flex-direction: $direction
+  justify-content: center
+
+.subsection
+
+  &__header
+
+      &_h2
+        color: black
+
+  &__description
+
+      &_p
+        color: black
+  
+  &__status-section
+    +flex(row)
+
+  &__btn-score
+    +flex(row)
+
+  &__btn-status
+    height: 15px
+
+    &_red
+      background-color: $red
+
+    &_green
+      background-color: $green
+
+    &_blue
+      background-color: $blue
+
+    &_yellow
+      background-color: $yellow
+
+  &__content-section
+    color: black
+
+  &__points-section
+
+    +flex(row)
+
+  &__btn-point
+
+    &_red
+      background-color: $red
+
+    &_green
+      background-color: $green
+
+    &_blue
+      background-color: $blue
+
+    &_yellow
+      background-color: $yellow
+

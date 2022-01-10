@@ -2,30 +2,36 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import StateFunc from "../../components/sections/stateFunc/StateFunc";
 import Sensmotor from "../../components/sections/sensmotor/Sensmotor";
+import './style.sass'
 
 
-class Diag extends React.Component{
+export default class Diag extends React.Component {
 
-    constructor(props){
-        super(props)
-    }
-    render(){
-        return (
-            <Tabs defaultIndex={1}>
-                <TabList>
-                    <Tab>Состояние функций</Tab>
-                    <Tab>Сенсо-моторный уровень</Tab>
-                </TabList>
+  constructor(props) {
+    super(props)
+  }
 
-                <TabPanel>
-                    <h2>Состояние функций</h2>
-                    <StateFunc/>
-                </TabPanel>
-                <TabPanel>
-                    <Sensmotor />
-                </TabPanel>
-            </Tabs>
-        )
-    }
+  render() {
+    return (
+      <div className="diag">
+        <Tabs className='diag__tabs' defaultIndex={1}>
+          <TabList className='diag__tab-list'>
+            <Tab className='diag__item'>Состояние функций</Tab>
+            <Tab className='diag__item'>Сенсо-моторный уровень</Tab>
+          </TabList>
+
+          <TabPanel className='diag__tab-panel'>
+            <StateFunc/>
+          </TabPanel>
+          <TabPanel className='diag__tab-panel'>
+            <Sensmotor/>
+          </TabPanel>
+        </Tabs>
+        <div className='diag__bottom-section'>
+          <button className='diag__btn diag__btn_save'>Сохранить</button>
+          <button className='diag__btn diag__btn_cancel'>Отмена</button>
+        </div>
+      </div>
+    )
+  }
 }
-export { Diag }

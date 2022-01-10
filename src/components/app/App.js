@@ -1,6 +1,6 @@
 import React from 'react'
 import Auth from '../../pages/auth/Auth'
-import {Diag} from "../../pages/diag/Diag";
+import Diag from "../../pages/diag/Diag";
 
 export default class App extends React.Component{
 

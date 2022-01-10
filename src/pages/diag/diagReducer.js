@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import {SensMotorReducer} from "../../components/sections/sensmotor/SensMotorReducer";
+import {SubsectionReducer} from "../../components/sections/subsection/subsectionReducer";
 
 export const diagReducer = combineReducers({
-  sensMotor: SensMotorReducer
+  subsections: SubsectionReducer
 })

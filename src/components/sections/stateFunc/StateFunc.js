@@ -9,7 +9,9 @@ export default class StateFunc extends React.Component{
 
   render(){
     return (
-        <div>{
+        <div>
+          <h1>Состояние функций</h1>
+          {
           Fields.map((field, index) => (
               <div key={index}>
                 <label>{field.title}</label>
