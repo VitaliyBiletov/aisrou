@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import StateFunc from "../../components/sections/stateFunc/StateFunc";
 import Sensmotor from "../../components/sections/sensmotor/Sensmotor";
+import Grammatic from "../../components/sections/grammatic/Grammatic";
 import './style.sass'
 
 
@@ -18,6 +19,7 @@ export default class Diag extends React.Component {
           <TabList className='diag__tab-list'>
             <Tab className='diag__item'>Состояние функций</Tab>
             <Tab className='diag__item'>Сенсо-моторный уровень</Tab>
+            <Tab className='diag__item'>Грамматика</Tab>
           </TabList>
 
           <TabPanel className='diag__tab-panel'>
@@ -25,6 +27,9 @@ export default class Diag extends React.Component {
           </TabPanel>
           <TabPanel className='diag__tab-panel'>
             <Sensmotor/>
+          </TabPanel>
+          <TabPanel className='diag__tab-panel'>
+            <Grammatic/>
           </TabPanel>
         </Tabs>
         <div className='diag__bottom-section'>

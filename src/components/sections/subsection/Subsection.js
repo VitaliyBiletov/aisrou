@@ -20,6 +20,10 @@ class Subsection extends React.Component {
     }
   }
 
+  componentDidMount(){
+    
+  }
+
   handleClick = (e) => {
     e.preventDefault()
     const { value } = e.target
@@ -34,16 +38,15 @@ class Subsection extends React.Component {
 
   handleButtonClick = (e) => {
     e.preventDefault()
-    const { name, data } = this.props
+    const { name, data, section } = this.props
     const { activeItem } = this.state
     const length = data.length
-    this.props.setValueItem(activeItem, name, Number(e.target.value))
+    this.props.setValueItem(activeItem, section, name, Number(e.target.value))
     this.setNextItem(activeItem, length)
   }
 
   render() {
-    const { data, title, instruction, store } = this.props
-
+    const { data, title, text, instruction, store } = this.props
     return (
       <div className="subsection">
         <div className="subsection__header">
@@ -69,7 +72,12 @@ class Subsection extends React.Component {
           )}
          </div>
         <div className='subsection__content-section'>
-
+          {this.props.type === "text" ?
+            <p>{this.props.data[this.state.activeItem].text}</p> :
+            <>
+              <img src={`http://localhost:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
+            </>
+          }
         </div>
         <div className='subsection__points-section'>
           { buttonsData.map((item, index) =>
@@ -85,7 +93,8 @@ class Subsection extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {store: state.diag.subsections[ownProps.name]}
+  const {section, name} = ownProps
+  return {store: state.diag.subsections[section][name]}
 }
 
 const mapDispatchToProps = {
