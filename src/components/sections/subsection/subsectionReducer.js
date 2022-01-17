@@ -10,6 +10,7 @@ const initialState = {
     "grammatic":{
       "pluralNominative":[],
       "pluralGenitive":[],
+      "diminutiveForm":[],
       "prepositions":[],
       "relativeAdjectives":[],
       "possessiveAdjectives":[],
