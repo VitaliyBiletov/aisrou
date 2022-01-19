@@ -12,10 +12,13 @@
   &__tab-list
     display: flex
     list-style-type: none
+    justify-content: center
 
   &__item
     padding: 10px
-
+    background-color: aliceblue
+    margin: 0 10px
+    border-radius: 10px
     &:hover
       cursor: pointer
 
@@ -36,3 +39,6 @@
 
     &_cancel
       background-color: dodgerblue
+
+.react-tabs__tab--selected
+  background-color: cornsilk

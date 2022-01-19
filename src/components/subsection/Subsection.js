@@ -21,7 +21,7 @@ class Subsection extends React.Component {
   }
 
   componentDidMount(){
-    
+
   }
 
   handleClick = (e) => {
@@ -47,7 +47,6 @@ class Subsection extends React.Component {
 
   render() {
     const { data, title, text, instruction, store } = this.props
-    console.log(Array.isArray(instruction))
     return (
       <div className="subsection">
         <div className="subsection__header">
@@ -58,29 +57,28 @@ class Subsection extends React.Component {
             !Array.isArray(instruction) ? instruction : instruction[this.state.activeItem]
           }</p>
         </div>
-        <div className="subsection__status-section">
-          { data.map((item, index) =>{
-            const result = store.find(i=>i.id === item.id)
-            const color = result ? buttonsData.find(b=>result.value === b.id).color : 'white'
-            return (
-              <button
-                className={`subsection__btn-status subsection__btn-status_${color}`}
-                onClick={this.handleClick}
-                key={index}
-                value={item.id}
-                style={item.id === this.state.activeItem ? {'border': '2px solid red'} : null}
-              />
-            )
-          }
-          )}
-         </div>
         <div className='subsection__content-section'>
           {this.props.type === "text" ?
-            <p>{this.props.data[this.state.activeItem].text}</p> :
+            <p className='subsection__text'>{this.props.data[this.state.activeItem].text}</p> :
             <>
-              <img className='subsection__img' src={`http://192.168.1.61:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
+              <img className='subsection__img' src={`http://localhost:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
             </>
           }
+        </div>
+        <div className="subsection__status-section">
+          { data.map((item, index) =>{
+              const result = store.find(i=>i.id === item.id)
+              const color = result ? buttonsData.find(b=>result.value === b.id).color : 'white'
+              return (
+                <button
+                  className={`subsection__btn-status subsection__btn-status_${color} ${this.state.activeItem === item.id ? 'subsection__btn-status subsection__btn-status_active' : null}`}
+                  onClick={this.handleClick}
+                  key={index}
+                  value={item.id}
+                />
+              )
+            }
+          )}
         </div>
         <div className='subsection__points-section'>
           { buttonsData.map((item, index) =>

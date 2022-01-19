@@ -3,6 +3,7 @@ $red: #ff0005
 $green: #008000
 $blue: #1e90ff
 $yellow: #ffff00
+$btnStatusSize: 15px
 
 =flex($direction)
   display: flex
@@ -14,28 +15,48 @@ $yellow: #ffff00
   max-width: 1000px
   border: 1px lightgray solid
   margin: 10px auto
+  border-radius: 15px
 
   &__header
-
-      background-color: lavender
+      border-top-left-radius: 15px
+      border-top-right-radius: 15px
+      background-color: #9696ea
+      padding: 5px
 
       &_h2
         margin: 0
+        color: #f0f8ff
+        text-shadow: 0 1px darkblue
 
   &__description
-
       &_p
-        color: black
-  
+        margin: 0
+        padding: 5px
+        background-color: #e6e6fa
   &__status-section
     +flex(row)
+    background-color: #7bea7b
+    display: inline-block
+    padding: 3px
+    border-radius: 8px
 
   &__btn-score
     +flex(row)
 
   &__btn-status
-    height: 15px
-
+    height: $btnStatusSize
+    width: $btnStatusSize
+    margin: 3px
+    background-color: #fff
+    cursor: pointer
+    border: none
+    border-radius: 4px
+    &:hover
+      outline: 1px #1ebe1e solid
+    &:focus
+      outline: 2px #1ebe1e solid
+    &_active
+      outline: 2px #1ebe1e solid
     &_red
       background-color: $red
 
@@ -53,16 +74,19 @@ $yellow: #ffff00
 
   &__img
 
-  &__points-section
+  &__text
+    font-size: 25pt
 
+  &__points-section
+    margin: 10px
     +flex(row)
 
   &__btn-point
     border: none
     width: 50px
-    height: 20px
+    height: 30px
     margin: 10px
-    border-radius: 5px
+    border-radius: 10px
 
     &_red
       background-color: $red

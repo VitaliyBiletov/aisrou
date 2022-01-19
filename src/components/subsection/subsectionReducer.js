@@ -17,6 +17,10 @@ const initialState = {
       "qualityAdjectives":[],
       "draftingProposals":[],
       "proposalVerification":[]
+    },
+    "lexis":{
+      "generalizing":[],
+      "antonyms":[]
     }
 }
 
