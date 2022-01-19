@@ -78,7 +78,7 @@ class Subsection extends React.Component {
           {this.props.type === "text" ?
             <p>{this.props.data[this.state.activeItem].text}</p> :
             <>
-              <img className='subsection__img' src={`http://localhost:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
+              <img className='subsection__img' src={`http://192.168.1.61:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
             </>
           }
         </div>
