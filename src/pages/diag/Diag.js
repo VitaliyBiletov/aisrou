@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import StateFunc from "../../components/sections/stateFunc/StateFunc";
-import Sensmotor from "../../components/sections/sensmotor/Sensmotor";
-import Grammatic from "../../components/sections/grammatic/Grammatic";
+import StateFunc from "./stateFunc/StateFunc";
+import Sensmotor from "./sensmotor/Sensmotor";
+import Grammatic from "./grammatic/Grammatic";
 import './style.sass'
 
 

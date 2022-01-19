@@ -1,18 +1,18 @@
 import React from 'react'
-import Subsection from '../subsection/Subsection'
-import SENSMOTOR_DATA from "./SensmotorData"
+import Subsection from '../../../components/subsection/Subsection'
+import GRAMMATIC_DATA from "./grammaticData"
 
 export default class Sensmotor extends React.Component {
   render() {
     return (
-      <div className="diagnostic-section senso-motor-level">
-        <h1>Сенсо-моторный уровень</h1>
-        {SENSMOTOR_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
+      <div className="diagnostic-section">
+        <h1>Гамматический строй и словообразование</h1>
+        {GRAMMATIC_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
           return (
             <Subsection
               key={id}
               name={name}
-              section='sensMotor'
+              section='grammatic'
               title={title}
               instruction={instruction}
               type={type}

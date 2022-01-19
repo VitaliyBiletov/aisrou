@@ -47,13 +47,16 @@ class Subsection extends React.Component {
 
   render() {
     const { data, title, text, instruction, store } = this.props
+    console.log(Array.isArray(instruction))
     return (
       <div className="subsection">
         <div className="subsection__header">
           <h2 className='subsection__header_h2'>{title}</h2>
         </div>
         <div className="subsection__description">
-          <p className='subsection__description_p'>{instruction}</p>
+          <p className='subsection__description_p'>{
+            !Array.isArray(instruction) ? instruction : instruction[this.state.activeItem]
+          }</p>
         </div>
         <div className="subsection__status-section">
           { data.map((item, index) =>{
@@ -75,7 +78,7 @@ class Subsection extends React.Component {
           {this.props.type === "text" ?
             <p>{this.props.data[this.state.activeItem].text}</p> :
             <>
-              <img src={`http://localhost:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
+              <img className='subsection__img' src={`http://localhost:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
             </>
           }
         </div>
@@ -85,7 +88,8 @@ class Subsection extends React.Component {
               className={`subsection__btn-point subsection__btn-point_${item.color}`}
               onClick={this.handleButtonClick}
               value={item.id}
-              key={index}>{item.id}</button>) }
+              key={index} />
+          )}
         </div>
       </div>
     );

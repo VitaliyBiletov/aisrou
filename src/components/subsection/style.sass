@@ -9,11 +9,16 @@ $yellow: #ffff00
   justify-content: center
 
 .subsection
+  min-width: 660px
+  max-width: 1000px
+  border: 1px lightgray solid
+  padding: 20px
+  margin: 10px auto
 
   &__header
 
       &_h2
-        color: black
+        margin: 0
 
   &__description
 
@@ -42,13 +47,20 @@ $yellow: #ffff00
       background-color: $yellow
 
   &__content-section
-    color: black
+    margin: 1em
+
+  &__img
 
   &__points-section
 
     +flex(row)
 
   &__btn-point
+    border: none
+    width: 50px
+    height: 20px
+    margin: 10px
+    border-radius: 5px
 
     &_red
       background-color: $red
@@ -61,4 +73,7 @@ $yellow: #ffff00
 
     &_yellow
       background-color: $yellow
+
+    &:hover
+      cursor: pointer
 
