@@ -6,7 +6,7 @@ export default class Sensmotor extends React.Component {
   render() {
     return (
       <div className="diagnostic-section">
-        <h1>Лексический строй</h1>
+        <h1>Лексика</h1>
         {LEXIS_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
           return (
             <Subsection
