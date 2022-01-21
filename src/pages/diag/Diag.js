@@ -6,6 +6,12 @@ import Grammatic from "./grammatic/Grammatic";
 import Lexis from "./lexis/Lexis";
 import './style.sass'
 
+const SECTIONS = [
+  {tabName: 'Состояние функций', component: <StateFunc />},
+  {tabName: 'Сенсо-моторный уровень', component: <Sensmotor />},
+  {tabName: 'Грамматика', component: <Grammatic />},
+  {tabName: 'Лексика', component: <Lexis />},
+]
 
 export default class Diag extends React.Component {
 
@@ -18,28 +24,25 @@ export default class Diag extends React.Component {
       <div className="diag">
         <Tabs className='diag__tabs' defaultIndex={1}>
           <TabList className='diag__tab-list'>
-            <Tab className='diag__item'>Состояние функций</Tab>
-            <Tab className='diag__item'>Сенсо-моторный уровень</Tab>
-            <Tab className='diag__item'>Грамматика</Tab>
-            <Tab className='diag__item'>Лексика</Tab>
+            { SECTIONS.map((s, index)=><Tab key={index} className='diag__item'>{s.tabName}</Tab>)}
           </TabList>
 
-          <TabPanel className='diag__tab-panel'>
-            <StateFunc/>
-          </TabPanel>
-          <TabPanel className='diag__tab-panel'>
-            <Sensmotor/>
-          </TabPanel>
-          <TabPanel className='diag__tab-panel'>
-            <Grammatic/>
-          </TabPanel>
-          <TabPanel className='diag__tab-panel'>
-            <Lexis/>
-          </TabPanel>
+          {SECTIONS.map((s, index)=>(
+            <TabPanel key={index} className='diag__tab-panel'>
+              {s.component}
+            </TabPanel>
+          ))}
         </Tabs>
         <div className='diag__bottom-section'>
           <button className='diag__btn diag__btn_save'>Сохранить</button>
           <button className='diag__btn diag__btn_cancel'>Отмена</button>
+          <div className="diag__progress">
+            <span>Прогресс:</span>
+            <progress className="diag__progress-bar" max="100" value="50" >
+
+            </progress>
+          </div>
+
         </div>
       </div>
     )

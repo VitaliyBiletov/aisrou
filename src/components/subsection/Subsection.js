@@ -75,6 +75,7 @@ class Subsection extends React.Component {
                   onClick={this.handleClick}
                   key={index}
                   value={item.id}
+                  data-tooltip={item.text}
                 />
               )
             }

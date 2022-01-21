@@ -1,29 +1,53 @@
 import React from 'react';
-import Fields from './Fields.json'
+import FIELDS from './Fields.json'
+import {connect} from 'react-redux'
+import {setValueStatFunc} from "../../../components/subsection/subsectionActions";
+import './style.sass'
 
-export default class StateFunc extends React.Component{
+class StateFunc extends React.Component{
 
   constructor(props){
     super(props)
   }
 
+  handleChange = (e) => {
+    this.props.setValueStatFunc(e.target.name, e.target.value)
+  }
+
   render(){
     return (
-        <div>
-          <h1>Состояние функций</h1>
-          {
-          Fields.map((field, index) => (
-              <div key={index}>
-                <label>{field.title}</label>
-                <textarea
-                  name={field.name}
-                  title={field.title}
-                />
-              </div>
-            )
-          )
-        }
+        <div className="section stateOfFunc">
+          <h1 className="section__header">Состояние функций</h1>
+          <div className="section__container">
+            <div className="stateOfFunc__form">
+              {FIELDS.map((field, index) => (
+                  <div className="stateOfFunc__item" key={index}>
+                    <label className="stateOfFunc__label">{field.title}</label>
+                    <textarea
+                      className="stateOfFunc__text-area"
+                      onChange={this.handleChange}
+                      name={field.name}
+                      title={field.title}
+                      value={this.props.store[field.name]}
+                    />
+                  </div>
+                )
+              )
+            }
+            </div>
+          </div>
         </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  console.log(state.diag.subsections.stateOfFunc)
+  return {store: state.diag.subsections.stateOfFunc}
+}
+
+const mapDispatchToProps = {
+  setValueStatFunc
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StateFunc)

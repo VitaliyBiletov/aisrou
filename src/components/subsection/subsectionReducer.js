@@ -1,6 +1,16 @@
-import {SET_VALUE_ITEM} from "./subsectionTypes";
+import {SET_VALUE_ITEM, SET_VALUE_STATE_FUNC} from "./subsectionTypes";
 
 const initialState = {
+    "stateOfFunc":{
+      "hearing":'',
+      "vision":'',
+      "breath":'',
+      "voice":'',
+      "prosody":'',
+      "articulationApparatus":'',
+      "motorSkills":'',
+      "additionalInformation":''
+    },
     "sensMotor":{
       "artic":[],
       "phonemics":[],
@@ -28,6 +38,8 @@ export function SubsectionReducer(state = initialState, action){
   switch (action.type){
     case SET_VALUE_ITEM:
       return updateItems(state, action)
+    case SET_VALUE_STATE_FUNC:
+      return Object.assign({}, state, {stateOfFunc:{...state.stateOfFunc, [action.payload.name]:action.payload.value}})
     default: return state
   }
 }

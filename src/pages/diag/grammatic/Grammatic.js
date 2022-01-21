@@ -5,8 +5,9 @@ import GRAMMATIC_DATA from "./grammaticData"
 export default class Sensmotor extends React.Component {
   render() {
     return (
-      <div className="diagnostic-section">
-        <h1>Грамматический строй и словообразование</h1>
+      <div className="section">
+        <h1 className="section__header">Грамматический строй и словообразование</h1>
+        <div className="section__container">
         {GRAMMATIC_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
           return (
             <Subsection
@@ -21,6 +22,7 @@ export default class Sensmotor extends React.Component {
             />
           )
         })}
+        </div>
       </div>
     )
   }
