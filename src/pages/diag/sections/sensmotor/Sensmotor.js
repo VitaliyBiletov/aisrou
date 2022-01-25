@@ -1,6 +1,6 @@
 import React from 'react'
 import Subsection from '../../../../components/subsection/Subsection'
-import SENSMOTOR_DATA from "./SensmotorData"
+import SENSMOTOR_DATA from "./sensmotorData"
 
 export default class Sensmotor extends React.Component {
   render() {
