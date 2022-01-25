@@ -31,17 +31,16 @@ export default class Diag extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
     const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
     this.setState({'activeTab': activeTab})
-  }
-
-  scrollToTop = function() {
-      scroll.scrollToTop({
-          duration: 800,
-          containerId:"diag",
-          smooth: 'easeInOutCubic'
-      });
+    window.addEventListener('scroll', (e) => {
+      if (window.scrollY > 50){
+          this.setState({isVisibleUp: true})
+      } else {
+          this.setState({isVisibleUp: false})
+      }
+    })
   }
 
   handleSelect = (index) => {
@@ -49,17 +48,9 @@ export default class Diag extends React.Component {
     sessionStorage.setItem('activeTab', index)
   }
 
-  handleScroll = (e) => {
-    if (e.target.scrollTop > 50){
-      this.setState({isVisibleUp: true})
-    } else {
-      this.setState({isVisibleUp: false})
-    }
-  }
-
   render() {
     return (
-      <div className="diag" id="diag" onScroll={this.handleScroll}>
+      <div className="diag" id="diag">
         <Tabs className='diag__tabs' selectedIndex={this.state.activeTab} onSelect={this.handleSelect}>
           <TabList className='diag__tab-list'>
             { SECTIONS.map((s, index)=><Tab key={index} className='diag__item'>{s.tabName}</Tab>)}
@@ -75,7 +66,7 @@ export default class Diag extends React.Component {
             this.state.isVisibleUp ?
                   <button
                       className="diag__btn diag__btn_up animate__animated animate__fadeIn"
-                      onClick={this.scrollToTop}
+                      onClick={()=>{scroll.scrollToTop()}}
                   >
                     <FontAwesomeIcon icon={faAngleUp} size="4x"/>
                   </button>
