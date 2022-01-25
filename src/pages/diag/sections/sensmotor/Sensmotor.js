@@ -1,19 +1,19 @@
 import React from 'react'
-import Subsection from '../../../components/subsection/Subsection'
-import LEXIS_DATA from "./lexisData"
+import Subsection from '../../../../components/subsection/Subsection'
+import SENSMOTOR_DATA from "./SensmotorData"
 
 export default class Sensmotor extends React.Component {
   render() {
     return (
       <div className="section">
-        <h1 className="section__header">Лексика</h1>
+        <h1 className="section__header">Сенсо-моторный уровень</h1>
         <div className="section__container">
-          {LEXIS_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
+          {SENSMOTOR_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
             return (
               <Subsection
                 key={id}
                 name={name}
-                section='lexis'
+                section='sensMotor'
                 title={title}
                 instruction={instruction}
                 type={type}

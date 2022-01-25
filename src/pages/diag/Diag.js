@@ -1,9 +1,10 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import StateFunc from "./stateFunc/StateFunc";
-import Sensmotor from "./sensmotor/Sensmotor";
-import Grammatic from "./grammatic/Grammatic";
-import Lexis from "./lexis/Lexis";
+import StateFunc from "./sections/stateFunc/StateFunc";
+import Sensmotor from "./sections/sensmotor/Sensmotor";
+import Grammatic from "./sections/grammatic/Grammatic";
+import Lexis from "./sections/lexis/Lexis";
+import Progress from '../../components/progress/Progress'
 import './style.sass'
 
 const SECTIONS = [
@@ -17,12 +18,26 @@ export default class Diag extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      activeTab: 0
+    }
+  }
+
+  componentDidMount(){
+    const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
+    this.setState({'activeTab': activeTab})
+
+  }
+
+  handleSelect = (index) => {
+    this.setState({'activeTab': index})
+    sessionStorage.setItem('activeTab', index)
   }
 
   render() {
     return (
       <div className="diag">
-        <Tabs className='diag__tabs' defaultIndex={1}>
+        <Tabs className='diag__tabs' selectedIndex={this.state.activeTab} onSelect={this.handleSelect}>
           <TabList className='diag__tab-list'>
             { SECTIONS.map((s, index)=><Tab key={index} className='diag__item'>{s.tabName}</Tab>)}
           </TabList>
@@ -36,13 +51,7 @@ export default class Diag extends React.Component {
         <div className='diag__bottom-section'>
           <button className='diag__btn diag__btn_save'>Сохранить</button>
           <button className='diag__btn diag__btn_cancel'>Отмена</button>
-          <div className="diag__progress">
-            <span>Прогресс:</span>
-            <progress className="diag__progress-bar" max="100" value="50" >
-
-            </progress>
-          </div>
-
+          <Progress />
         </div>
       </div>
     )

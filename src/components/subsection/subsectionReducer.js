@@ -31,7 +31,8 @@ const initialState = {
     "lexis":{
       "generalizing":[],
       "antonyms":[],
-      "actions":[]
+      "actions":[],
+      "concrete":[]
     }
 }
 

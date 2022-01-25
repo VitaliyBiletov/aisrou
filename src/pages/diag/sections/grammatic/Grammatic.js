@@ -1,5 +1,5 @@
 import React from 'react'
-import Subsection from '../../../components/subsection/Subsection'
+import Subsection from '../../../../components/subsection/Subsection'
 import GRAMMATIC_DATA from "./grammaticData"
 
 export default class Sensmotor extends React.Component {

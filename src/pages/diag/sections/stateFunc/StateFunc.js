@@ -1,7 +1,7 @@
 import React from 'react';
 import FIELDS from './Fields.json'
 import {connect} from 'react-redux'
-import {setValueStatFunc} from "../../../components/subsection/subsectionActions";
+import {setValueStatFunc} from "../../../../components/subsection/subsectionActions";
 import './style.sass'
 
 class StateFunc extends React.Component{
@@ -42,7 +42,6 @@ class StateFunc extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.diag.subsections.stateOfFunc)
   return {store: state.diag.subsections.stateOfFunc}
 }
 
