@@ -1,15 +1,55 @@
 .progress
-  display: flex
+  display: inline-flex
+  position: relative
   align-items: center
   margin: 0 20px
-  justify-content: end
-  width: 100%
+  padding: 5px 10px
+  background: #564c90
+  width: 600px
   color: #fff
 
   &:hover
     cursor: pointer
+    background: #6458a7
+
+  &__info
+    position: absolute
+    bottom: 50px
+    left: 0
+    background: #6a5fab
+    border-top-left-radius: 10px
+    border-top-right-radius: 10px
+    color: #000
+    width: 600px
+    padding: 5px 10px
+    z-index: -1
+
+  &__text
+    width: 400px
+
+  &__list
+    list-style-type: none
+    padding: 0
+
+  &__item
+    display: flex
+    justify-content: space-between
+    align-content: center
+    background: #fff
+    margin: 10px
+    padding: 10px
+    border-radius: 10px
+
+  &__title
+    pointer-events: none
+    margin: 10px
 
   &__bar
+    pointer-events: none
     width: 400px
     height: 40px
     margin: 0 10px
+
+  &__line
+
+
