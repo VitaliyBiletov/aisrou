@@ -99,6 +99,7 @@ export default function Progress(){
         strokeColor="#a32f37"
         trailColor="#fff"
         strokeLinecap="square"
+        className="progress__line_main"
       />
       {/*label={`${countOfPercent.toFixed(0)}%`}*/}
       <div className='container' />
