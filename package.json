@@ -24,6 +24,7 @@
     "react-animated-css": "^1.2.1",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
     "react-scroll": "^1.8.4",
     "react-tabs": "^3.2.3",
     "redux": "^4.1.2"
