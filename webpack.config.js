@@ -38,8 +38,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'index_[contenthash].js',
-        publicPath: '/'
+        filename: 'index_[contenthash].js'
     },
     plugins:[
         new HtmlWebpackPlugin({

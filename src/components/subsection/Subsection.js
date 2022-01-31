@@ -20,10 +20,6 @@ class Subsection extends React.Component {
     }
   }
 
-  componentDidMount(){
-
-  }
-
   handleClick = (e) => {
     e.preventDefault()
     const { value } = e.target
@@ -46,7 +42,9 @@ class Subsection extends React.Component {
   }
 
   render() {
-    const { data, title, text, instruction, store } = this.props
+    const { data, title, instruction, store, type, name } = this.props
+    const {activeItem} = this.state
+      console.log('result = ', data)
     return (
       <div className="subsection">
         <div className="subsection__header">
@@ -54,16 +52,11 @@ class Subsection extends React.Component {
         </div>
         <div className="subsection__description">
           <p className='subsection__description_p'>{
-            !Array.isArray(instruction) ? instruction : instruction[this.state.activeItem]
+            !Array.isArray(instruction) ? instruction : instruction[activeItem]
           }</p>
         </div>
         <div className='subsection__content-section'>
-          {this.props.type === "text" ?
-            <p className='subsection__text'>{this.props.data[this.state.activeItem].text}</p> :
-            <>
-              <img className='subsection__img' src={`http://localhost:3000/static/images/${this.props.name}/${this.state.activeItem}.jpg`}/>
-            </>
-          }
+            <Content activeItem={activeItem} data={data} type={type} name={name}/>
         </div>
         <div className="subsection__status-section">
           { data.map((item, index) =>{
@@ -75,7 +68,7 @@ class Subsection extends React.Component {
                   onClick={this.handleClick}
                   key={index}
                   value={item.id}
-                  data-tooltip={item.text}
+                  data-tooltip={item.title}
                 />
               )
             }
@@ -93,6 +86,28 @@ class Subsection extends React.Component {
       </div>
     );
   }
+}
+
+const Content = ({activeItem, data, type, name}) => {
+    console.log(type)
+    switch (type){
+        case 'small-text':{
+            return <p className='subsection__small-text'>{data[activeItem].text}</p>
+        }
+        case 'text':{
+            return (
+                <>
+                    <h3>{data[activeItem].title}</h3>
+                    <p className='subsection__text'>{data[activeItem].text}</p>
+                </>
+            )
+        }
+        case 'img':{
+            const src = `http://localhost:3000/static/images/${name}/${activeItem}.jpg`
+            return <img className='subsection__img' src={src}/>
+        }
+        default: return null
+    }
 }
 
 const mapStateToProps = (state, ownProps) => {

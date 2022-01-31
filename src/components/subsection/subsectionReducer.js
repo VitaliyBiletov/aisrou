@@ -33,6 +33,9 @@ const initialState = {
       "antonyms":[],
       "actions":[],
       "concrete":[]
+    },
+    "coherentSpeech": {
+        "paraphrase": []
     }
 }
 

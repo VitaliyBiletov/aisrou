@@ -1,25 +1,14 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import StateFunc from "./sections/stateFunc/StateFunc";
-import Sensmotor from "./sections/sensmotor/Sensmotor";
-import Grammatic from "./sections/grammatic/Grammatic";
-import Lexis from "./sections/lexis/Lexis";
 import Progress from '../../components/progress/Progress'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import "animate.css/animate.css"
-
+import { SECTIONS } from './sections/consts'
 // import * as Scroll from 'react-scroll';
 import { animateScroll as scroll } from 'react-scroll'
-
 import './style.sass'
 
-const SECTIONS = [
-  {tabName: 'Состояние функций', component: <StateFunc />},
-  {tabName: 'Сенсо-моторный уровень', component: <Sensmotor />},
-  {tabName: 'Грамматика', component: <Grammatic />},
-  {tabName: 'Лексика', component: <Lexis />},
-]
 
 export default class Diag extends React.Component {
 
@@ -31,7 +20,7 @@ export default class Diag extends React.Component {
     }
   }
 
-  componentDidMount = () => {
+  componentDidMount(){
     const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
     this.setState({'activeTab': activeTab})
     window.addEventListener('scroll', (e) => {
