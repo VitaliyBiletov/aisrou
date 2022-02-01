@@ -8,8 +8,21 @@ import './style.sass'
 
 export default function Progress(){
   const [isVisible, setVisible] = useState(false)
+  const [percentAll, setPercentAll] = useState(0)
 
-  const dataOfState = useSelector((state)=> state.diag.subsections)
+  const dataOfState = useSelector((state)=> {
+    const subsections = state.diag.subsections
+    const sectionsData = SECTIONS_DATA.map(section=>{
+      const count = getCountOfCompleted(subsections[section.name])
+      const percent = count / section.sectionCount * 100
+      return {name: section.name, title: section.title, percent: percent.toFixed(0)}
+      // setCountCompletedAll(countCompletedAll + count)
+    })
+    const countCompletedAll = sectionsData.reduce((sum, sec) => sum + Number(sec.percent), 0) / sectionsData.length
+    if (percentAll !== countCompletedAll)
+      setPercentAll(countCompletedAll)
+    return sectionsData
+  })
 
   const handleMouseOver = (e) => {
     setVisible(true)
@@ -30,33 +43,28 @@ export default function Progress(){
         className="progress__info animate__animated animate__slideInUp"
       >
         <ul className="progress__list">
-          {SECTIONS_DATA.map(section=>{
-            console.log(section.sectionCount)
-            const count = getCountOfCompleted(dataOfState[section.name])
-            const percent = count / section.sectionCount * 100
-            return (
-              <li key={section.name}>
+          {dataOfState.map(section=>
+              <li className="progress__item" key={section.name}>
               <span className="progress__title">{section.title}</span>
               <Line
-                percent={percent.toFixed(0)}
+                percent={section.percent}
                 trailWidth="4"
                 strokeWidth="4"
                 strokeColor="#a32f37"
-                trailColor="#fff"
+                trailColor="#f7e3e5"
                 strokeLinecap="square"
                 className="progress__line_main"
               />
               </li>
-            )
-          })
+          )
           }
         </ul>
 
       </div> : null }
-      <span className="progress__title">Прогресс: </span>
+      <span className="progress__title_main">Прогресс: </span>
       {/*<Line percent={countOfPercent} strokeColor="#D3D3D3" />*/}
       <Line
-        percent="50"
+        percent={percentAll}
         trailWidth="4"
         strokeWidth="4"
         strokeColor="#a32f37"

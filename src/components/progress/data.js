@@ -13,6 +13,5 @@ let DATA = [
 export const SECTIONS_DATA = DATA.map(section=>{
     const sectionCount = section.data.reduce(
       (count, elem)=>count + elem.data.length, 0)
-    console.log(sectionCount)
     return {name: section.name, title: section.title, sectionCount: sectionCount}
 })

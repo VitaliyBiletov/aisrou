@@ -23,13 +23,13 @@ export default class Diag extends React.Component {
   componentDidMount(){
     const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
     this.setState({'activeTab': activeTab})
-    window.addEventListener('scroll', (e) => {
-      if (window.scrollY > 150){
-          this.setState({isVisibleUp: true})
-      } else {
-          this.setState({isVisibleUp: false})
-      }
-    })
+    // window.addEventListener('scroll', (e) => {
+    //   if (window.scrollY > 150){
+    //       this.setState({isVisibleUp: true})
+    //   } else {
+    //       this.setState({isVisibleUp: false})
+    //   }
+    // })
   }
 
   handleSelect = (index) => {
