@@ -20,7 +20,7 @@ class StateFunc extends React.Component{
           <h1 className="section__header">Состояние функций</h1>
           <div className="section__container">
             <div className="stateOfFunc__form">
-              {FIELDS.map((field, index) => (
+              {FIELDS[0].data.map((field, index) => (
                   <div className="stateOfFunc__item" key={index}>
                     <label className="stateOfFunc__label">{field.title}</label>
                     <textarea

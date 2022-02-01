@@ -1,5 +1,5 @@
 import React from 'react'
-import {ADMIN_ROUTE, DIAGNOSTIC_ROUTE, LOGIN_ROUTE, APP_ROUTE} from "./utils/consts";
+import {ADMIN_ROUTE, DIAGNOSTIC_ROUTE, LOGIN_ROUTE, APP_ROUTE} from "./utils/const";
 import Auth from "./pages/auth/Auth";
 import Diag from "./pages/diag/Diag";
 import Admin from "./pages/admin/Admin";

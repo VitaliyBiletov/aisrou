@@ -4,9 +4,9 @@ import Progress from '../../components/progress/Progress'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import "animate.css/animate.css"
-import { SECTIONS } from './sections/consts'
+import { SECTIONS } from './sections/const'
 // import * as Scroll from 'react-scroll';
-import { animateScroll as scroll } from 'react-scroll'
+// import { animateScroll as scroll } from 'react-scroll'
 import './style.sass'
 
 
@@ -24,7 +24,7 @@ export default class Diag extends React.Component {
     const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
     this.setState({'activeTab': activeTab})
     window.addEventListener('scroll', (e) => {
-      if (window.scrollY > 50){
+      if (window.scrollY > 150){
           this.setState({isVisibleUp: true})
       } else {
           this.setState({isVisibleUp: false})

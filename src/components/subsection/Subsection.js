@@ -44,7 +44,6 @@ class Subsection extends React.Component {
   render() {
     const { data, title, instruction, store, type, name } = this.props
     const {activeItem} = this.state
-      console.log('result = ', data)
     return (
       <div className="subsection">
         <div className="subsection__header">
@@ -89,7 +88,6 @@ class Subsection extends React.Component {
 }
 
 const Content = ({activeItem, data, type, name}) => {
-    console.log(type)
     switch (type){
         case 'small-text':{
             return <p className='subsection__small-text'>{data[activeItem].text}</p>
