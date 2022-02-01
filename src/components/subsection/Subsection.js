@@ -3,6 +3,9 @@ import {classNames} from 'classnames'
 import './style.sass'
 import {connect} from 'react-redux'
 import {setValueItem} from "./subsectionActions";
+import Explanation from "../explanation/Explanation";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
 const buttonsData = [
   {id:0, color: "red"},
@@ -17,6 +20,7 @@ class Subsection extends React.Component {
     super(props)
     this.state = {
       activeItem: 0,
+      isVisibleExp: false
     }
   }
 
@@ -41,10 +45,15 @@ class Subsection extends React.Component {
     this.setNextItem(activeItem, length)
   }
 
+  handleExpClick = (e) => {
+    this.setState({isVisibleExp: !this.state.isVisibleExp})
+  }
+
   render() {
     const { data, title, instruction, store, type, name } = this.props
     const {activeItem} = this.state
     return (
+      <>
       <div className="subsection">
         <div className="subsection__header">
           <h2 className='subsection__header_h2'>{title}</h2>
@@ -82,7 +91,15 @@ class Subsection extends React.Component {
               key={index} />
           )}
         </div>
+        <FontAwesomeIcon className="subsection__btn-exp" onClick={this.handleExpClick} icon={this.state.isVisibleExp ? faAngleUp : faAngleDown} size="1x"/>
       </div>
+        {
+          this.state.isVisibleExp ?
+            <Explanation/> :
+            null
+        }
+
+      </>
     );
   }
 }
