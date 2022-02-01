@@ -1,0 +1,52 @@
+@import "../const"
+
+.explanation
+  position: relative
+  min-width: 660px
+  max-width: 1000px
+  margin: 0 auto
+  z-index: -1
+
+  &__header
+    padding: 10px
+    background-color: #c8c8f4
+    margin: 0
+
+  &__container
+    background-color: #f2f2fc
+    display: flex
+    border: 1px lightgray solid
+    border-bottom-left-radius: 15px
+    border-bottom-right-radius: 15px
+
+  &__cell
+    display: flex
+    align-items: center
+    font-family: Cambria
+    font-size: 11pt
+
+  &__text
+    flex: 9
+    text-align: left
+
+  &__column
+    flex: 1
+
+  &__color
+    flex: 1
+    width: 100px
+    height: 30px
+    margin: 10px
+    border-radius: 5px
+
+    &_red
+      background-color: $red
+
+    &_yellow
+      background-color: $yellow
+
+    &_blue
+      background-color: $blue
+
+    &_green
+      background-color: $green

@@ -8,7 +8,7 @@ export default class CoherentSpeech extends React.Component {
             <div className="section">
                 <h1 className="section__header">Связная речь</h1>
                 <div className="section__container">
-                    {COHERENT_SPEECH_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
+                    {COHERENT_SPEECH_DATA.map(({id, hints, name, title, text, instruction, data, type}, index) => {
                         return (
                             <Subsection
                                 key={id}
@@ -19,6 +19,7 @@ export default class CoherentSpeech extends React.Component {
                                 type={type}
                                 text={text}
                                 data={data}
+                                hints={hints}
                             />
                         )
                     })}

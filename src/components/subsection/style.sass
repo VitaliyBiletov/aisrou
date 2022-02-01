@@ -2,11 +2,7 @@
   font-family: 'Cambria'
   src: url('./Cambria.ttf')
 
-$red: #ff0005
-$green: #008000
-$blue: #1e90ff
-$yellow: #ffff00
-$btnStatusSize: 15px
+@import "../const"
 
 =flex($display, $direction)
   display: $display
@@ -16,9 +12,14 @@ $btnStatusSize: 15px
 .subsection
   min-width: 660px
   max-width: 1000px
+  background-color: #fff
   border: 1px lightgray solid
-  margin: 30px auto
-  border-radius: 15px
+  margin-top: 30px
+  margin-right: auto
+  margin-left: auto
+  border-top-left-radius: 15px
+  border-top-right-radius: 15px
+  z-index: 5
 
   &__header
       border-top-left-radius: 15px
@@ -36,6 +37,7 @@ $btnStatusSize: 15px
         margin: 0
         padding: 5px
         background-color: #e6e6fa
+
   &__status-section
     +flex(inline-flex, row)
     background-color: #dcdcdc

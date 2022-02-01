@@ -95,10 +95,9 @@ class Subsection extends React.Component {
       </div>
         {
           this.state.isVisibleExp ?
-            <Explanation/> :
+            <Explanation hints={this.props.hints}/> :
             null
         }
-
       </>
     );
   }

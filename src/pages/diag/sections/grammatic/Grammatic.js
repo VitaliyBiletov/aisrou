@@ -8,7 +8,7 @@ export default class Sensmotor extends React.Component {
       <div className="section">
         <h1 className="section__header">Грамматический строй и словообразование</h1>
         <div className="section__container">
-        {GRAMMATIC_DATA.map(({id, name, title, text, instruction, data, type}, index) => {
+        {GRAMMATIC_DATA.map(({id, name, title, text, instruction, data, type, hints}, index) => {
           return (
             <Subsection
               key={id}
@@ -19,6 +19,7 @@ export default class Sensmotor extends React.Component {
               type={type}
               text={text}
               data={data}
+              hints={hints}
             />
           )
         })}
