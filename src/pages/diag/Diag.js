@@ -4,7 +4,9 @@ import Progress from '../../components/progress/Progress'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import "animate.css/animate.css"
-import { SECTIONS } from './sections/const'
+import StateFunc from '../../components/stateFunc/StateFunc'
+import DIAG_DATA from './diagData'
+import Section from '../../components/section/Section'
 // import * as Scroll from 'react-scroll';
 // import { animateScroll as scroll } from 'react-scroll'
 import './style.sass'
@@ -42,12 +44,18 @@ export default class Diag extends React.Component {
       <div className="diag" id="diag">
         <Tabs className='diag__tabs' selectedIndex={this.state.activeTab} onSelect={this.handleSelect}>
           <TabList className='diag__tab-list'>
-            { SECTIONS.map((s, index)=><Tab key={index} className='diag__item'>{s.tabName}</Tab>)}
+            { DIAG_DATA.map((s)=><Tab key={s.name} className='diag__item'>{s.title}</Tab>)}
           </TabList>
 
-          {SECTIONS.map((s, index)=>(
-            <TabPanel key={index} className='diag__tab-panel'>
-              {s.component}
+
+          {DIAG_DATA.map((s)=>(
+            <TabPanel key={s.name} className='diag__tab-panel'>
+              <Section
+                  name={s.name}
+                  title={s.title}
+                  data={s.data}
+                  type={s.type}
+              />
             </TabPanel>
           ))}
         </Tabs>

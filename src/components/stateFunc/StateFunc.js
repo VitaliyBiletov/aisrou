@@ -1,7 +1,6 @@
 import React from 'react';
-import FIELDS from './Fields.json'
 import {connect} from 'react-redux'
-import {setValueStatFunc} from "../../../../components/subsection/subsectionActions";
+import {setValueStatFunc} from "../subsection/subsectionActions";
 import './style.sass'
 
 class StateFunc extends React.Component{
@@ -16,11 +15,9 @@ class StateFunc extends React.Component{
 
   render(){
     return (
-        <div className="section stateOfFunc">
-          <h1 className="section__header">Состояние функций</h1>
           <div className="section__container">
             <div className="stateOfFunc__form">
-              {FIELDS[0].data.map((field, index) => (
+              {this.props.data.map((field, index) => (
                   <div className="stateOfFunc__item" key={index}>
                     <label className="stateOfFunc__label">{field.title}</label>
                     <textarea
@@ -36,7 +33,6 @@ class StateFunc extends React.Component{
             }
             </div>
           </div>
-        </div>
     )
   }
 }
