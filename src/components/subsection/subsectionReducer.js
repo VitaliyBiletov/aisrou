@@ -35,7 +35,8 @@ const initialState = {
       "concrete":[]
     },
     "coherentSpeech": {
-        "paraphrase": []
+        "paraphrase": [],
+        "story":[]
     }
 }
 
