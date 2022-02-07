@@ -37,6 +37,14 @@ const initialState = {
     "coherentSpeech": {
         "paraphrase": [],
         "story":[]
+    },
+    "langAnalysis":{
+        "compositionProposal":[],
+        "syllabicAnalysis":[],
+        "syllabicSynthesis":[],
+        "soundExtraction":[],
+        "soundNumber":[],
+        "phonemicSynthesis":[]
     }
 }
 
