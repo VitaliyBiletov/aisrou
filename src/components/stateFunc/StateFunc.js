@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {setValueStatFunc} from "../subsection/subsectionActions";
+import {setValueStatFunc} from "../../redux/actions/subsectionActions";
 import './style.sass'
 
 class StateFunc extends React.Component{

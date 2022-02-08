@@ -1,7 +1,7 @@
 import React from 'react'
 import {ADMIN_ROUTE, DIAGNOSTIC_ROUTE, LOGIN_ROUTE, APP_ROUTE} from "./utils/const";
 import Auth from "./pages/auth/Auth";
-import Diag from "./pages/diag/Diag";
+import Diag from "./pages/diagnostic/Diagnostic";
 import Admin from "./pages/admin/Admin";
 
 export const authRouters = [

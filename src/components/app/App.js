@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import Auth from '../../pages/auth/Auth'
-import Diag from "../../pages/diag/Diag";
+import Diag from "../../pages/diagnostic/Diagnostic";
 import AppRouter from "./AppRouter";
 
 export default class App extends React.Component{

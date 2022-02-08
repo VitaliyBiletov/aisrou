@@ -1,4 +1,4 @@
-import {SET_VALUE_ITEM, SET_VALUE_STATE_FUNC} from "./subsectionTypes";
+import {SET_VALUE_ITEM, SET_VALUE_STATE_FUNC} from "../types/subsectionTypes";
 
 const initialState = {
     "stateOfFunc":{

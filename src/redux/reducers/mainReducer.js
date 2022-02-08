@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {diagReducer} from "../pages/diag/redux/diagReducer";
+import {diagReducer} from "./diagReducer";
 
 export default combineReducers({
   diag: diagReducer

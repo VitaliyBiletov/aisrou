@@ -4,7 +4,7 @@ import App from './components/app/App';
 import './index.sass'
 import {createStore} from 'redux'
 import { Provider } from 'react-redux'
-import mainReducer from './redux/mainReducer'
+import mainReducer from './redux/reducers/mainReducer'
 
 const mainStore = createStore(
   mainReducer,

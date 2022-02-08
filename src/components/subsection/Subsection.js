@@ -2,7 +2,7 @@ import React from 'react'
 import {classNames} from 'classnames'
 import './style.sass'
 import {connect} from 'react-redux'
-import {setValueItem} from "./subsectionActions";
+import {setValueItem} from "../../redux/actions/subsectionActions";
 import Explanation from "../explanation/Explanation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
