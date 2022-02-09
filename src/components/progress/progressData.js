@@ -1,4 +1,4 @@
-import DIAG_DATA from '../../pages/diagnostic/diagData'
+import DIAG_DATA from '../../pages/diagnostic/diagnosticData'
 
 //Количество заданий в каждом типе
 export const TASKS_COUNT = DIAG_DATA.map(section=>{

@@ -11,7 +11,7 @@ export default function Progress(){
   const [percentAll, setPercentAll] = useState(0)
 
   const progressInPercent = useSelector(state=> {
-    const {subsections} = state.diag
+    const {subsections} = state.diagnostic
 
     const sectionsData = TASKS_COUNT.map(section=>{
         const count = getCountOfCompleted(subsections[section.name])  //Количество сделанных заданий в конкретном разделе

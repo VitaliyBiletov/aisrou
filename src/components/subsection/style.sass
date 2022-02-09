@@ -1,8 +1,16 @@
+$header_color: #9696ea              //цвет фона заголовка
+$header_text_color: #f0f8ff         //цвет текста заголовка
+$header_text_shadow_color: #4e4583  //цвет тени текста заголовка
+$description_color: #e6e6fa         //цвет фона описания
+$description_text_color: #000       //цвет текста описания
+$status_section_color: #dcdcdc      //цвет фона статусной строки
+$btn_status_size: 15px              //размер ячейки в статусной строке
+
 @font-face
   font-family: 'Cambria'
   src: url('./Cambria.ttf')
 
-@import "../const"
+@import "../colors"
 
 =flex($display, $direction)
   display: $display
@@ -24,23 +32,24 @@
   &__header
       border-top-left-radius: 15px
       border-top-right-radius: 15px
-      background-color: #9696ea
+      background-color: $header_color
       padding: 5px
 
       &_h2
         margin: 0
-        color: #f0f8ff
-        text-shadow: 0 1px darkblue
+        color: $header_text_color
+        text-shadow: 0 2px $header_text_shadow_color
 
   &__description
       &_p
         margin: 0
         padding: 5px
-        background-color: #e6e6fa
+        background-color: $description_color
+        color: $description_text_color
 
   &__status-section
     +flex(inline-flex, row)
-    background-color: #dcdcdc
+    background-color: $status_section_color
     padding: 3px
     border-radius: 5px
 
@@ -49,8 +58,8 @@
 
   &__btn-status
     position: relative
-    height: $btnStatusSize
-    width: $btnStatusSize
+    height: $btn_status_size
+    width: $btn_status_size
     margin: 3px
     background-color: #fff
     cursor: pointer

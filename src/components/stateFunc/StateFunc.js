@@ -1,48 +1,37 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {setValueStatFunc} from "../../redux/actions/subsectionActions";
 import './style.sass'
 
-class StateFunc extends React.Component{
+function StateFunc(props){
 
-  constructor(props){
-    super(props)
+  const store = useSelector(({diagnostic})=>diagnostic.subsections.stateOfFunc)
+  const dispatch = useDispatch()
+
+  const handleChange = (e) => {
+    dispatch(setValueStatFunc(e.target.name, e.target.value))
   }
 
-  handleChange = (e) => {
-    this.props.setValueStatFunc(e.target.name, e.target.value)
-  }
-
-  render(){
-    return (
-          <div className="section__container">
-            <div className="stateOfFunc__form">
-              {this.props.data.map((field, index) => (
-                  <div className="stateOfFunc__item" key={index}>
-                    <label className="stateOfFunc__label">{field.title}</label>
-                    <textarea
-                      className="stateOfFunc__text-area"
-                      onChange={this.handleChange}
-                      name={field.name}
-                      title={field.title}
-                      value={this.props.store[field.name]}
-                    />
-                  </div>
-                )
-              )
-            }
-            </div>
+  return (
+    <div className="section__container">
+      <div className="stateOfFunc__form">
+        {props.data.map((field, index) => (
+          <div className="stateOfFunc__item" key={index}>
+            <label className="stateOfFunc__label">{field.title}</label>
+            <textarea
+              className="stateOfFunc__text-area"
+              onChange={handleChange}
+              name={field.name}
+              title={field.title}
+              value={store[field.name]}
+            />
           </div>
-    )
-  }
+          )
+        )
+      }
+      </div>
+    </div>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {store: state.diag.subsections.stateOfFunc}
-}
-
-const mapDispatchToProps = {
-  setValueStatFunc
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StateFunc)
+export default StateFunc

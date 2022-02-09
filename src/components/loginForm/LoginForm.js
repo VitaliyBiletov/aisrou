@@ -3,7 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import {login} from '../../http/userAPI'
 import {ADMIN_ROUTE, DIAGNOSTIC_ROUTE} from "../../utils/const";
 
-export default function LoginForm(props){
+
+export default function LoginForm(){
   const [email, setEmail] = useState('vitaxa17@yandex.ru')
   const [password, setPassword] = useState('1234')
   const [error, setError] = useState('')

@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import {diagReducer} from "./diagReducer";
+import {diagnosticReducer} from "./diagnosticReducer";
 
 export default combineReducers({
-  diag: diagReducer
+  diagnostic: diagnosticReducer
 })

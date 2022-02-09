@@ -4,19 +4,17 @@ import Progress from '../../components/progress/Progress'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import "animate.css/animate.css"
-import StateFunc from '../../components/stateFunc/StateFunc'
-import DIAG_DATA from './diagData'
+import DIAG_DATA from './diagnosticData'
 import Section from '../../components/section/Section'
 import {useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
-// import * as Scroll from 'react-scroll';
-// import { animateScroll as scroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 import './style.sass'
 import {check} from '../../http/userAPI'
 import {LOGIN_ROUTE} from "../../utils/const";
 
-export default function Diagnostic(){
 
+export default function Diagnostic(){
   const [activeTab, setActiveTab] = useState(0)
   const [isVisibleUp, setVisibleUp] = useState(false)
   const navigate = useNavigate()
@@ -52,15 +50,15 @@ export default function Diagnostic(){
   }
 
   return (
-    <div className="diag" id="diag">
+    <div className="diagnostic" id="diagnostic">
       <button onClick={handleExit}>Выход</button>
-      <Tabs className='diag__tabs' selectedIndex={activeTab} onSelect={handleSelect}>
-        <TabList className='diag__tab-list'>
-          { DIAG_DATA.map((s)=><Tab key={s.name} className='diag__item'>{s.title}</Tab>)}
+      <Tabs className='diagnostic__tabs' selectedIndex={activeTab} onSelect={handleSelect}>
+        <TabList className='diagnostic__tab-list'>
+          { DIAG_DATA.map((s)=><Tab key={s.name} className='diagnostic__item'>{s.title}</Tab>)}
         </TabList>
 
         {DIAG_DATA.map((s)=>(
-          <TabPanel key={s.name} className='diag__tab-panel'>
+          <TabPanel key={s.name} className='diagnostic__tab-panel'>
             <Section
                 name={s.name}
                 title={s.title}
@@ -73,17 +71,16 @@ export default function Diagnostic(){
         {
           isVisibleUp ?
                 <button
-                    className="diag__btn diag__btn_up animate__animated animate__fadeIn"
+                    className="diagnostic__btn diagnostic__btn_up animate__animated animate__fadeIn"
                     onClick={()=>{scroll.scrollToTop()}}
                 >
                   <FontAwesomeIcon icon={faAngleUp} size="4x"/>
                 </button>
-            :
-          null
+            : null
         }
-      <div className='diag__bottom-section'>
-        <button className='diag__btn diag__btn_save'>Сохранить</button>
-        <button className='diag__btn diag__btn_cancel'>Отмена</button>
+      <div className='diagnostic__bottom-section'>
+        <button className='diagnostic__btn diagnostic__btn_save'>Сохранить</button>
+        <button className='diagnostic__btn diagnostic__btn_cancel'>Отмена</button>
         <Progress />
       </div>
     </div>
