@@ -9,11 +9,15 @@ import Diagnostic from "./pages/diagnostic/Diagnostic";
 import DiagnosticMenu from "./pages/diagnostic-menu/DiagnosticMenu";
 import Admin from "./pages/admin/Admin";
 
+export const adminRouters = [
+  {
+    path: ADMIN_ROUTE,
+    element: <Admin/>
+  },
+]
+
 export const authRouters = [
-    {
-        path: ADMIN_ROUTE,
-        element: <Admin/>
-    },
+
     {
         path: DIAGNOSTIC_MENU_ROUTE,
         element: <DiagnosticMenu/>

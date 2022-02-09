@@ -126,7 +126,7 @@ const Content = ({activeItem, data, type, name}) => {
 
 const mapStateToProps = (state, ownProps) => {
   const {section, name} = ownProps
-  return {store: state.diag.subsections[section][name]}
+  return {store: state.diagnostic.subsections[section][name]}
 }
 
 const mapDispatchToProps = {

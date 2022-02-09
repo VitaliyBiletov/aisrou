@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux'
-import {diagnosticReducer} from "./diagnosticReducer";
+import {UserReducer} from "./userReducer";
+import {DiagnosticReducer} from "./diagnosticReducer";
 
 export default combineReducers({
-  diagnostic: diagnosticReducer
+  user: UserReducer,
+  diagnostic: DiagnosticReducer
 })

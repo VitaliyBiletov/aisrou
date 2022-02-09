@@ -8,7 +8,12 @@ export async function login (email, password) {
 }
 
 export async function check () {
-  const {data} = await $authHost.post('api/user/auth')
-  localStorage.setItem('token', data)
-  return jwt_decode(data)
+  try{
+    const {data} = await $authHost.post('api/user/auth')
+    localStorage.setItem('token', data)
+    return jwt_decode(data)
+  }catch (e) {
+    console.log(e.response.data)
+  }
+
 }

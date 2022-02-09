@@ -1,19 +1,23 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom';
 import {login} from '../../http/userAPI'
 import {ADMIN_ROUTE, DIAGNOSTIC_ROUTE} from "../../utils/const";
-
+import {setUser} from "../../redux/actions/userActions";
 
 export default function LoginForm(){
   const [email, setEmail] = useState('vitaxa17@yandex.ru')
   const [password, setPassword] = useState('1234')
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleClick = async (e) => {
     e.preventDefault()
     try {
       const res = await login(email, password)
+      dispatch(setUser(res))
+
       if (res.role === "USER"){
         navigate(DIAGNOSTIC_ROUTE)
       }
