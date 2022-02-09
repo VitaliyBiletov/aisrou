@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {login} from '../../http/userAPI'
 import {ADMIN_ROUTE, DIAGNOSTIC_ROUTE} from "../../utils/const";
 import {setUser} from "../../redux/actions/userActions";
+import './style.sass'
 
 export default function LoginForm(){
   const [email, setEmail] = useState('vitaxa17@yandex.ru')
@@ -39,21 +40,34 @@ export default function LoginForm(){
   }
 
   return (
-    <div>
-      <form>
-          <input
-              type='text'
-              onChange={handleChangeLogin}
-              value={email}
-          />
-          <input
-              type='password'
-              onChange={handleChangePassword}
-              value={password}
-          />
-          <button
-              onClick={handleClick}
-          >Войти</button>
+    <div className="login">
+      <form className="login__form">
+        <label
+          htmlFor="email"
+          className="login__label"
+        >Email: </label>
+        <input
+            type='text'
+            id="email"
+            className="login__input login__email"
+            onChange={handleChangeLogin}
+            value={email}
+        />
+        <label
+          htmlFor="password"
+          className="login__label"
+        >Пароль: </label>
+        <input
+            type='password'
+            id="password"
+            className="login__input login__password"
+            onChange={handleChangePassword}
+            value={password}
+        />
+        <button
+          className="login__submit"
+          onClick={handleClick}
+        >Войти</button>
       </form>
       <div>{error}</div>
     </div>
