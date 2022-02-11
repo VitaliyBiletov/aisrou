@@ -1,17 +1,12 @@
 import React from 'react'
 import {useNavigate, Routes, Route, Link} from 'react-router-dom'
 import {DIAGNOSTIC_ROUTE} from "../../utils/const"
-import {Tabs, Tab, TabPanel, TabList} from 'react-tabs'
+import Management from '../../components/table/Table'
 import './style.sass'
+import {Users} from "./Users";
 
 
 export default function Admin(){
-    const navigate = useNavigate()
-
-    const handleClick = () => {
-        navigate(DIAGNOSTIC_ROUTE)
-    }
-
     return(
       <div className='admin'>
         <header className='admin__header'>
@@ -39,12 +34,6 @@ export default function Admin(){
         </div>
       </div>
     )
-}
-
-function Users() {
-  return(
-    <div>Пользователи2</div>
-  )
 }
 
 function Pupils() {
