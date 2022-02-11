@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom';
 import {login} from '../../http/userAPI'
-import {ADMIN_ROUTE, DIAGNOSTIC_ROUTE} from "../../utils/const";
+import {ADMIN_ROUTE, DIAGNOSTIC_MENU_ROUTE} from "../../utils/const";
 import {setUser} from "../../redux/actions/userActions";
 import './style.sass'
 
@@ -20,7 +20,7 @@ export default function LoginForm(){
       dispatch(setUser(res))
 
       if (res.role === "USER"){
-        navigate(DIAGNOSTIC_ROUTE)
+        navigate(DIAGNOSTIC_MENU_ROUTE)
       }
       if (res.role === "ADMIN"){
         navigate(ADMIN_ROUTE)

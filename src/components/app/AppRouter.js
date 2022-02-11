@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {Routes, Route, Navigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import {adminRouters, authRouters, publicRouters} from "../../routers";
@@ -9,7 +9,7 @@ function AppRouter(){
   return(
       <Routes>
           {isAuth && role === "ADMIN" && adminRouters.map(({path, element})=>
-            <Route key={path} path={path} element={element} />
+            <Route key={path} path={`${path}`} element={element} />
           )}
           {isAuth && authRouters.map(({path, element})=>
               <Route key={path} path={path} element={element} />

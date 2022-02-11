@@ -39,7 +39,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'index_[contenthash].js'
+        filename: 'index_[contenthash].js',
+        publicPath: '/',
     },
     plugins:[
         new HtmlWebpackPlugin({
@@ -50,6 +51,9 @@ module.exports = {
     ],
     devServer:{
         port: 8000,
+        static: {
+            directory: path.join(__dirname, './dist'),
+        },
         historyApiFallback: true,
     }
 }
