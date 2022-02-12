@@ -5,7 +5,6 @@ import {adminRouters, authRouters, publicRouters} from "../../routers";
 
 function AppRouter(){
   const {isAuth, role} = useSelector(state=>state.user)
-  console.log(isAuth)
   return(
       <Routes>
           {isAuth && role === "ADMIN" && adminRouters.map(({path, element})=>

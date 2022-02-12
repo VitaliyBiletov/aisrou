@@ -15,5 +15,32 @@ export async function check () {
   }catch (e) {
     console.log(e.response.data)
   }
+}
 
+export async function registration(user) {
+  try{
+    const {data} = await $authHost.post(`api/user/registration`, user)
+    return data
+  }catch (e) {
+    console.log(e.response.data)
+  }
+}
+
+export async function getUser(id) {
+  const {data} = await $authHost.get(`api/user/${id}`)
+  return data
+}
+
+export async function getAll () {
+  try{
+    const {data} = await $authHost.get('api/user/all')
+    return data
+  }catch (e) {
+    console.log(e.response.data)
+  }
+}
+
+export async function editUser(id, data) {
+    const result = await $authHost.post(`api/user/edit/${id}`, data)
+    return result
 }

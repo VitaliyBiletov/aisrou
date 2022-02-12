@@ -12,7 +12,6 @@ export default function App(){
   useEffect(()=>{
     if(localStorage.getItem('token')){
       check().then(data=>{
-        console.log(data)
         dispatch(setUser(data))
       }).finally(()=>setLoading(false))
     } else{
