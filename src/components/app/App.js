@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {setUser} from '../../redux/actions/userActions'
-import {check} from '../../http/userAPI'
+import {check} from '../../http/managementAPI'
 import AppRouter from "./AppRouter";
 
 export default function App(){

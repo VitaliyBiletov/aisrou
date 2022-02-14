@@ -13,28 +13,27 @@ export const adminRouters = [
   {
     path: ADMIN_ROUTE,
     element: <Admin/>,
-  },
+  }
 ]
 
 export const authRouters = [
-
-    {
-        path: DIAGNOSTIC_MENU_ROUTE,
-        element: <DiagnosticMenu/>
-    },
-    {
-        path: DIAGNOSTIC_ROUTE,
-        element: <Diagnostic/>
-    }
+  {
+    path: DIAGNOSTIC_MENU_ROUTE,
+    element: <DiagnosticMenu/>
+  },
+  {
+    path: DIAGNOSTIC_ROUTE,
+    element: <Diagnostic/>
+  }
 ]
 
 export const publicRouters = [
-    {
-        path: APP_ROUTE,
-        element: <Auth/>
-    },
-    {
-        path: LOGIN_ROUTE,
-        element: <Auth/>
-    }
+  {
+    path: APP_ROUTE,
+    element: <Auth/>
+  },
+  {
+    path: LOGIN_ROUTE,
+    element: <Auth/>
+  }
 ]

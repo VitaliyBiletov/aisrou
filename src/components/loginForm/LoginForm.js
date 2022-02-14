@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom';
-import {login} from '../../http/userAPI'
+import {login} from '../../http/managementAPI'
 import {ADMIN_ROUTE, DIAGNOSTIC_MENU_ROUTE} from "../../utils/const";
 import {setUser} from "../../redux/actions/userActions";
 import './style.sass'

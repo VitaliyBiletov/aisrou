@@ -1,13 +1,7 @@
 import React, {useState, useEffect} from 'react'
+
 import './style.sass'
 import {edit, get} from "../../http/managementAPI";
-
-const USER_DATA = [
-  {name: 'firstName', type: 'text', placeholder: 'Имя'},
-  {name: 'lastName', type: 'text', placeholder: 'Фамилия'},
-  {name: 'patronymic', type: 'text', placeholder: 'Отчество'},
-  {name: 'email', type: 'text', placeholder: 'Email'},
-]
 
 const STUDENT_DATA = [
   {name: 'firstName', type: 'text', placeholder: 'Имя'},
@@ -17,24 +11,15 @@ const STUDENT_DATA = [
   {name: 'enrollmentСlass', type: 'text', placeholder: 'Класс зачисления'},
 ]
 
-function EditForm(props) {
+function EditStudentForm(props) {
   const [formData, setFormData] = useState({})
-  const [type, setType] = useState('')
-  const [data, setData] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(async ()=>{
     try {
-      setType(props.type)
-      if (props.type ==='user'){
-        setData(USER_DATA)
-      }
-      if (props.type ==='student'){
-        setData(STUDENT_DATA)
-      }
-      const data = await get(props.type, props.activeItem)
+      const data = await get('student', props.activeItem)
       setFormData(data)
-      setIsLoading(true)
+      setIsLoading(false)
     } catch (e) {
       console.log("err",e)
     }
@@ -47,18 +32,17 @@ function EditForm(props) {
 
   async function handleClick(e) {
     e.preventDefault()
-    console.log(type)
-    await edit(type, props.activeItem, formData)
+    await edit('student', props.activeItem, formData)
   }
 
   return (
     <div className='modal'>
-      <h2 className='modal__title'>Редактирование2</h2>
+      <h2 className='modal__title'>Редактирование</h2>
       <div className='modal__container'>
-        {isLoading ?
+        {!isLoading ?
           <>
             <form className='modal__form form'>
-              {data.map(field=>
+              {DATA.map(field=>
                 <input
                   key={field.name}
                   className='form__input'
@@ -69,19 +53,13 @@ function EditForm(props) {
                   value={formData[field.name]}
                 />
               )}
-              {type === 'user' ?
-                <select className='form__input' onChange={handleChange} value={formData['role']} name="role">
-                  <option value="ADMIN">Администратор</option>
-                  <option value="USER">Пользователь</option>
-                </select>
-                : null}
               <button className='form__button' onClick={handleClick}>Сохранить</button>
             </form>
-          </> : <p>Загрузка</p>
+        </> : <p>Загрузка</p>
         }
       </div>
     </div>
   )
 }
 
-export {EditForm}
+export {EditStudentForm}

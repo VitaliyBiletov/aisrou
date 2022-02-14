@@ -1,11 +1,11 @@
-.registration
+.modal
 
   &__header
     display: flex
     flex-direction: row
     justify-content: space-between
 
-  &__h2
+  &__title
     text-align: center
 
   &__container
@@ -27,12 +27,19 @@
 
   &__button
     width: 200px
+    font-size: 15pt
     border: none
     background-color: darkcyan
     padding: 20px
     color: white
     border-radius: 10px
     margin: 10px auto
+
+    &_yes
+      background-color: #1ebe1e
+
+    &_no
+      background-color: brown
 
     &:hover
       cursor: pointer

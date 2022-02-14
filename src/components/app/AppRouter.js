@@ -8,13 +8,13 @@ function AppRouter(){
   return(
       <Routes>
           {isAuth && role === "ADMIN" && adminRouters.map(({path, element})=>
-            <Route key={path} path={`${path}`} element={element} />
+            <Route key={path} path={path} element={element} />
           )}
           {isAuth && authRouters.map(({path, element})=>
-              <Route key={path} path={path} element={element} />
+            <Route key={path} path={path} element={element} />
           )}
           {publicRouters.map(({path, element})=>
-              <Route key={path} path={path} element={element} />
+            <Route key={path} path={path} element={element} />
           )}
           <Route
             path="*"

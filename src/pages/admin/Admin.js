@@ -1,9 +1,8 @@
 import React from 'react'
-import {useNavigate, Routes, Route, Link} from 'react-router-dom'
-import {DIAGNOSTIC_ROUTE} from "../../utils/const"
-import Management from '../../components/table/Table'
+import {Routes, Route, Link} from 'react-router-dom'
 import './style.sass'
-import {Users} from "./Users";
+import {Management} from "./Management";
+
 
 
 export default function Admin(){
@@ -24,22 +23,16 @@ export default function Admin(){
           </div>
           <div className='admin__content'>
             <Routes>
-              <Route index element={<Users/>}/>
-              <Route index path='users' element={<Users/>}/>
-              <Route path='pupils' element={<Pupils/>}/>
+              <Route path='users' element={<Management type='user' title='Пользователи'/>}/>
+              <Route path='pupils' element={<Management type='student' title='Ученики'/>}/>
               <Route path='groups' element={<Groups/>}/>
               <Route path='results' element={<Results/>}/>
+              <Route path='*' element={<Management type='user' title='Пользователи'/>}/>
             </Routes>
           </div>
         </div>
       </div>
     )
-}
-
-function Pupils() {
-  return(
-    <div>Ученики</div>
-  )
 }
 
 function Groups() {
