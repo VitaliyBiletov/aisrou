@@ -59,72 +59,70 @@ function Management(props){
     setModalRemoveIsOpen(false)
   }
 
-  if (props.isLoading){
-    return (
-      <div className='management'>
-        <h2 className='management__title'>{props.title}</h2>
-        <div className='management__buttons'>
-          <button className='management__button' onClick={openModalRegistration}>Зарегистрировать</button>
-          {activeItem ?
-            <>
-              <button className='management__button' onClick={activeItem && openModalEdit}>Изменить</button>
-              {props.type === 'user' ?
-                <button className='management__button' onClick={openModalSetPassword}>Сменить пароль</button>
-                :
-                null
-              }
-              <button className='management__button management__button_remove' onClick={activeItem && openModalRemove}>Удалить</button>
-            </>
-          : null}
-        </div>
-          <div className='management__table'>
-            <Table
-              data={props.data}
-              activeItem={activeItem}
-              setActiveItem={setActiveItem}
-            />
-          </div>
-        {modalRegistrationIsOpen ?
-          <Modal isOpen={modalRegistrationIsOpen} onRequestClose={closeModalRegistration} style={customStyle}>
-            <RegistrationForm
-              type={props.type}
-              updateData={props.update}
-              close={closeModalRegistration}
-            />
-          </Modal> : null
-        }
-        {modalEditIsOpen ?
-          <Modal isOpen={modalEditIsOpen} onRequestClose={closeModalEdit} style={customStyle}>
-            <EditForm
-              type={props.type}
-              activeItem={activeItem}
-              updateData={props.update}
-              close={closeModalEdit}
-            />
-          </Modal> : null
-        }
-        {modalSetPasswordIsOpen ?
-          <Modal isOpen={modalSetPasswordIsOpen} onRequestClose={closeModalPassword} style={customStyle}>
-            <SetPasswordForm
-              activeItem={activeItem}
-              close={closeModalPassword}
-            />
-          </Modal> : null
-        }
-        {modalRemoveIsOpen ?
-          <Modal isOpen={modalRemoveIsOpen} onRequestClose={closeModalRemove} style={customStyle}>
-            <RemoveForm
-              type={props.type}
-              activeItem={activeItem}
-              setActiveItem={setActiveItem}
-              updateData={props.update}
-              close={closeModalRemove}
-            />
-          </Modal> : null
-        }
+  return (
+    <div className='management'>
+      <h2 className='management__title'>{props.title}</h2>
+      <div className='management__buttons'>
+        <button className='management__button' onClick={openModalRegistration}>Зарегистрировать</button>
+        {activeItem ?
+          <>
+            <button className='management__button' onClick={activeItem && openModalEdit}>Изменить</button>
+            {props.type === 'user' ?
+              <button className='management__button' onClick={openModalSetPassword}>Сменить пароль</button>
+              :
+              null
+            }
+            <button className='management__button management__button_remove' onClick={activeItem && openModalRemove}>Удалить</button>
+          </>
+        : null}
       </div>
-    )
-  } else {return <p>Загрузка</p>}
+        <div className='management__table'>
+          <Table
+            data={props.data}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+          />
+        </div>
+      {modalRegistrationIsOpen ?
+        <Modal isOpen={modalRegistrationIsOpen} onRequestClose={closeModalRegistration} style={customStyle}>
+          <RegistrationForm
+            type={props.type}
+            updateData={props.update}
+            close={closeModalRegistration}
+          />
+        </Modal> : null
+      }
+      {modalEditIsOpen ?
+        <Modal isOpen={modalEditIsOpen} onRequestClose={closeModalEdit} style={customStyle}>
+          <EditForm
+            type={props.type}
+            activeItem={activeItem}
+            updateData={props.update}
+            close={closeModalEdit}
+          />
+        </Modal> : null
+      }
+      {modalSetPasswordIsOpen ?
+        <Modal isOpen={modalSetPasswordIsOpen} onRequestClose={closeModalPassword} style={customStyle}>
+          <SetPasswordForm
+            activeItem={activeItem}
+            close={closeModalPassword}
+          />
+        </Modal> : null
+      }
+      {modalRemoveIsOpen ?
+        <Modal isOpen={modalRemoveIsOpen} onRequestClose={closeModalRemove} style={customStyle}>
+          <RemoveForm
+            type={props.type}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+            updateData={props.update}
+            close={closeModalRemove}
+          />
+        </Modal> : null
+      }
+    </div>
+  )
 }
 
 export {Management}

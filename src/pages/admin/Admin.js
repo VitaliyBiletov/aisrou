@@ -56,6 +56,9 @@ function generateManagement(Component, props) {
       setIsLoading(true)
     }, [])
 
+    if(!isLoading){
+      return <p>Загрузка</p>
+    }
     return <Component update={update} data={data} isLoading={isLoading} type={props.type} title={props.title}/>
   }
 }
