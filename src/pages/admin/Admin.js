@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState ,useEffect} from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
 import './style.sass'
 import {Management} from "./Management";
+import {getAll} from "../../http/managementAPI";
+import _ from 'lodash'
 
 
 
@@ -23,11 +25,11 @@ export default function Admin(){
           </div>
           <div className='admin__content'>
             <Routes>
-              <Route path='users' element={<Management type='user' title='Пользователи'/>}/>
-              <Route path='pupils' element={<Management type='student' title='Ученики'/>}/>
-              <Route path='groups' element={<Groups/>}/>
-              <Route path='results' element={<Results/>}/>
-              <Route path='*' element={<Management type='user' title='Пользователи'/>}/>
+              <Route path='users' element={<UserManagement />}/>
+              <Route path='pupils' element={<StudentManagement type='student'/>}/>
+              <Route path='groups' element={<Groups text='Привет'/>}/>
+              <Route path='results' element={<Groups text='Пока'/>}/>
+              <Route path='*' element={<UserManagement />}/>
             </Routes>
           </div>
         </div>
@@ -35,10 +37,34 @@ export default function Admin(){
     )
 }
 
-function Groups() {
-  return(
-    <div>Группы</div>
-  )
+const UserManagement = generateManagement(Management, {type: 'user', title: 'Пользователи'})
+const StudentManagement = generateManagement(Management, {type: 'student', title: 'Ученики'})
+
+function generateManagement(Component, props) {
+  return () => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [data, setData] = useState([])
+
+    const update = async () => {
+      const list = await getAll(props.type)
+      setData(list)
+    }
+
+    useEffect(() => {
+      setIsLoading(false)
+      update().catch(e => console.log(e))
+      setIsLoading(true)
+    }, [])
+
+    return <Component update={update} data={data} isLoading={isLoading} type={props.type} title={props.title}/>
+  }
+}
+
+function Groups({text}) {
+  return <div className='primer'>
+        <h2>GROUPS</h2>
+        <p>{text}</p>
+      </div>
 }
 
 function Results() {

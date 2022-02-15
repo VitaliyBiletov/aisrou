@@ -47,16 +47,16 @@ function EditForm(props) {
 
   async function handleClick(e) {
     e.preventDefault()
-    console.log(type)
     await edit(type, props.activeItem, formData)
+    props.close()
+    props.updateData()
   }
 
   return (
     <div className='modal'>
-      <h2 className='modal__title'>Редактирование2</h2>
+      <h2 className='modal__title'>Редактирование</h2>
       <div className='modal__container'>
         {isLoading ?
-          <>
             <form className='modal__form form'>
               {data.map(field=>
                 <input
@@ -76,8 +76,7 @@ function EditForm(props) {
                 </select>
                 : null}
               <button className='form__button' onClick={handleClick}>Сохранить</button>
-            </form>
-          </> : <p>Загрузка</p>
+            </form> : <p>Загрузка</p>
         }
       </div>
     </div>
