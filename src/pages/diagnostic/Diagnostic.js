@@ -10,7 +10,7 @@ import {useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import './style.sass'
-import {check} from '../../http/managementAPI'
+import {check} from '../../http/userAPI'
 import {LOGIN_ROUTE} from "../../utils/const";
 
 

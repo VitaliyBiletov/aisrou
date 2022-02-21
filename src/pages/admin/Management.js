@@ -1,7 +1,7 @@
-import React, {useState ,useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import Table from "../../components/table/Table";
 import Modal from 'react-modal'
-import {getAll} from "../../http/managementAPI";
+import {getAll} from "../../http/userAPI";
 import {RegistrationForm} from "../../components/forms/RegistrationForm";
 import {SetPasswordForm} from "../../components/forms/SetPasswordForm";
 import {RemoveForm} from "../../components/forms/RemoveForm";
@@ -9,7 +9,7 @@ import {EditForm} from "../../components/forms/EditForm";
 import './management.sass'
 
 
-const customStyle={
+const customStyle = {
   content: {
     position: 'relative',
     width: '600px',
@@ -20,7 +20,7 @@ const customStyle={
 
 Modal.setAppElement('#root')
 
-function Management(props){
+function Management(props) {
   const [activeItem, setActiveItem] = useState(null)
   const [modalRegistrationIsOpen, setModalRegistrationIsOpen] = useState(false)
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false)
@@ -51,7 +51,7 @@ function Management(props){
     setModalSetPasswordIsOpen(false)
   }
 
-  async function openModalRemove(){
+  async function openModalRemove() {
     setModalRemoveIsOpen(true)
   }
 
@@ -61,28 +61,21 @@ function Management(props){
 
   return (
     <div className='management'>
-      <h2 className='management__title'>{props.title}</h2>
+      <h2 className='management__title title'>{props.title}</h2>
       <div className='management__buttons'>
         <button className='management__button' onClick={openModalRegistration}>Зарегистрировать</button>
-        {activeItem ?
-          <>
-            <button className='management__button' onClick={activeItem && openModalEdit}>Изменить</button>
-            {props.type === 'user' ?
-              <button className='management__button' onClick={openModalSetPassword}>Сменить пароль</button>
-              :
-              null
-            }
-            <button className='management__button management__button_remove' onClick={activeItem && openModalRemove}>Удалить</button>
-          </>
-        : null}
       </div>
-        <div className='management__table'>
-          <Table
-            data={props.data}
-            activeItem={activeItem}
-            setActiveItem={setActiveItem}
-          />
-        </div>
+      <div className='management__table'>
+        <Table
+          data={props.data}
+          type={props.type}
+          activeItem={activeItem}
+          setActiveItem={setActiveItem}
+          handleResetPassword={openModalSetPassword}
+          handleEdit={openModalEdit}
+          handleRemove={openModalRemove}
+        />
+      </div>
       {modalRegistrationIsOpen ?
         <Modal isOpen={modalRegistrationIsOpen} onRequestClose={closeModalRegistration} style={customStyle}>
           <RegistrationForm
