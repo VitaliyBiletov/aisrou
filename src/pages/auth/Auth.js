@@ -1,6 +1,5 @@
 import React from 'react'
 import LoginForm from '../../components/loginForm/LoginForm'
-import './style.sass'
 
 export default function Auth(){
   return (

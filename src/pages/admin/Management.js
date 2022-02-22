@@ -6,7 +6,6 @@ import {RegistrationForm} from "../../components/forms/RegistrationForm";
 import {SetPasswordForm} from "../../components/forms/SetPasswordForm";
 import {RemoveForm} from "../../components/forms/RemoveForm";
 import {EditForm} from "../../components/forms/EditForm";
-import './management.sass'
 
 
 const customStyle = {

@@ -5,20 +5,8 @@
     margin: 10px 0
 
   &__button
-    margin-right: 5px
-    padding: 5px 10px
-    border: none
-    border-radius: 5px
-
-    &:hover
-      cursor: pointer
-      background-color: #c8c8f4
-
-    &_remove
-      background-color: #d04949
-      color: #ffffff
-      &:hover
-        background-color: #a62b2b
+    @extend %button
+    color: $text_color
 
   &__table
     display: inline-block

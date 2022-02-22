@@ -3,13 +3,11 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Progress from '../../components/progress/Progress'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
-import "animate.css/animate.css"
 import DIAG_DATA from './diagnosticData'
 import Section from '../../components/section/Section'
 import {useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import { animateScroll as scroll } from 'react-scroll'
-import './style.sass'
 import {check} from '../../http/userAPI'
 import {LOGIN_ROUTE} from "../../utils/const";
 

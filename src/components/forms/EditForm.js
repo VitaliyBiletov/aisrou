@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import './style.sass'
 import {edit, get} from "../../http/managementAPI";
 
 const USER_DATA = [

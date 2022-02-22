@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux'
 import { Line } from 'rc-progress';
 import {TASKS_COUNT} from './progressData'
 import {getCountOfCompleted} from './progressUtils'
-import './style.sass'
 
 
 export default function Progress(){

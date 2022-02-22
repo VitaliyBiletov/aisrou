@@ -1,5 +1,4 @@
 import React from 'react'
-import './style.sass'
 import {remove} from "../../http/managementAPI";
 
 

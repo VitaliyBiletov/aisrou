@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {getUsers, getStudents, getStudentsForUser, attachStudent} from "../../http/groupAPI";
+import {getUsers, getStudents, getGroups, attachStudent, unAttachStudent} from "../../http/groupAPI";
 import Table from "../../components/table/Table";
-import './groups.sass'
 import _ from 'lodash'
 
 export function Groups(props) {
@@ -10,26 +9,25 @@ export function Groups(props) {
   const [activeItem, setActiveItem] = useState(null)
   const [students, setStudents] = useState([])
   const [activeStudentId, setActiveStudentId] = useState(null)
-  const [studentsForUser, setStudentsForUser] = useState([])
+  const [groups, setGroups] = useState([])
 
   useEffect(()=>{
     getUsers().then(res=>{
       setUsers(res)
       const userId = res[0].id
-      getStudentsForUser(userId).then(res=>setStudentsForUser(res))
+      getGroups(userId).then(res=>setGroups(res))
       setActiveUserId(userId)
     })
     getStudents().then(students=>{
       setStudents(students)
       setActiveStudentId(students[0].id)
     })
-
   }, [])
-  console.log(studentsForUser)
+
   const handleChangeUser = (e) => {
     e.preventDefault()
     const userId = e.target.value
-    getStudentsForUser(userId).then(res=>setStudentsForUser(res))
+    getGroups(userId).then(res=>setGroups(res))
     setActiveUserId(userId)
   }
 
@@ -41,21 +39,25 @@ export function Groups(props) {
 
   const handleAttach = (e) => {
     e.preventDefault()
-    const student = _.find(studentsForUser, (student)=>student.id === activeStudentId)
+    const student = _.find(groups, (group)=>group.studentId === Number(activeStudentId))
     if (student){
       console.log('Ученик уже прикреплен')
       return
     }
     attachStudent(activeUserId, activeStudentId)
-      .then(res=>{
-        getStudentsForUser(activeUserId).then(res=>setStudentsForUser(res))
+      .then(()=>{
+        getGroups(activeUserId).then(res=>setGroups(res))
       })
       .catch(e=>console.log(e))
   }
 
-  const handleRemove = (e) => {
-    e.preventDefault()
-
+  const handleUnAttach = (id) => {
+    if(id){
+      unAttachStudent(id).then(()=>{
+        getGroups(activeUserId).then(res=>setGroups(res))
+      })
+        .catch(e=>console.log(e))
+    }
   }
 
   return (
@@ -94,10 +96,10 @@ export function Groups(props) {
           <h3 className='attached-students__h4'>Закреплённые ученики</h3>
           <div className='attached-students__table'>
             <Table
-              data={studentsForUser}
+              data={groups}
               activeItem={activeItem}
               setActiveItem={setActiveItem}
-              // handleRemove={}
+              handleRemove={handleUnAttach}
             />
           </div>
         </div>: null

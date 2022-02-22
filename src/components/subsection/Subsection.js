@@ -1,6 +1,5 @@
 import React from 'react'
 import {classNames} from 'classnames'
-import './style.sass'
 import {connect} from 'react-redux'
 import {setValueItem} from "../../redux/actions/subsectionActions";
 import Explanation from "../explanation/Explanation";

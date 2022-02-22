@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {setValueStatFunc} from "../../redux/actions/subsectionActions";
-import './style.sass'
+
 
 function StateFunc(props){
 

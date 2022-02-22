@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import './style.sass'
 import {faTrash, faKey, faPen} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
@@ -58,7 +57,9 @@ function Table(props) {
                   <button
                     title='Удалить'
                     className='tbody__button tbody__button_type_remove'
-                    onClick={props.handleRemove}>
+                    onClick={()=>{
+                      props.handleRemove(item.id)
+                    }}>
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
@@ -70,7 +71,7 @@ function Table(props) {
       </div>
     )
   } else {
-    return <p>Данные отстутствуют</p>
+    return null
   }
 
 }

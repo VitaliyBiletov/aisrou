@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom';
 import {login} from '../../http/userAPI'
-import {ADMIN_ROUTE, DIAGNOSTIC_MENU_ROUTE} from "../../utils/const";
+import {ADMIN_USERS_ROUTE, DIAGNOSTIC_MENU_ROUTE} from "../../utils/const";
 import {setUser} from "../../redux/actions/userActions";
-import './style.sass'
 
 export default function LoginForm(){
   const [email, setEmail] = useState('vitaxa17@yandex.ru')
@@ -23,7 +22,7 @@ export default function LoginForm(){
         navigate(DIAGNOSTIC_MENU_ROUTE)
       }
       if (res.role === "ADMIN"){
-        navigate(ADMIN_ROUTE)
+        navigate(ADMIN_USERS_ROUTE)
       }
     } catch (e) {
       const {message} = e.response.data

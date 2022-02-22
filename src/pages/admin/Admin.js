@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {Routes, Route, Link} from 'react-router-dom'
-import './style.sass'
+import {Routes, Route, NavLink} from 'react-router-dom'
 import {Management} from "./Management";
 import {getAll} from "../../http/managementAPI";
 import {Groups} from "./Groups";
+import { TailSpin } from  'react-loader-spinner'
 
 
 export default function Admin() {
@@ -17,10 +17,10 @@ export default function Admin() {
       </header>
       <div className='admin__container'>
         <div className='admin__menu'>
-          <Link className='admin__link' to='users'>Пользователи</Link>
-          <Link className='admin__link' to='pupils'>Ученики</Link>
-          <Link className='admin__link' to='groups'>Группы</Link>
-          <Link className='admin__link' to='results'>Результаты</Link>
+          <NavLink className={`admin__link`} to='users'>Пользователи</NavLink>
+          <NavLink className={`admin__link`} to='pupils'>Ученики</NavLink>
+          <NavLink className={`admin__link`} to='groups'>Группы</NavLink>
+          <NavLink className={`admin__link`} to='results'>Результаты</NavLink>
         </div>
         <div className='admin__content'>
           <Routes>
@@ -56,7 +56,13 @@ function generateManagement(Component, props) {
     }, [])
 
     if (!isLoading) {
-      return <p>Загрузка</p>
+      return (
+        <TailSpin
+          height="50"
+          width="50"
+          color='#4e4583'
+        />
+      )
     }
     return <Component update={update} data={data} isLoading={isLoading} type={props.type} title={props.title}/>
   }

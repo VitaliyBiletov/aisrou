@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/App';
-import './index.sass'
+import './style/index.sass'
 import {createStore} from 'redux'
 import { Provider } from 'react-redux'
 import mainReducer from './redux/reducers/mainReducer'
