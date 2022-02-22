@@ -1,18 +1,33 @@
 import React, {useState, useEffect} from 'react'
+import {useSelector} from 'react-redux'
 import {Routes, Route, NavLink} from 'react-router-dom'
 import {Management} from "./Management";
 import {getAll} from "../../http/managementAPI";
 import {Groups} from "./Groups";
 import { TailSpin } from  'react-loader-spinner'
+import {LOGIN_ROUTE} from "../../utils/const";
+import {useNavigate} from "react-router-dom/index";
 
 
 export default function Admin() {
+  const {fullName} = useSelector(state=>state.user)
+  const navigate = useNavigate()
+
+  const handleExit = () =>{
+    localStorage.removeItem('token')
+    navigate(LOGIN_ROUTE)
+  }
+
   return (
     <div className='admin'>
       <header className='admin__header'>
         <div className='admin__logo'><span className='admin__logo_span'>АИСРОУ</span></div>
         <div className='admin__header-menu'>
-          <button className='admin__button'>Выход</button>
+          <div className='admin__username'>{fullName}</div>
+          <button
+            className='admin__button'
+            onClick={handleExit}
+          >Выход</button>
         </div>
       </header>
       <div className='admin__container'>
