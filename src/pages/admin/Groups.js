@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import {getUsers, getStudents, getGroups, attachStudent, unAttachStudent} from "../../http/groupAPI";
+import {getGroups, attachStudent, unAttachStudent} from "../../http/groupAPI";
+import {getUsers} from '../../http/userAPI'
+import {getStudents} from '../../http/studentAPI'
 import Table from "../../components/table/Table";
 import _ from 'lodash'
 
@@ -10,6 +12,7 @@ export function Groups(props) {
   const [students, setStudents] = useState([])
   const [activeStudentId, setActiveStudentId] = useState(null)
   const [groups, setGroups] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
     getUsers().then(res=>{
@@ -17,6 +20,7 @@ export function Groups(props) {
       const userId = res[0].id
       getGroups(userId).then(res=>setGroups(res))
       setActiveUserId(userId)
+      setIsLoading(true)
     })
     getStudents().then(students=>{
       setStudents(students)
@@ -66,6 +70,7 @@ export function Groups(props) {
       <form className='groups__form'>
         <div className='groups__form-item'>
           <label htmlFor="users" className='groups__label'>Учитель</label>
+          {isLoading ?
           <select
             name="users"
             id="users"
@@ -73,7 +78,7 @@ export function Groups(props) {
             className='groups__select'
           >
             {users.map(user=><option key={user.id} value={user.id}>{userNameFormatting(user)}</option> )}
-          </select>
+          </select> : null }
         </div>
         <div className='groups__form-item'>
           <label htmlFor="students" className='groups__label'>Ученик</label>

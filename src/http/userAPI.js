@@ -8,6 +8,11 @@ export async function login(email, password) {
   return jwt_decode(data)
 }
 
+export async function getUsers(){
+  const {data} = await $authHost.get('api/user/all')
+  return data
+}
+
 export async function check() {
   try {
     const {data} = await $authHost.post('api/user/auth')

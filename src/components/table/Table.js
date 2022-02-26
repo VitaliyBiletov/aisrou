@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 function Table(props) {
   const {activeItem, setActiveItem} = props
 
-  if (props.data[0]){
+  if (props.data.length !== 0){
     return (
       <div className='table'>
         <div className='table__container'>

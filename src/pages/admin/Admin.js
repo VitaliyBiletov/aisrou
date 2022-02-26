@@ -7,6 +7,7 @@ import {Groups} from "./Groups";
 import { TailSpin } from  'react-loader-spinner'
 import {LOGIN_ROUTE} from "../../utils/const";
 import {useNavigate} from "react-router-dom/index";
+import {Header} from "../../components/header/Header";
 
 
 export default function Admin() {
@@ -20,16 +21,7 @@ export default function Admin() {
 
   return (
     <div className='admin'>
-      <header className='admin__header'>
-        <div className='admin__logo'><span className='admin__logo_span'>АИСРОУ</span></div>
-        <div className='admin__header-menu'>
-          <div className='admin__username'>{fullName}</div>
-          <button
-            className='admin__button'
-            onClick={handleExit}
-          >Выход</button>
-        </div>
-      </header>
+      <Header username={fullName}/>
       <div className='admin__container'>
         <div className='admin__menu'>
           <NavLink className={`admin__link`} to='users'>Пользователи</NavLink>

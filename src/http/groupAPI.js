@@ -1,4 +1,4 @@
-import {$host, $authHost} from "./index";
+import {$authHost} from "./index";
 
 
 export async function attachStudent(userId, studentId) {
@@ -13,20 +13,6 @@ export async function unAttachStudent(groupId) {
 
 export async function getGroups(userId) {
   const {data} = await $authHost.get(`api/group/getGroups?userId=${userId}`)
-  return data
-}
-
-export async function getUsers() {
-  const {data} = await $authHost.get('api/group/users')
-  return data
-}
-
-export async function getStudents() {
-  const {data} = await $authHost.get(`api/group/students/all`)
-  return data
-}
-
-export async function getStudentsForUser(userId) {
-  const {data} = await $authHost.get(`api/group/students?userId=${userId}`)
+  console.log(data)
   return data
 }
