@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Table from "../../components/table/Table";
-import Modal from 'react-modal'
 import {getAll} from "../../http/userAPI";
 import {RegistrationForm} from "../../components/forms/RegistrationForm";
-import {SetPasswordForm} from "../../components/forms/SetPasswordForm";
-import {RemoveForm} from "../../components/forms/RemoveForm";
-import {EditForm} from "../../components/forms/EditForm";
+import Modal from 'react-modal'
+
 
 
 const customStyle = {
@@ -20,11 +18,24 @@ const customStyle = {
 Modal.setAppElement('#root')
 
 function Management(props) {
-  const [activeItem, setActiveItem] = useState(null)
+  const [functions, setFunctions] = useState({})
   const [modalRegistrationIsOpen, setModalRegistrationIsOpen] = useState(false)
-  const [modalEditIsOpen, setModalEditIsOpen] = useState(false)
-  const [modalSetPasswordIsOpen, setModalSetPasswordIsOpen] = useState(false)
-  const [modalRemoveIsOpen, setModalRemoveIsOpen] = useState(false)
+
+  useEffect(()=>{
+    switch (props.type){
+      case 'user': return setFunctions({
+          isEdit: true,
+          isResetPassword: true,
+          isRemove: true
+        })
+      case 'student': return setFunctions({
+        isEdit: true,
+        isResetPassword: false,
+        isRemove: true
+      })
+      default: return setFunctions({})
+    }
+  },[])
 
   function openModalRegistration() {
     setModalRegistrationIsOpen(true)
@@ -32,30 +43,6 @@ function Management(props) {
 
   function closeModalRegistration() {
     setModalRegistrationIsOpen(false)
-  }
-
-  function openModalEdit() {
-    setModalEditIsOpen(true)
-  }
-
-  function closeModalEdit() {
-    setModalEditIsOpen(false)
-  }
-
-  function openModalSetPassword() {
-    setModalSetPasswordIsOpen(true)
-  }
-
-  function closeModalPassword() {
-    setModalSetPasswordIsOpen(false)
-  }
-
-  async function openModalRemove() {
-    setModalRemoveIsOpen(true)
-  }
-
-  function closeModalRemove() {
-    setModalRemoveIsOpen(false)
   }
 
   return (
@@ -67,12 +54,9 @@ function Management(props) {
       <div className='management__table'>
         <Table
           data={props.data}
+          setData={props.setData}
           type={props.type}
-          activeItem={activeItem}
-          setActiveItem={setActiveItem}
-          handleResetPassword={openModalSetPassword}
-          handleEdit={openModalEdit}
-          handleRemove={openModalRemove}
+          functions={functions}
         />
       </div>
       {modalRegistrationIsOpen ?
@@ -81,35 +65,6 @@ function Management(props) {
             type={props.type}
             updateData={props.update}
             close={closeModalRegistration}
-          />
-        </Modal> : null
-      }
-      {modalEditIsOpen ?
-        <Modal isOpen={modalEditIsOpen} onRequestClose={closeModalEdit} style={customStyle}>
-          <EditForm
-            type={props.type}
-            activeItem={activeItem}
-            updateData={props.update}
-            close={closeModalEdit}
-          />
-        </Modal> : null
-      }
-      {modalSetPasswordIsOpen ?
-        <Modal isOpen={modalSetPasswordIsOpen} onRequestClose={closeModalPassword} style={customStyle}>
-          <SetPasswordForm
-            activeItem={activeItem}
-            close={closeModalPassword}
-          />
-        </Modal> : null
-      }
-      {modalRemoveIsOpen ?
-        <Modal isOpen={modalRemoveIsOpen} onRequestClose={closeModalRemove} style={customStyle}>
-          <RemoveForm
-            type={props.type}
-            activeItem={activeItem}
-            setActiveItem={setActiveItem}
-            updateData={props.update}
-            close={closeModalRemove}
           />
         </Modal> : null
       }

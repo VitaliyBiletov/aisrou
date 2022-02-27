@@ -19,17 +19,17 @@ const STUDENT_DATA = [
 function EditForm(props) {
   const [formData, setFormData] = useState({})
   const [type, setType] = useState('')
-  const [data, setData] = useState({})
+  const [fields, setFields] = useState({})
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(async ()=>{
     try {
       setType(props.type)
       if (props.type ==='user'){
-        setData(USER_DATA)
+        setFields(USER_DATA)
       }
       if (props.type ==='student'){
-        setData(STUDENT_DATA)
+        setFields(STUDENT_DATA)
       }
       const data = await get(props.type, props.activeItem)
       setFormData(data)
@@ -46,9 +46,16 @@ function EditForm(props) {
 
   async function handleClick(e) {
     e.preventDefault()
-    await edit(type, props.activeItem, formData)
+    const {data} = await edit(type, props.activeItem, formData)
+    const updatedData = props.data.map(item=>{
+      if (item.id === data.id){
+        return data
+      }
+      return item
+    })
+    console.log(updatedData)
+    props.setData(updatedData)
     props.close()
-    props.updateData()
   }
 
   return (
@@ -57,7 +64,7 @@ function EditForm(props) {
       <div className='modal__container'>
         {isLoading ?
             <form className='modal__form form'>
-              {data.map(field=>
+              {fields.map(field=>
                 <input
                   key={field.name}
                   className='form__input'

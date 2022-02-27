@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {getGroups, attachStudent, unAttachStudent} from "../../http/groupAPI";
+import {getGroups, attachStudent} from "../../http/groupAPI";
 import {getUsers} from '../../http/userAPI'
 import {getStudents} from '../../http/studentAPI'
 import Table from "../../components/table/Table";
@@ -8,7 +8,6 @@ import _ from 'lodash'
 export function Groups(props) {
   const [users, setUsers] = useState([])
   const [activeUserId, setActiveUserId] = useState(null)
-  const [activeItem, setActiveItem] = useState(null)
   const [students, setStudents] = useState([])
   const [activeStudentId, setActiveStudentId] = useState(null)
   const [groups, setGroups] = useState([])
@@ -55,15 +54,6 @@ export function Groups(props) {
       .catch(e=>console.log(e))
   }
 
-  const handleUnAttach = (id) => {
-    if(id){
-      unAttachStudent(id).then(()=>{
-        getGroups(activeUserId).then(res=>setGroups(res))
-      })
-        .catch(e=>console.log(e))
-    }
-  }
-
   return (
     <div className='groups'>
       <h2 className='groups__title title'>Группы</h2>
@@ -102,9 +92,9 @@ export function Groups(props) {
           <div className='attached-students__table'>
             <Table
               data={groups}
-              activeItem={activeItem}
-              setActiveItem={setActiveItem}
-              handleRemove={handleUnAttach}
+              setData={setGroups}
+              type="group"
+              functions={{isRemove: true}}
             />
           </div>
         </div>: null

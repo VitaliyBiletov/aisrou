@@ -2,19 +2,26 @@ import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {Header} from "../../components/header/Header";
 import {getGroups} from "../../http/groupAPI";
+import {getDiagnostics, createDiagnostic, removeDiagnostic} from "../../http/diagnosticAPI";
 import Table from "../../components/table/Table";
+
 
 export default function DiagnosticMenu() {
   const {id, fullName} = useSelector(state=>state.user)
   const [students, setStudents] = useState([])
+  const [diagnostics, setDiagnostics] = useState([])
   const [activeStudentId, setActiveStudentId] = useState(null)
+  const [activeItem, setActiveItem] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
     getGroups(id).then(group=>{
       setStudents(group)
       if (group.length > 0){
-        setActiveStudentId(group[0].id)
+        setActiveStudentId(group[0].studentId)
+        getDiagnostics(group[0].studentId).then(diags=>{
+          setDiagnostics(diags)
+        })
       }
       setIsLoading(true)
     })
@@ -22,6 +29,23 @@ export default function DiagnosticMenu() {
 
   const handleChange = (e) => {
     setActiveStudentId(e.target.value)
+    getDiagnostics(e.target.value).then(diags=>{
+      setDiagnostics(diags)
+    })
+  }
+
+  const handleCreate = (e) => {
+    createDiagnostic(activeStudentId).then(({data})=>{
+      setDiagnostics([...diagnostics, data])
+      console.log(data)
+    })
+  }
+
+  const handleRemove = (active) => {
+    removeDiagnostic(active).then(()=>{
+      const diagFiltered = diagnostics.filter(d=>d.id !== active)
+      setDiagnostics(diagFiltered)
+    })
   }
 
   return (
@@ -36,17 +60,21 @@ export default function DiagnosticMenu() {
           defaultValue={activeStudentId}
           onChange={handleChange}
         >
-          {students.map(({id, lastName, firstName})=>
-            <option key={id} value={id}>{lastName + ' ' + firstName}</option>)}
+          {students.map(({studentId, lastName, firstName})=>
+            <option key={studentId} value={studentId}>{lastName + ' ' + firstName}</option>)}
         </select>
         <h3 className='diagnostic-menu__h3'>
           Обследования
-          <button className='diagnostic-menu__button_type_add'>+</button>
+          <button
+            className='diagnostic-menu__button_type_add'
+            onClick={handleCreate}
+          >+</button>
         </h3>
         <div className="diagnostic-menu__table">
           <Table
             type='student'
-            data={[{id:2, date: '12/09/1991'}, {id:1, date: '12/09/1991'}]}
+            data={diagnostics}
+            handleRemove={handleRemove}
           />
         </div>
       </div> : null}

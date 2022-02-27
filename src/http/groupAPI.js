@@ -6,13 +6,12 @@ export async function attachStudent(userId, studentId) {
   return data
 }
 
-export async function unAttachStudent(groupId) {
+export async function remove(groupId) {
   const {data} = await $authHost.post('api/group/unAttach', {groupId})
   return data
 }
 
 export async function getGroups(userId) {
-  const {data} = await $authHost.get(`api/group/getGroups?userId=${userId}`)
-  console.log(data)
+  const {data} = await $authHost.get(`api/group/${userId}`)
   return data
 }

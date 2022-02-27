@@ -1,10 +1,52 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {faTrash, faKey, faPen} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
+import PropTypes from 'prop-types'
+import Modal from 'react-modal'
+import {EditForm} from "../../components/forms/EditForm";
+import {RemoveForm} from "../../components/forms/RemoveForm";
+import {SetPasswordForm} from "../forms/SetPasswordForm";
 
+
+const customStyle = {
+  content: {
+    position: 'relative',
+    width: '600px',
+    margin: "0 auto",
+    borderRadius: "20px"
+  }
+}
 
 function Table(props) {
-  const {activeItem, setActiveItem} = props
+  const [activeItem, setActiveItem] = useState(null)
+  const {isEdit, isResetPassword, isRemove} = props.functions
+  const [modalEditIsOpen, setModalEditIsOpen] = useState(false)
+  const [modalRemoveIsOpen, setModalRemoveIsOpen] = useState(false)
+  const [modalPasswordIsOpen, setModalPasswordIsOpen] = useState(false)
+
+  function openModalEdit() {
+    setModalEditIsOpen(true)
+  }
+
+  function closeModalEdit() {
+    setModalEditIsOpen(false)
+  }
+
+  function openModalRemove() {
+    setModalRemoveIsOpen(true)
+  }
+
+  function closeModalRemove() {
+    setModalRemoveIsOpen(false)
+  }
+
+  function openModalSetPassword() {
+    setModalPasswordIsOpen(true)
+  }
+
+  function closeModalSetPassword() {
+    setModalPasswordIsOpen(false)
+  }
 
   if (props.data.length !== 0){
     return (
@@ -16,10 +58,9 @@ function Table(props) {
               {Object.keys(props.data[0]).map(key=>
                 <th key={key} className='thead__th'>{key}</th>
               )}
-              <th />
-              {props.type === "user" || props.type === "student" ?
-              <th /> : null}
-              {props.type === "user" ? <th /> : null}
+              {Object.values(props.functions).filter((val) => val).map((val, index)=>
+                <th key={index} className='thead__th'/>
+              )}
             </tr>
             </thead>
             <tbody className='table__tbody tbody'>
@@ -33,47 +74,88 @@ function Table(props) {
                 {Object.entries(item).map(([key,value])=>
                   <td key={key} className='tbody__td'>{value}</td>
                 )}
-                {props.type === "user" || props.type === "student" ?
-                <td className={`tbody__td tbody__td_func`}>
-                  <button
-                    title='Редактировать'
-                    className='tbody__button tbody__button_type_edit'
-                    onClick={props.handleEdit}>
-                    <FontAwesomeIcon icon={faPen} />
-                  </button>
-                </td> : null
-                }
-                {props.type === "user" ?
-                <td className={`tbody__td tbody__td_func`}>
-                  <button
-                    title='Сбросить пароль'
-                    className='tbody__button tbody__button_type_reset-password'
-                    onClick={props.handleResetPassword}>
-                    <FontAwesomeIcon icon={faKey} />
-                  </button>
-                </td> : null
-                }
-                <td className={`tbody__td tbody__td_func`}>
-                  <button
-                    title='Удалить'
-                    className='tbody__button tbody__button_type_remove'
-                    onClick={()=>{
-                      props.handleRemove(item.id)
-                    }}>
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </td>
+
+                {isEdit ?
+                  <td className={`tbody__td tbody__td_func`}>
+                    <button
+                      title='Редактировать'
+                      onClick={openModalEdit}
+                      className='tbody__button tbody__button_type_edit'>
+                      <FontAwesomeIcon icon={faPen} />
+                    </button>
+                  </td> : null}
+                {isResetPassword ?
+                  <td className={`tbody__td tbody__td_func`}>
+                    <button
+                      title='Сбросить пароль'
+                      onClick={openModalSetPassword}
+                      className='tbody__button tbody__button_type_reset-password'>
+                      <FontAwesomeIcon icon={faKey} />
+                    </button>
+                  </td> : null}
+                {isRemove ?
+                  <td className={`tbody__td tbody__td_func`}>
+                    <button
+                      title='Удалить'
+                      onClick={openModalRemove}
+                      className='tbody__button tbody__button_type_remove'>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </td> : null}
               </tr>
+
             )}
             </tbody>
           </table>
         </div>
+
+        {modalEditIsOpen ?
+          <Modal isOpen={modalEditIsOpen} onRequestClose={closeModalEdit} style={customStyle}>
+            <EditForm
+              type={props.type}
+              data={props.data}
+              setData={props.setData}
+              activeItem={activeItem}
+              close={closeModalEdit}
+            />
+          </Modal> : null
+        }
+
+        {modalRemoveIsOpen ?
+          <Modal isOpen={modalRemoveIsOpen} onRequestClose={closeModalRemove} style={customStyle}>
+            <RemoveForm
+              type={props.type}
+              data={props.data}
+              setData={props.setData}
+              activeItem={activeItem}
+              close={closeModalRemove}
+            />
+          </Modal> : null
+        }
+
+        {modalPasswordIsOpen ?
+          <Modal isOpen={modalPasswordIsOpen} onRequestClose={closeModalSetPassword} style={customStyle}>
+            <SetPasswordForm
+              type={props.type}
+              setData={props.setData}
+              activeItem={props.activeItem}
+              close={closeModalRemove}
+            />
+          </Modal> : null
+        }
       </div>
     )
   } else {
     return null
   }
+}
 
+Table.propTypes = {
+  activeItem: PropTypes.number,
+  setActiveItem: PropTypes.func,
+  data: PropTypes.array,
+  handleRemove: PropTypes.func,
+  handleResetPassword: PropTypes.func,
 }
 
 export default Table

@@ -12,12 +12,6 @@ import {Header} from "../../components/header/Header";
 
 export default function Admin() {
   const {fullName} = useSelector(state=>state.user)
-  const navigate = useNavigate()
-
-  const handleExit = () =>{
-    localStorage.removeItem('token')
-    navigate(LOGIN_ROUTE)
-  }
 
   return (
     <div className='admin'>
@@ -71,7 +65,7 @@ function generateManagement(Component, props) {
         />
       )
     }
-    return <Component update={update} data={data} isLoading={isLoading} type={props.type} title={props.title}/>
+    return <Component update={update} data={data} setData={setData} isLoading={isLoading} type={props.type} title={props.title}/>
   }
 }
 
