@@ -9,12 +9,15 @@ import {useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import { animateScroll as scroll } from 'react-scroll'
 import {check} from '../../http/userAPI'
-import {LOGIN_ROUTE} from "../../utils/const";
+import {DIAGNOSTIC_MENU_ROUTE, LOGIN_ROUTE} from "../../utils/const";
+import {Header} from "../../components/header/Header";
+import {useSelector} from "react-redux";
 
 
 export default function Diagnostic(){
   const [activeTab, setActiveTab] = useState(0)
   const [isVisibleUp, setVisibleUp] = useState(false)
+  const {fullName} = useSelector(state=>state.user)
   const navigate = useNavigate()
 
   useEffect(async ()=>{
@@ -49,7 +52,7 @@ export default function Diagnostic(){
 
   return (
     <div className="diagnostic" id="diagnostic">
-      <button onClick={handleExit}>Выход</button>
+      <Header username={fullName}/>
       <Tabs className='diagnostic__tabs' selectedIndex={activeTab} onSelect={handleSelect}>
         <TabList className='diagnostic__tab-list'>
           { DIAG_DATA.map((s)=><Tab key={s.name} className='diagnostic__item'>{s.title}</Tab>)}
@@ -78,7 +81,10 @@ export default function Diagnostic(){
         }
       <div className='diagnostic__bottom-section'>
         <button className='diagnostic__btn diagnostic__btn_save'>Сохранить</button>
-        <button className='diagnostic__btn diagnostic__btn_cancel'>Отмена</button>
+        <button
+          className='diagnostic__btn diagnostic__btn_cancel'
+          onClick={()=>navigate(DIAGNOSTIC_MENU_ROUTE)}
+        >Отмена</button>
         <Progress />
       </div>
     </div>

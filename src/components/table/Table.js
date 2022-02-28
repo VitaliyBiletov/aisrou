@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react'
-import {faTrash, faKey, faPen} from "@fortawesome/free-solid-svg-icons/index";
+import React, {useState} from 'react'
+import {faTrash, faKey, faPen, faListAlt} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
+import {useNavigate} from 'react-router-dom'
 import {EditForm} from "../../components/forms/EditForm";
 import {RemoveForm} from "../../components/forms/RemoveForm";
 import {SetPasswordForm} from "../forms/SetPasswordForm";
+import {DIAGNOSTIC_ROUTE} from "../../utils/const";
 
 
 const customStyle = {
@@ -19,10 +21,12 @@ const customStyle = {
 
 function Table(props) {
   const [activeItem, setActiveItem] = useState(null)
-  const {isEdit, isResetPassword, isRemove} = props.functions
+  const {isEdit, isResetPassword, isFill, isRemove} = props.functions
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false)
   const [modalRemoveIsOpen, setModalRemoveIsOpen] = useState(false)
   const [modalPasswordIsOpen, setModalPasswordIsOpen] = useState(false)
+
+  const navigate = useNavigate()
 
   function openModalEdit() {
     setModalEditIsOpen(true)
@@ -74,7 +78,15 @@ function Table(props) {
                 {Object.entries(item).map(([key,value])=>
                   <td key={key} className='tbody__td'>{value}</td>
                 )}
-
+                {isFill ?
+                  <td className={`tbody__td tbody__td_func`}>
+                    <button
+                      title='Заполнить'
+                      onClick={()=>navigate(DIAGNOSTIC_ROUTE)}
+                      className='tbody__button tbody__button_type_fill'>
+                      <FontAwesomeIcon icon={faListAlt} />
+                    </button>
+                  </td> : null }
                 {isEdit ?
                   <td className={`tbody__td tbody__td_func`}>
                     <button

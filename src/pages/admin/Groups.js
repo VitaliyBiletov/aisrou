@@ -3,7 +3,30 @@ import {getGroups, attachStudent} from "../../http/groupAPI";
 import {getUsers} from '../../http/userAPI'
 import {getStudents} from '../../http/studentAPI'
 import Table from "../../components/table/Table";
+import Select from 'react-select'
 import _ from 'lodash'
+
+
+const customStyles = {
+  menu: (provided, state) => ({
+    ...provided,
+    color: '#4e4583',
+  }),
+
+  option: (provided, state) => ({
+    padding: 5,
+    '&:hover': {
+      color: '#fff',
+      cursor: 'pointer',
+      backgroundColor: '#6a5fab'
+    }
+  }),
+
+  singleValue: (provided, state) => {
+    const color = '#4e4583';
+    return { ...provided, color};
+  }
+}
 
 export function Groups(props) {
   const [users, setUsers] = useState([])
@@ -14,29 +37,27 @@ export function Groups(props) {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
-    getUsers().then(res=>{
+    getUsers('fullName').then(res=>{
       setUsers(res)
       const userId = res[0].id
       getGroups(userId).then(res=>setGroups(res))
       setActiveUserId(userId)
       setIsLoading(true)
     })
-    getStudents().then(students=>{
+    getStudents('fullName').then(students=>{
       setStudents(students)
       setActiveStudentId(students[0].id)
     })
   }, [])
 
   const handleChangeUser = (e) => {
-    e.preventDefault()
-    const userId = e.target.value
+    const userId = e.value
     getGroups(userId).then(res=>setGroups(res))
     setActiveUserId(userId)
   }
 
   const handleChangeStudent = (e) => {
-    e.preventDefault()
-    const studentId = e.target.value
+    const studentId = e.value
     setActiveStudentId(studentId)
   }
 
@@ -61,25 +82,23 @@ export function Groups(props) {
         <div className='groups__form-item'>
           <label htmlFor="users" className='groups__label'>Учитель</label>
           {isLoading ?
-          <select
-            name="users"
-            id="users"
-            onChange={handleChangeUser}
-            className='groups__select'
-          >
-            {users.map(user=><option key={user.id} value={user.id}>{userNameFormatting(user)}</option> )}
-          </select> : null }
+            <Select
+              placeholder="Выберите"
+              styles={customStyles}
+              onChange={handleChangeUser}
+              options={users.map(u=>
+                ({value: u.id, label: u.fullName})
+              )}/> : null }
         </div>
         <div className='groups__form-item'>
           <label htmlFor="students" className='groups__label'>Ученик</label>
-          <select
-            name="students"
-            id="students"
+          <Select
+            placeholder="Выберите"
+            styles={customStyles}
             onChange={handleChangeStudent}
-            className='groups__select'
-          >
-            {students.map(student=><option key={student.id} value={student.id}>{student.lastName}</option> )}
-          </select>
+            options={students.map(s=>
+              ({value: s.id, label: s.fullName})
+            )}/>
         </div>
       </form>
       <button

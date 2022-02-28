@@ -1,6 +1,6 @@
 import {$authHost} from "./index";
 
-export async function getStudents(){
-  const {data} = await $authHost.get('api/student/all')
+export async function getStudents(type){
+  const {data} = await $authHost.get(`api/student/all${type ? '?type='+type : '' }`)
   return data
 }
