@@ -46,7 +46,7 @@ export default function DiagnosticMenu() {
     console.log(e.value)
       setActiveStudentId(e.value)
       getDiagnostics(e.value).then(diags=>{
-      const test = diags.map((d)=>{
+      const diagsList = diags.map((d)=>{
         d.progress = <Line
           percent={50}
           trailWidth="20"
@@ -58,13 +58,22 @@ export default function DiagnosticMenu() {
         />
         return d
       })
-      setDiagnostics(test)
+      setDiagnostics(diagsList)
       })
 
   }
 
   const handleCreate = (e) => {
     createDiagnostic(id, activeStudentId).then(({data})=>{
+        data.progress = <Line
+          percent={data.progress}
+          trailWidth="20"
+          strokeWidth="20"
+          strokeColor="#009d23"
+          trailColor="#e0ffe1"
+          strokeLinecap="square"
+          className="progress__line_main"
+        />
       setDiagnostics([...diagnostics, data])
       console.log(data)
     })
