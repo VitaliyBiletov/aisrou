@@ -13,13 +13,13 @@ export default function Progress(){
     const {subsections} = state.diagnostic
 
     const sectionsData = TASKS_COUNT.map(section=>{
-        const count = getCountOfCompleted(subsections[section.name])  //Количество сделанных заданий в конкретном разделе
-        const percent = count / section.count * 100                   //Количество в процентах
-        return {
-            name: section.name,
-            title: section.title,
-            percent: percent.toFixed(0)
-        }
+      const count = getCountOfCompleted(subsections[section.name])  //Количество сделанных заданий в конкретном разделе
+      const percent = count / section.count * 100                   //Количество в процентах
+      return {
+          name: section.name,
+          title: section.title,
+          percent: percent.toFixed(0)
+      }
       }
     )
 

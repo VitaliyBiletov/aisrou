@@ -45,6 +45,10 @@ const initialState = {
         "soundExtraction":[],
         "soundNumber":[],
         "phonemicSynthesis":[]
+    },
+    "readingWriting": {
+      "reading":[],
+      "writing":[]
     }
 }
 

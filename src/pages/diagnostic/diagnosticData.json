@@ -623,5 +623,20 @@
         ]
       }
     ]
+  },
+  {
+    "name": "readingWriting",
+    "title": "Чтение и письмо",
+    "type": "analysis",
+    "data": [
+      {
+        "id": 0,
+        "name": "reading",
+        "title": "Чтение",
+        "description":"Прочитай и т.д.",
+        "type": "analysis-reading",
+        "instruction": "Прочитай"
+      }
+    ]
   }
 ]

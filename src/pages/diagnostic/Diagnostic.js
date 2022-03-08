@@ -23,12 +23,9 @@ export default function Diagnostic(){
   useEffect(async ()=>{
     const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
     setActiveTab(activeTab)
-    console.log("token", localStorage.getItem('token'))
     try {
       const res = await check()
-      console.log(res)
     } catch (e) {
-      console.log(e)
       navigate(LOGIN_ROUTE)
     }
     window.addEventListener('scroll', (e) => {

@@ -36,7 +36,8 @@
     "react-scroll": "^1.8.4",
     "react-select": "^5.2.2",
     "react-tabs": "^3.2.3",
-    "redux": "^4.1.2"
+    "redux": "^4.1.2",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",

@@ -1,6 +1,7 @@
 import React from 'react'
 import Subsection from "../subsection/Subsection";
 import StateFunc from "../stateFunc/StateFunc";
+import Analysis from "../analysis/Analysis";
 
 
 export default function Section(props){
@@ -9,6 +10,13 @@ export default function Section(props){
     <div className={`section ${name}`}>
       <h1 className="section__header">{title}</h1>
       <div className="section__container">
+        { type==="info" ?
+          <StateFunc
+            name={name}
+            data={data}
+            title={title}
+          /> : null
+        }
         { type==="tasks" ?
         data.map(({id, name, title, text, instruction, data, type, hints}) => {
           return (
@@ -24,12 +32,17 @@ export default function Section(props){
               hints={hints}
             />
           )
-        }) :
-          <StateFunc
-            name={name}
-            data={data}
-            title={title}
-          />
+        }) : null }
+        { type==="analysis" ?
+          data.map(({id, type, title, description})=>
+            <Analysis
+              key={id}
+              description={description}
+              title={title}
+              type={type}
+              id={id}
+            />)
+          : null
         }
       </div>
     </div>

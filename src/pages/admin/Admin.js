@@ -5,8 +5,6 @@ import {Management} from "./Management";
 import {getAll} from "../../http/managementAPI";
 import {Groups} from "./Groups";
 import { TailSpin } from  'react-loader-spinner'
-import {LOGIN_ROUTE} from "../../utils/const";
-import {useNavigate} from "react-router-dom/index";
 import {Header} from "../../components/header/Header";
 
 
