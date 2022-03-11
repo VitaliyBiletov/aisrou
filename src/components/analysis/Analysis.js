@@ -1,4 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {setSpeedReading, setReadingSkill} from '../../redux/actions/subsectionActions'
 import { Circle } from 'rc-progress';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStop, faPlay, faPrint, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
@@ -6,6 +8,7 @@ import {TabList, Tab, Tabs, TabPanel} from 'react-tabs'
 import useSound from 'use-sound'
 import soundStop from '../../sounds/stop.mp3'
 import _ from 'lodash'
+import data from './data'
 
 let textTemplate = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis cupiditate, dignissimos distinctio excepturi in laborum magnam nulla odit perspiciatis ratione, reprehenderit voluptates. Aliquid consequatur culpa, deserunt dolorem doloremque ea eligendi et eveniet, ex expedita iusto laboriosam laudantium molestias nihil nisi officiis omnis, quae rem reprehenderit tempora ullam ut voluptatum?"
 
@@ -127,16 +130,31 @@ export default function Analysis(props){
   )
 }
 
-
 function SkillListTemplate(props) {
   const {data} = props
   const chunk = _.chunk(data, 5)
+  const {reading} = useSelector(({diagnostic})=>diagnostic.subsections.readingWriting)
+  const dispatch = useDispatch()
+  const handleChecked = (name) => (e) => {
+    dispatch(setReadingSkill(name, e.target.checked))
+  }
+
+
+
+  useEffect(()=>{
+    console.log(reading)
+  },[])
+
+  console.log(reading)
+
   return <div className='skills'>
     {chunk.map((c, index)=>{
       return <div key={index} className='skills__column'>
         {c.map(({name, title})=>{
+          const skill = reading.skills.find((skill)=>skill.name===name)
+          console.log(skill)
           return <div key={name} className='analysis__checkbox'>
-            <input type="checkbox" id={name} name={name}/>
+            <input type="checkbox" defaultChecked={skill ? skill.value : false} onClick={handleChecked(name)} id={name} name={name}/>
             <label htmlFor={name}>{title}</label>
           </div>
         })}
@@ -148,10 +166,12 @@ function SkillListTemplate(props) {
 function Text(props){
   const [activeWord, setActiveWord] = useState(-1)
   const {text} = props
+  const dispatch = useDispatch()
 
   const handleClick = (e) => {
     setActiveWord(e.target.dataset.index)
     props.setCount(Number(e.target.dataset.index) + 1)
+    dispatch(setSpeedReading(Number(e.target.dataset.index) + 1))
   }
 
   return <div className='text'>
@@ -166,138 +186,3 @@ function Text(props){
     )}
   </div>
 }
-
-const data = [
-  {
-    "id": 0,
-    "name": "reading-method",
-    "title":"Способ чтения",
-    "items":[
-      {
-        "id": 0,
-        "name": "letterByLetter",
-        "title": "Побуквенное"
-      },
-      {
-        "id": 1,
-        "name": "bySyllables",
-        "title": "По слогам отрывисто"
-      },
-      {
-        "id": 2,
-        "name": "slowlyInSyllables",
-        "title": "По слогам плавно"
-      },
-      {
-        "id": 3,
-        "name": "wholeWords",
-        "title": "Целыми словами, в сложных случаях послоговое"
-      },
-      {
-        "id": 4,
-        "name": "phrases",
-        "title": "Словосочетаниями"
-      }
-    ]},
-  {
-    "id": 1,
-    "name": "right",
-    "title":"Правильность",
-    "items":[
-      {
-        "id": 0,
-        "name": "passes",
-        "title": "Пропуски"
-      },
-      {
-        "id": 1,
-        "name": "permutations",
-        "title": "Перестановки"
-      },
-      {
-        "id": 2,
-        "name": "substitutions",
-        "title": "Замены"
-      },
-      {
-        "id": 3,
-        "name": "additions",
-        "title": "Добавления"
-      },
-      {
-        "id": 4,
-        "name": "replays",
-        "title": "Повторы"
-      },
-      {
-        "id": 5,
-        "name": "sounds",
-        "title": "Звуков"
-      },
-      {
-        "id": 6,
-        "name": "syllables",
-        "title": "Слогов"
-      },
-      {
-        "id": 7,
-        "name": "words",
-        "title": "Слов"
-      },
-      {
-        "id": 8,
-        "name": "wrongEmphasis",
-        "title": "Неправильная постановка ударения"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "expressiveness",
-    "title":"Выразительность",
-    "items":[
-      {
-        "id": 0,
-        "name": "pausesOnPunctuationMarks",
-        "title": "Паузы на знаках препинания"
-      },
-      {
-        "id": 1,
-        "name": "raiseAndLowerVoice",
-        "title": "Повышение и понижение голоса"
-      },
-      {
-        "id": 2,
-        "name": "emphasizingImportantWords",
-        "title": "Выделение голосом важных слов"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "mindfulness",
-    "title":"Осознанность",
-    "items":[
-      {
-        "id": 0,
-        "name": "literalSense",
-        "title": "В прямом значении"
-      },
-      {
-        "id": 1,
-        "name": "figurativeMeaning",
-        "title": "В переносном значении"
-      },
-      {
-        "id": 2,
-        "name": "storyEventChains",
-        "title": "Цепочки событий сюжета"
-      },
-      {
-        "id": 3,
-        "name": "mainIdea",
-        "title": "Главная мысль"
-      }
-    ]
-  }
-]
