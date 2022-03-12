@@ -5,7 +5,7 @@ import {setValueStatFunc} from "../../redux/actions/subsectionActions";
 
 function StateFunc(props){
 
-  const store = useSelector(({diagnostic})=>diagnostic.subsections.stateOfFunc)
+  const store = useSelector(state=>state.diagnostic.tasks.stateOfFunc)
   const dispatch = useDispatch()
 
   const handleChange = (e) => {

@@ -12,12 +12,15 @@ import {check} from '../../http/userAPI'
 import {DIAGNOSTIC_MENU_ROUTE, LOGIN_ROUTE} from "../../utils/const";
 import {Header} from "../../components/header/Header";
 import {useSelector} from "react-redux";
+import {saveDiagnostic} from "../../http/diagnosticAPI";
+
 
 
 export default function Diagnostic(){
   const [activeTab, setActiveTab] = useState(0)
   const [isVisibleUp, setVisibleUp] = useState(false)
   const {fullName} = useSelector(state=>state.user)
+  const data = useSelector(state=>state.diagnostic)
   const navigate = useNavigate()
 
   useEffect(async ()=>{
@@ -40,6 +43,10 @@ export default function Diagnostic(){
   const handleSelect = (index) => {
     setActiveTab(index)
     sessionStorage.setItem('activeTab', index)
+  }
+
+  const handleClick = (e) => {
+    saveDiagnostic(data)
   }
 
   const handleExit = () =>{
@@ -77,7 +84,7 @@ export default function Diagnostic(){
             : null
         }
       <div className='diagnostic__bottom-section'>
-        <button className='diagnostic__btn diagnostic__btn_save'>Сохранить</button>
+        <button className='diagnostic__btn diagnostic__btn_save' onClick={handleClick}>Сохранить</button>
         <button
           className='diagnostic__btn diagnostic__btn_cancel'
           onClick={()=>navigate(DIAGNOSTIC_MENU_ROUTE)}

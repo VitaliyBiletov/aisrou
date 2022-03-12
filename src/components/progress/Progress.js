@@ -10,10 +10,10 @@ export default function Progress(){
   const [percentAll, setPercentAll] = useState(0)
 
   const progressInPercent = useSelector(state=> {
-    const {subsections} = state.diagnostic
+    const {tasks} = state.diagnostic
 
     const sectionsData = TASKS_COUNT.map(section=>{
-      const count = getCountOfCompleted(subsections[section.name])  //Количество сделанных заданий в конкретном разделе
+      const count = getCountOfCompleted(tasks[section.name], section.type)  //Количество сделанных заданий в конкретном разделе
       const percent = count / section.count * 100                   //Количество в процентах
       return {
           name: section.name,
@@ -23,7 +23,9 @@ export default function Progress(){
       }
     )
 
-    //Считаем общий процент решенных упражнений
+
+
+    //Считаем общий процент решеных упражнений
     const countCompletedAll = sectionsData.reduce((sum, sec) => sum + Number(sec.percent), 0) / sectionsData.length
 
     if (percentAll !== countCompletedAll){

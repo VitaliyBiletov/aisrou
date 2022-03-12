@@ -11,6 +11,11 @@ export async function createDiagnostic(userId, studentId) {
   return res
 }
 
+export async function saveDiagnostic(data) {
+  const res = await $authHost.post(`api/diagnostic/save`, {data})
+  return res
+}
+
 export async function removeDiagnostic(diagId) {
   const res = await $authHost.delete(`api/diagnostic/remove/${diagId}`)
   return res

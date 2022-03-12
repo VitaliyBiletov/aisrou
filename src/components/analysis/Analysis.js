@@ -72,58 +72,50 @@ export default function Analysis(props){
   }
 
   return(
-    <div className='subsection analysis'>
-      <div className='subsection__header'>
-        <h2 className='subsection__header_h2'>{props.title}</h2>
+    <div>
+      <div className='print__container'>
+        <button className='print__button' onClick={handlePlus}><FontAwesomeIcon icon={faPlus}/></button>
+        <button className='print__button' onClick={handleMinus}><FontAwesomeIcon icon={faMinus}/></button>
+        <button className='print__button' onClick={handlePrint}><FontAwesomeIcon icon={faPrint}/></button>
       </div>
-      <div className="subsection__description">
-        <p className='subsection__description_p'>{props.description}</p>
-      </div>
-      <div className='subsection__content-section'>
-        <div>
-          <div className='print__container'>
-            <button className='print__button' onClick={handlePlus}><FontAwesomeIcon icon={faPlus}/></button>
-            <button className='print__button' onClick={handleMinus}><FontAwesomeIcon icon={faMinus}/></button>
-            <button className='print__button' onClick={handlePrint}><FontAwesomeIcon icon={faPrint}/></button>
+      {text ? <Text fontSize={fontSize} setCount={setCount} text={text}/> : null }
+
+      <div className='analysis__panel'>
+        {props.type === 'reading' ?
+        <div className='analysis__timer timer'>
+          <button className='timer__button timer__button_start' onClick={startTimer}><FontAwesomeIcon icon={faPlay}/></button>
+          <button className='timer__button timer__button_stop' onClick={stopTimer}><FontAwesomeIcon icon={faStop}/></button>
+          <div className="timer__progress">
+            <Circle percent={sec} strokeWidth="7" strokeColor={color}/>
           </div>
-          {text ? <Text fontSize={fontSize} setCount={setCount} text={text}/> : null }
-          <div className='analysis__panel'>
-            <div className='analysis__timer timer'>
-              <button className='timer__button timer__button_start' onClick={startTimer}><FontAwesomeIcon icon={faPlay}/></button>
-              <button className='timer__button timer__button_stop' onClick={stopTimer}><FontAwesomeIcon icon={faStop}/></button>
-              <div className="timer__progress">
-                <Circle percent={sec} strokeWidth="7" strokeColor={color}/>
-              </div>
-              <div className='analysis__speed'>
-                {count ?
-                  <>
-                    <span>Скорость:</span><span className='analysis__speed-count'>{count} сл/мин</span>
-                  </> :
-                  <span>Выберите слово</span>
-                }
-              </div>
-            </div>
-            <div className='analysis__skills'>
-              <Tabs className="analysis__tabs" selectedTabClassName="analysis__tab_active">
-                <TabList className='analysis__tab-list'>
-                  {data.map(({name, title})=>
-                    <Tab
-                      className='analysis__tab'
-                      key={name}
-                      to={name}
-                    >{title}</Tab>
-                  )}
-                  </TabList>
-                  {data.map(({name, title, items})=>
-                  <TabPanel
-                    className="analysis__tab-panel"
-                    selectedClassName="analysis__tab-panel_selected"
-                    key={name}>
-                    <SkillListTemplate data={items}/>
-                  </TabPanel>)}
-              </Tabs>
-            </div>
+          <div className='analysis__speed'>
+            {count ?
+              <>
+                <span>Скорость:</span><span className='analysis__speed-count'>{count} сл/мин</span>
+              </> :
+              <span>Выберите слово</span>
+            }
           </div>
+        </div> : null }
+        <div className='analysis__skills'>
+          <Tabs className="analysis__tabs" selectedTabClassName="analysis__tab_active">
+            <TabList className='analysis__tab-list'>
+              {data.map(({name, title})=>
+                <Tab
+                  className='analysis__tab'
+                  key={name}
+                  to={name}
+                >{title}</Tab>
+              )}
+              </TabList>
+              {data.map(({name, title, items})=>
+              <TabPanel
+                className="analysis__tab-panel"
+                selectedClassName="analysis__tab-panel_selected"
+                key={name}>
+                <SkillListTemplate data={items}/>
+              </TabPanel>)}
+          </Tabs>
         </div>
       </div>
     </div>
@@ -133,26 +125,21 @@ export default function Analysis(props){
 function SkillListTemplate(props) {
   const {data} = props
   const chunk = _.chunk(data, 5)
-  const {reading} = useSelector(({diagnostic})=>diagnostic.subsections.readingWriting)
+  const {reading} = useSelector(({diagnostic})=>diagnostic.tasks)
   const dispatch = useDispatch()
+
   const handleChecked = (name) => (e) => {
     dispatch(setReadingSkill(name, e.target.checked))
   }
 
-
-
   useEffect(()=>{
-    console.log(reading)
   },[])
-
-  console.log(reading)
 
   return <div className='skills'>
     {chunk.map((c, index)=>{
       return <div key={index} className='skills__column'>
         {c.map(({name, title})=>{
           const skill = reading.skills.find((skill)=>skill.name===name)
-          console.log(skill)
           return <div key={name} className='analysis__checkbox'>
             <input type="checkbox" defaultChecked={skill ? skill.value : false} onClick={handleChecked(name)} id={name} name={name}/>
             <label htmlFor={name}>{title}</label>

@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import {SubsectionReducer} from "./subsectionReducer";
+import {TasksReducer} from "./tasksReducer";
 
 export const DiagnosticReducer = combineReducers({
-  subsections: SubsectionReducer
+  tasks: TasksReducer,
 })

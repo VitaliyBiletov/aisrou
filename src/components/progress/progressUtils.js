@@ -1,11 +1,21 @@
 
 //Считает общее количество заполненных упражнений в разделе
-export function getCountOfCompleted(result) {
-  if (Array.isArray(result)) return result.length
-  if (typeof result === 'string' && result.length > 0) return 1
-  let count = 0
-  for(let i of Object.values(result)){
-    count = count + getCountOfCompleted(i)
+export function getCountOfCompleted(data, type) {
+  switch (type){
+    case 'info':{
+      return Object.values(data).filter(i=>i).length
+    }
+    case 'analysis':{
+      return data.skills.find(item=>item.value) ? 1 : 0
+    }
+    case 'tasks':{
+      return getCountOfTasks(data)
+    }
+    default: return 0
   }
+}
+
+function getCountOfTasks(data) {
+  const count = Object.values(data).reduce((previousValue, currentValue)=> previousValue + currentValue.length, 0)
   return count
 }

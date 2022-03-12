@@ -625,17 +625,30 @@
     ]
   },
   {
-    "name": "readingWriting",
-    "title": "Чтение и письмо",
+    "name": "reading",
+    "title": "Чтение",
     "type": "analysis",
     "data": [
       {
         "id": 0,
         "name": "reading",
         "title": "Чтение",
-        "description":"Прочитай текст, как можно быстрее и ответь на вопросы",
-        "type": "analysis-reading",
-        "instruction": "Прочитай"
+        "type": "reading",
+        "instruction": "Прочитай текст, как можно быстрее и ответь на вопросы"
+      }
+    ]
+  },
+  {
+    "name": "writing",
+    "title": "Письмо",
+    "type": "analysis",
+    "data": [
+      {
+        "id": 0,
+        "name": "writing",
+        "title": "Письмо",
+        "type": "writing",
+        "instruction": "Спиши текст"
       }
     ]
   }
