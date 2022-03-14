@@ -4,19 +4,21 @@
   background-color: $primary_color
 
   &__logo
-    background-color: $secondary_color
     color: $logo_color
     text-align: center
     font-weight: bold
+    font-size: 0.6em
     min-width: 120px
     padding: 10px 0
 
     &_span
-      border: 3px solid $logo_color
+      border: 2px solid $logo_color
       padding: 5px
+      border-radius: 5px
 
-    &:hover
-      cursor: pointer
+      &:hover
+        cursor: pointer
+        background-color: #7c73b5
 
   &__header-menu
     display: flex
@@ -26,9 +28,12 @@
     width: 100%
 
   &__username
-    color: #4e4583
-    background: #e1e1f9
-    padding: 10px
+    padding: 0 10px
+    color: #fff
+    font-size: 0.8em
+
+  &__logout
+    height: 100%
 
   &__button
     border: none

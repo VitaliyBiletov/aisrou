@@ -17,11 +17,16 @@ function Header(props) {
         <span className='header__logo_span'>АИСРОУ</span>
       </div>
       <div className='header__header-menu'>
-        <div className='header__username'>{props.username}</div>
-        <button
-          className='header__button'
-          onClick={handleExit}
-        >Выход</button>
+        <div className='header__username'>
+          <span>{props.username}</span>
+        </div>
+        <div className='header__logout'>
+          <button
+            className='header__button'
+            onClick={handleExit}
+          >Выход</button>
+        </div>
+
       </div>
     </header>
   )
