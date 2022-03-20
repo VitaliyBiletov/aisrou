@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {setSpeedReading, setReadingSkill} from '../../redux/actions/subsectionActions'
+import {setSpeedReading, setReadingSkill} from '../../redux/actions/tasksActions'
 import { Circle } from 'rc-progress';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStop, faPlay, faPrint, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {faTrash, faKey, faPen, faListAlt} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 import PropTypes from 'prop-types'
@@ -7,6 +7,8 @@ import {useNavigate} from 'react-router-dom'
 import {EditForm} from "../../components/forms/EditForm";
 import {RemoveForm} from "../../components/forms/RemoveForm";
 import {SetPasswordForm} from "../forms/SetPasswordForm";
+import { Line } from 'rc-progress'
+
 import {DIAGNOSTIC_ROUTE} from "../../utils/const";
 
 
@@ -27,6 +29,10 @@ function Table(props) {
   const [modalPasswordIsOpen, setModalPasswordIsOpen] = useState(false)
 
   const navigate = useNavigate()
+
+  useEffect(()=>{
+    console.log(props.data)
+  },[])
 
   function openModalEdit() {
     setModalEditIsOpen(true)
@@ -52,6 +58,8 @@ function Table(props) {
     setModalPasswordIsOpen(false)
   }
 
+  console.log('data',props.fields)
+
   if (props.data.length !== 0){
     return (
       <div className='table'>
@@ -59,8 +67,8 @@ function Table(props) {
           <table className='table__table'>
             <thead className='table__thead thead'>
             <tr className='thead__tr'>
-              {Object.keys(props.data[0]).map(key=>
-                <th key={key} className='thead__th'>{key}</th>
+              {props.fields.map(({name, title})=>
+                <th key={name} className='thead__th'>{title}</th>
               )}
               {Object.values(props.functions).filter((val) => val).map((val, index)=>
                 <th key={index} className='thead__th'/>
@@ -75,8 +83,22 @@ function Table(props) {
                 onClick={()=>setActiveItem(item.id)}
                 className={`${activeItem === item.id ? 'tbody__tr_active' : null} tbody__tr`}
               >
-                {Object.entries(item).map(([key,value])=>
-                  <td key={key} className='tbody__td'>{value}</td>
+                {item.fieldsData.map((f)=>{
+                    return <td key={f.name} className='tbody__td'>{
+                      String(f.name) === 'progress' ?
+                      <Line
+                        key={f.name}
+                        percent={f.value}
+                        trailWidth="20"
+                        strokeWidth="20"
+                        strokeColor="#009d23"
+                        trailColor="#e0ffe1"
+                        strokeLinecap="square"
+                        className="progress__line_main"
+                      /> : f.value}
+                      </td>
+                }
+
                 )}
                 {isFill ?
                   <td className={`tbody__td tbody__td_func`}>
@@ -115,7 +137,6 @@ function Table(props) {
                     </button>
                   </td> : null}
               </tr>
-
             )}
             </tbody>
           </table>
@@ -166,6 +187,7 @@ Table.propTypes = {
   activeItem: PropTypes.number,
   setActiveItem: PropTypes.func,
   data: PropTypes.array,
+  fields: PropTypes.array,
   handleRemove: PropTypes.func,
   handleResetPassword: PropTypes.func,
 }

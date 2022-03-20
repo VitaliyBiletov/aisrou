@@ -40,7 +40,10 @@ export function Groups(props) {
     getUsers('fullName').then(res=>{
       setUsers(res)
       const userId = res[0].id
-      getGroups(userId).then(res=>setGroups(res))
+      getGroups(userId).then(res=>{
+        console.log('res',res)
+        setGroups(res)
+      })
       setActiveUserId(userId)
       setIsLoading(true)
     })

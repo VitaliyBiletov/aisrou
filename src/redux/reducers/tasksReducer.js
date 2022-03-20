@@ -1,4 +1,4 @@
-import {SET_VALUE_ITEM, SET_VALUE_STATE_FUNC, SET_SPEED_READING, SET_READING_SKILL} from "../types/subsectionTypes";
+import {SET_VALUE_ITEM, SET_VALUE_STATE_FUNC, SET_SPEED_READING, SET_READING_SKILL} from "../types/tasksTypes";
 
 const initialState = {
     "stateOfFunc":{

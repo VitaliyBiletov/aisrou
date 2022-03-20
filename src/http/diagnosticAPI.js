@@ -6,13 +6,18 @@ export async function getDiagnostics(studentId) {
   return data
 }
 
-export async function createDiagnostic(userId, studentId) {
-  const res = await $authHost.post(`api/diagnostic/create`, {userId, studentId})
+export async function createDiagnostic(userId, studentId, date, typeId, classNumber) {
+  const res = await $authHost.post(`api/diagnostic/create`, {userId, studentId, typeId, date, classNumber})
   return res
 }
 
 export async function saveDiagnostic(data) {
   const res = await $authHost.post(`api/diagnostic/save`, {data})
+  return res
+}
+
+export async function getTypes() {
+  const res = await $authHost.get(`api/diagnostic/types`)
   return res
 }
 

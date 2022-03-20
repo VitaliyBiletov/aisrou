@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {setValueStatFunc} from "../../redux/actions/subsectionActions";
+import {setValueStatFunc} from "../../redux/actions/tasksActions";
 
 
 function StateFunc(props){

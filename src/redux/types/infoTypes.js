@@ -1,0 +1,3 @@
+export const SET_DATE = 'INFO/SET_DATE'
+export const SET_FORM_DATA = 'INFO/SET_FORM_DATA'
+export const SET_STUDENT = 'INFO/SET_STUDENT'

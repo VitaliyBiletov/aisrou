@@ -21,6 +21,8 @@ function Management(props) {
   const [functions, setFunctions] = useState({})
   const [modalRegistrationIsOpen, setModalRegistrationIsOpen] = useState(false)
 
+  console.log(props.data)
+
   useEffect(()=>{
     switch (props.type){
       case 'user': return setFunctions({
@@ -52,12 +54,14 @@ function Management(props) {
         <button className='management__button' onClick={openModalRegistration}>Зарегистрировать</button>
       </div>
       <div className='management__table'>
-        <Table
-          data={props.data}
-          setData={props.setData}
-          type={props.type}
-          functions={functions}
-        />
+        {props.data.data ?
+          <Table
+            data={props.data.data}
+            fields={props.data.fields}
+            setData={props.setData}
+            type={props.type}
+            functions={functions}
+          /> : null }
       </div>
       {modalRegistrationIsOpen ?
         <Modal isOpen={modalRegistrationIsOpen} onRequestClose={closeModalRegistration} style={customStyle}>

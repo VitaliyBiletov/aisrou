@@ -1,11 +1,22 @@
-import React, {useState, useEffect} from 'react'
-import {useSelector} from 'react-redux'
-import {Header} from "../../components/header/Header";
-import {getGroups} from "../../http/groupAPI";
-import {getDiagnostics, createDiagnostic, removeDiagnostic} from "../../http/diagnosticAPI";
-import Table from "../../components/table/Table";
-import { Line } from 'rc-progress';
+import React, {useState, useEffect, useRef} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {Header} from "../../components/header/Header"
+import {getGroups} from "../../http/groupAPI"
+import {getDiagnostics, createDiagnostic, removeDiagnostic, getTypes} from "../../http/diagnosticAPI"
+import Table from "../../components/table/Table"
+import { Line } from 'rc-progress'
 import Select from 'react-select'
+import Modal from 'react-modal'
+import {setStudent, setFormData} from "../../redux/actions/infoActions";
+
+const customStyleModal = {
+  content: {
+    position: 'relative',
+    width: '600px',
+    margin: "0 auto",
+    borderRadius: "20px"
+  }
+}
 
 const customStyles = {
   menu: (provided, state) => ({
@@ -31,51 +42,59 @@ const customStyles = {
 export default function DiagnosticMenu() {
   const {id, fullName} = useSelector(state=>state.user)
   const [students, setStudents] = useState([])
-  const [diagnostics, setDiagnostics] = useState([])
+  const [types, setTypes] = useState([])
+  const [diagnostics, setDiagnostics] = useState(null)
+  const [fields, setFields] = useState(null)
+  const [data, setData] = useState(null)
+  const [diagInfo, setDiagInfo] = useState({})
   const [activeStudentId, setActiveStudentId] = useState(null)
+  const [modalCreateDiagIsOpen, setModalCreateDiagIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const dispatch = useDispatch()
+  const formRef = useRef()
 
   useEffect(()=>{
     getGroups(id).then(group=>{
       setStudents(group)
       setIsLoading(true)
     })
+    getTypes().then(({data})=>setTypes(data))
   },[])
 
-  const handleChange = (e) => {
-    console.log(e.value)
+  function openModalCreateDiag() {
+    setModalCreateDiagIsOpen(true)
+  }
+
+  function closeModalCreateDiag() {
+    setModalCreateDiagIsOpen(false)
+  }
+
+  const handleChangeStudent = (e) => {
+    console.log(e.label)
+      dispatch(setStudent({id: e.value, label: e.label}))
       setActiveStudentId(e.value)
       getDiagnostics(e.value).then(diags=>{
-      const diagsList = diags.map((d)=>{
-        d.progress = <Line
-          percent={50}
-          trailWidth="20"
-          strokeWidth="20"
-          strokeColor="#009d23"
-          trailColor="#e0ffe1"
-          strokeLinecap="square"
-          className="progress__line_main"
-        />
-        return d
-      })
-      setDiagnostics(diagsList)
-      })
+        setFields(diags.fields)
+        setData(diags.data)
+      }).catch(e=>console.log(e))
+  }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    const name = e.target.name
+    const value = e.target.value
+    setDiagInfo({...diagInfo, [name]: value})
   }
 
   const handleCreate = (e) => {
-    createDiagnostic(id, activeStudentId).then(({data})=>{
-        data.progress = <Line
-          percent={data.progress}
-          trailWidth="20"
-          strokeWidth="20"
-          strokeColor="#009d23"
-          trailColor="#e0ffe1"
-          strokeLinecap="square"
-          className="progress__line_main"
-        />
-      setDiagnostics([...diagnostics, data])
-      console.log(data)
+    e.preventDefault()
+    console.log(diagnostics)
+    const {type, classNumber, date} = diagInfo
+    createDiagnostic(id, activeStudentId, date, type, classNumber).then((result)=>{
+      console.log('resulr', result)
+      console.log('data', data)
+      setData([...data, result.data])
+      setModalCreateDiagIsOpen(false)
     })
   }
 
@@ -96,40 +115,80 @@ export default function DiagnosticMenu() {
           <Select
             placeholder="Выберите ученика"
             styles={customStyles}
-            onChange={handleChange}
+            onChange={handleChangeStudent}
             options={students.map(s=>
               ({value: s.studentId, label: s.fullName})
             )}/>
         </div>
-        {/*<select*/}
-          {/*name="students"*/}
-          {/*className='diagnostic-menu__select'*/}
-          {/*onChange={handleChange}*/}
-        {/*>*/}
-          {/*<option value='default'>Выберите ученика</option>*/}
-          {/*{students.map(({studentId, fullName})=>*/}
-            {/*<option key={studentId} value={studentId}>{fullName}</option>)}*/}
-        {/*</select>*/}
         {activeStudentId ?
         <div className='diagnostic-menu__list'>
           <h3 className='diagnostic-menu__h3'>
             Обследования
             <button
               className='diagnostic-menu__button_type_add'
-              onClick={handleCreate}
+              onClick={openModalCreateDiag}
               title='Добавить'
             >+</button>
           </h3>
           <div className="diagnostic-menu__table">
+            {data ?
             <Table
               type='diagnostic'
               functions={{isRemove: true, isFill: true}}
-              data={diagnostics}
+              fields={fields}
+              data={data}
               setData={setDiagnostics}
-            />
+            /> : null }
           </div>
         </div>: null}
       </div> : null}
+      <Modal isOpen={modalCreateDiagIsOpen} onRequestClose={closeModalCreateDiag} style={customStyleModal}>
+        <div className='modal'>
+          <h2 className='modal__title'>Создание диагностики</h2>
+          <div className='modal__container'>
+            <form ref={formRef} className='modal__form form'>
+                <label>
+                  Дата обследования
+                  <input
+                    name="date"
+                    className='form__input'
+                    type="date"
+                    onChange={handleChange}
+                  />
+                </label>
+
+                <label>
+                  Тип
+                  <select
+                    name="type"
+                    className='form__input'
+                    onChange={handleChange}
+                  >
+                    {
+                      types.map(type=>
+                        <option key={type.id} value={type.id}>{type.title}</option>
+                      )
+                    }
+                  </select>
+                </label>
+                <label>
+                  Класс (0-5)
+                  <input
+                    name="classNumber"
+                    className='form__input'
+                    id="diagClassNumber"
+                    type="number"
+                    onChange={handleChange}
+                    max="5"
+                    min="0"/>
+                </label>
+              <button onClick={handleCreate} className='form__button'>Создать</button>
+            </form>
+          </div>
+
+        </div>
+
+      </Modal>
     </div>
   )
 }

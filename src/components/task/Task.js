@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {setValueItem} from '../../redux/actions/subsectionActions'
+import {setValueItem} from '../../redux/actions/tasksActions'
 import Analysis from "../analysis/Analysis";
 
 export function Task(props) {
