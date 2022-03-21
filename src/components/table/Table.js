@@ -74,7 +74,7 @@ function Table(props) {
             </tr>
             </thead>
             <tbody className='table__tbody tbody'>
-            {props.data.sort((a,b)=>a.id > b.id ? 1 : -1 ).map((item)=>
+            {props.data.map((item)=>
               <tr
                 key={item.id}
                 data-value={item.id}

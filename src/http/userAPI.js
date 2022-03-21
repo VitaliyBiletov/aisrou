@@ -8,8 +8,13 @@ export async function login(email, password) {
   return jwt_decode(data)
 }
 
-export async function getUsers(type){
-  const {data} = await $authHost.get(`api/user/all/${type ? '?type='+type : ''}`)
+export async function getUsers(){
+  const {data} = await $authHost.get(`api/user/all`)
+  return data
+}
+
+export async function getListUsers(){
+  const {data} = await $authHost.get(`api/user/list`, {})
   return data
 }
 

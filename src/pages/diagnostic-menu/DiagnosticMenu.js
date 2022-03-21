@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Header} from "../../components/header/Header"
-import {getGroups} from "../../http/groupAPI"
+import {getListGroups} from "../../http/groupAPI"
 import {getDiagnostics, createDiagnostic, removeDiagnostic, getTypes} from "../../http/diagnosticAPI"
 import Table from "../../components/table/Table"
 import { Line } from 'rc-progress'
@@ -54,11 +54,15 @@ export default function DiagnosticMenu() {
   const formRef = useRef()
 
   useEffect(()=>{
-    getGroups(id).then(group=>{
-      setStudents(group)
-      setIsLoading(true)
-    })
-    getTypes().then(({data})=>setTypes(data))
+    if (id){
+      console.log(id)
+      getListGroups(id).then(students=>{
+        setStudents(students)
+        setIsLoading(true)
+      })
+      getTypes().then(({data})=>setTypes(data))
+    }
+
   },[])
 
   function openModalCreateDiag() {
@@ -106,7 +110,7 @@ export default function DiagnosticMenu() {
             styles={customStyles}
             onChange={handleChangeStudent}
             options={students.map(s=>
-              ({value: s.studentId, label: s.fullName})
+              ({value: s.id, label: s.fullName})
             )}/>
         </div>
         {activeStudentId ?

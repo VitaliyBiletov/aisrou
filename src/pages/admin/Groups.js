@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {getGroups, attachStudent} from "../../http/groupAPI";
-import {getUsers} from '../../http/userAPI'
-import {getStudents} from '../../http/studentAPI'
+import {getListUsers} from '../../http/userAPI'
+import {getListStudents} from '../../http/studentAPI'
 import Table from "../../components/table/Table";
 import Select from 'react-select'
 import _ from 'lodash'
@@ -33,29 +33,38 @@ export function Groups(props) {
   const [activeUserId, setActiveUserId] = useState(null)
   const [students, setStudents] = useState([])
   const [activeStudentId, setActiveStudentId] = useState(null)
-  const [groups, setGroups] = useState([])
+  const [groups, setGroups] = useState(null)
+  const [data, setData] = useState([])
+  const [fields, setFields] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
-    getUsers('fullName').then(res=>{
+    getListUsers().then(res=>{
       setUsers(res)
-      const userId = res[0].id
-      getGroups(userId).then(res=>{
-        console.log('res',res)
-        setGroups(res)
-      })
-      setActiveUserId(userId)
-      setIsLoading(true)
+      // const userId = res[0].id
+      // getGroups(userId).then(res=>{
+      //   setData(res.data)
+      //   setFields(res.fields)
+      // })
+      // setActiveUserId(userId)
     })
-    getStudents('fullName').then(students=>{
+    getListStudents().then(students=>{
       setStudents(students)
-      setActiveStudentId(students[0].id)
+      // setActiveStudentId(students[0].id)
     })
+    setIsLoading(true)
   }, [])
+
+  console.log(data)
+  console.log(fields)
 
   const handleChangeUser = (e) => {
     const userId = e.value
-    getGroups(userId).then(res=>setGroups(res))
+    getGroups(userId).then(res=>{
+      console.log(res)
+      setData(res.data)
+      setFields(res.fields)
+    })
     setActiveUserId(userId)
   }
 
@@ -73,7 +82,10 @@ export function Groups(props) {
     }
     attachStudent(activeUserId, activeStudentId)
       .then(()=>{
-        getGroups(activeUserId).then(res=>setGroups(res))
+        getGroups(activeUserId).then(res=>{
+          setData(res.data)
+          setFields(res.fields)
+        })
       })
       .catch(e=>console.log(e))
   }
@@ -81,46 +93,49 @@ export function Groups(props) {
   return (
     <div className='groups'>
       <h2 className='groups__title title'>Группы</h2>
-      <form className='groups__form'>
-        <div className='groups__form-item'>
-          <label htmlFor="users" className='groups__label'>Учитель</label>
-          {isLoading ?
+      {isLoading ?
+        <>
+        <form className='groups__form'>
+          <div className='groups__form-item'>
+            <label htmlFor="users" className='groups__label'>Учитель</label>
             <Select
               placeholder="Выберите"
               styles={customStyles}
               onChange={handleChangeUser}
               options={users.map(u=>
-                ({value: u.id, label: u.fullName})
-              )}/> : null }
-        </div>
-        <div className='groups__form-item'>
-          <label htmlFor="students" className='groups__label'>Ученик</label>
-          <Select
-            placeholder="Выберите"
-            styles={customStyles}
-            onChange={handleChangeStudent}
-            options={students.map(s=>
-              ({value: s.id, label: s.fullName})
-            )}/>
-        </div>
-      </form>
+                ({value: u.id, label: u.name})
+              )}/>
+          </div>
+          <div className='groups__form-item'>
+            <label className='groups__label'>
+              Ученик
+              <Select
+                placeholder="Выберите"
+                styles={customStyles}
+                onChange={handleChangeStudent}
+                options={students.map(s=>
+                  ({value: s.id, label: s.name})
+                )}/>
+            </label>
+          </div>
+        </form>
       <button
         onClick={handleAttach}
         className='groups__button'
       >Прикрепить</button>
-      {students.length !== 0 ?
         <div className='attached-students'>
           <h3 className='attached-students__h4'>Закреплённые ученики</h3>
           <div className='attached-students__table'>
+            {data.length !== 0 ?
             <Table
-              data={groups}
-              setData={setGroups}
+              data={data}
+              fields={fields}
+              setData={setData}
               type="group"
               functions={{isRemove: true}}
-            />
+            /> : <p>Нет закрепленных учеников</p>}
           </div>
-        </div>: null
-      }
+        </div> </>: null }
     </div>
   )
 }

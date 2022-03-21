@@ -11,6 +11,11 @@ export async function remove(groupId) {
   return data
 }
 
+export async function getListGroups(id){
+  const {data} = await $authHost.post('api/group/list', {id})
+  return data
+}
+
 export async function getGroups(userId) {
   const {data} = await $authHost.get(`api/group/${userId}`)
   return data
