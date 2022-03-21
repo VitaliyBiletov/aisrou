@@ -70,7 +70,6 @@ export default function DiagnosticMenu() {
   }
 
   const handleChangeStudent = (e) => {
-    console.log(e.label)
       dispatch(setStudent({id: e.value, label: e.label}))
       setActiveStudentId(e.value)
       getDiagnostics(e.value).then(diags=>{
@@ -88,20 +87,10 @@ export default function DiagnosticMenu() {
 
   const handleCreate = (e) => {
     e.preventDefault()
-    console.log(diagnostics)
     const {type, classNumber, date} = diagInfo
     createDiagnostic(id, activeStudentId, date, type, classNumber).then((result)=>{
-      console.log('resulr', result)
-      console.log('data', data)
       setData([...data, result.data])
       setModalCreateDiagIsOpen(false)
-    })
-  }
-
-  const handleRemove = (active) => {
-    removeDiagnostic(active).then(()=>{
-      const diagFiltered = diagnostics.filter(d=>d.id !== active)
-      setDiagnostics(diagFiltered)
     })
   }
 
@@ -134,10 +123,10 @@ export default function DiagnosticMenu() {
             {data ?
             <Table
               type='diagnostic'
-              functions={{isRemove: true, isFill: true}}
+              functions={{isRemove: true, isFill: true, isEdit: true}}
               fields={fields}
               data={data}
-              setData={setDiagnostics}
+              setData={setData}
             /> : null }
           </div>
         </div>: null}

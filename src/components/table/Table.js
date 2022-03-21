@@ -31,7 +31,7 @@ function Table(props) {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    console.log(props.data)
+
   },[])
 
   function openModalEdit() {
@@ -58,11 +58,9 @@ function Table(props) {
     setModalPasswordIsOpen(false)
   }
 
-  console.log('data',props.fields)
-
   if (props.data.length !== 0){
     return (
-      <div className='table'>
+      <div className='table animate__animated animate__fadeIn'>
         <div className='table__container'>
           <table className='table__table'>
             <thead className='table__thead thead'>

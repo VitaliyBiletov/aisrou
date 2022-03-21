@@ -6,11 +6,8 @@ function RemoveForm(props) {
 
   const handleRemove = async (e) => {
     e.preventDefault()
-    console.log(props.type)
-    console.log(props.activeItem)
     await remove(props.type, props.activeItem)
     const filteredData = props.data.filter(item=>item.id !== props.activeItem)
-    console.log(filteredData)
     props.setData(filteredData)
     props.close()
   }
