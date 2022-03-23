@@ -58,6 +58,8 @@ function Table(props) {
     setModalPasswordIsOpen(false)
   }
 
+  console.log(props.data)
+
   if (props.data.length !== 0){
     return (
       <div className='table animate__animated animate__fadeIn'>

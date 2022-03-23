@@ -51,7 +51,6 @@ function RegistrationForm(props) {
   function handleChange(e) {
     e.preventDefault()
     setFormData({...formData, [e.target.name]: e.target.value})
-    console.log(formData)
   }
 
   async function handleClick() {
@@ -60,7 +59,7 @@ function RegistrationForm(props) {
         ({name: field.name, value: formData[field.name]}))
       }
     props.setData([...props.data, record])
-    // props.close()
+    props.close()
   }
 
   return (

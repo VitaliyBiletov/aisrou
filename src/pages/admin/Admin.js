@@ -43,11 +43,8 @@ function generateManagement(Component, props) {
     const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState([])
     const [fields, setFields] = useState([])
-    console.log('management data', data)
-    // const update = async () => {
-    //   const list = await getAll(props.type)
-    //   setData(list)
-    // }
+
+    console.log(data)
 
     useEffect(() => {
       setIsLoading(false)
@@ -67,14 +64,18 @@ function generateManagement(Component, props) {
         />
       )
     }
-    return <Component
-      data={data}
-      fields={fields}
-      setData={setData}
-      isLoading={isLoading}
-      type={props.type}
-      title={props.title}
-    />
+
+    if (data.length === 0){
+      return null
+    } else {
+      return <Component
+        data={data}
+        fields={fields}
+        setData={setData}
+        isLoading={isLoading}
+        type={props.type}
+        title={props.title} />
+    }
   }
 }
 

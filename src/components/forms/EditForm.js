@@ -5,7 +5,6 @@ const USER_DATA = [
   {name: 'firstName', type: 'text', placeholder: 'Имя'},
   {name: 'lastName', type: 'text', placeholder: 'Фамилия'},
   {name: 'patronymic', type: 'text', placeholder: 'Отчество'},
-  {name: 'email', type: 'text', placeholder: 'Email'},
 ]
 
 const STUDENT_DATA = [
@@ -48,14 +47,13 @@ function EditForm(props) {
     e.preventDefault()
     const {data} = await edit(type, props.activeItem, formData)
     const updatedData = props.data.map(item=>{
-      if (item.id === data.id){
+      if (item.id === Number(data.id)){
         return data
       }
       return item
     })
-    console.log(updatedData)
     props.setData(updatedData)
-    props.close()
+    // props.close()
   }
 
   return (
