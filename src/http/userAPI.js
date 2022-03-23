@@ -3,19 +3,22 @@ import {$host, $authHost} from "./index";
 import jwt_decode from "jwt-decode";
 
 export async function login(email, password) {
-  const {data} = await $host.post('api/user/login', {email, password})
-  localStorage.setItem('token', data)
-  return jwt_decode(data)
-}
-
-export async function getUsers(){
-  const {data} = await $authHost.get(`api/user/all`)
-  return data
+  try {
+    const {data} = await $host.post('api/user/login', {email, password})
+    localStorage.setItem('token', data)
+    return jwt_decode(data)
+  }catch (e) {
+    console.log("userAPI (login) - ",e.response.data)
+  }
 }
 
 export async function getListUsers(){
-  const {data} = await $authHost.get(`api/user/list`, {})
-  return data
+  try {
+    const {data} = await $authHost.get(`api/user/list`, {})
+    return data
+  } catch (e) {
+    console.log("userAPI (getListUsers) - ",e.response.data)
+  }
 }
 
 export async function check() {
@@ -24,6 +27,6 @@ export async function check() {
     localStorage.setItem('token', data)
     return jwt_decode(data)
   } catch (e) {
-    console.log(e.response.data)
+    console.log("userAPI (check) - ",e.response.data)
   }
 }
