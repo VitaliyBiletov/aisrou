@@ -8,6 +8,7 @@ const USER_DATA = [
   {name: 'email', type: 'text', placeholder: 'Email'},
   {name: 'password', type: 'password', placeholder: 'Пароль'},
   {name: 'password2', type: 'password', placeholder: 'Повторите пароль'},
+  {name: 'role', type: 'select', placeholder: 'Тип'},
 ]
 
 const STUDENT_DATA = [
@@ -50,12 +51,16 @@ function RegistrationForm(props) {
   function handleChange(e) {
     e.preventDefault()
     setFormData({...formData, [e.target.name]: e.target.value})
+    console.log(formData)
   }
 
   async function handleClick() {
-    await registration(props.type, formData)
-    props.close()
-    props.updateData()
+    const res = await registration(props.type, formData)
+    const record = {id: res.id, fieldsData: props.fields.map(field=>
+        ({name: field.name, value: formData[field.name]}))
+      }
+    props.setData([...props.data, record])
+    // props.close()
   }
 
   return (
@@ -64,8 +69,15 @@ function RegistrationForm(props) {
       {formData ?
       <div className='modal__container'>
         <form className='modal__form form'>
-          {data.map(data=>
-            <input
+          {data.map((data)=>{
+            if (data.name === 'role'){
+              return <select key={data.name} className='form__input' onChange={handleChange} defaultValue="USER" name={data.name}>
+                <option disabled>Выберите роль</option>
+                <option value="ADMIN">Администратор</option>
+                <option value="USER">Пользователь</option>
+              </select>
+            }
+            return <input
               key={data.name}
               className='form__input'
               onChange={handleChange}
@@ -74,13 +86,8 @@ function RegistrationForm(props) {
               type={data.type}
               value={formData[data.name]}
             />
+          }
           )}
-          {props.type === 'user' ?
-            <select className='form__input' onChange={handleChange} defaultValue="USER" name="role">
-              <option disabled>Выберите роль</option>
-              <option value="ADMIN">Администратор</option>
-              <option value="USER">Пользователь</option>
-            </select> : null}
         </form>
         <button className='form__button' onClick={handleClick}>Сохранить</button>
       </div> : null }

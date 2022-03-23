@@ -3,8 +3,8 @@ import {$authHost} from './index'
 //userAPI and studentAPI
 export async function registration(type, data) {
   try {
-    const {data} = await $authHost.post(`api/${type}/registration`, data)
-    return data
+    const res = await $authHost.post(`api/${type}/registration`, data)
+    return res.data
   } catch (e) {
     console.log("managementAPI (registration) - ",e.response.data)
   }
