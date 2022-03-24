@@ -41,27 +41,16 @@ export function Groups(props) {
   useEffect(()=>{
     getListUsers().then(res=>{
       setUsers(res)
-      // const userId = res[0].id
-      // getGroups(userId).then(res=>{
-      //   setData(res.data)
-      //   setFields(res.fields)
-      // })
-      // setActiveUserId(userId)
     })
     getListStudents().then(students=>{
       setStudents(students)
-      // setActiveStudentId(students[0].id)
     })
     setIsLoading(true)
   }, [])
 
-  console.log(data)
-  console.log(fields)
-
   const handleChangeUser = (e) => {
     const userId = e.value
     getGroups(userId).then(res=>{
-      console.log(res)
       setData(res.data)
       setFields(res.fields)
     })

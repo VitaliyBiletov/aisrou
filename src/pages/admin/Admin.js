@@ -44,8 +44,6 @@ function generateManagement(Component, props) {
     const [data, setData] = useState([])
     const [fields, setFields] = useState([])
 
-    console.log(data)
-
     useEffect(() => {
       setIsLoading(false)
       getAll(props.type).then(({fields, data})=>{
