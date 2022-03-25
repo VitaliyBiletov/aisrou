@@ -60,7 +60,7 @@ function Table(props) {
 
   if (props.data.length !== 0){
     return (
-      <div className='table animate__animated animate__fadeIn'>
+      <div className='table'>
         <div className='table__container'>
           <table className='table__table'>
             <thead className='table__thead thead'>

@@ -2,8 +2,9 @@ import React from 'react'
 
 
 export default function Explanation(props){
+  console.log('hints ',props.hints)
   return(
-    <div className="explanation animate__animated animate__slideInDown">
+    <div className="explanation">
       <p className="explanation__header">Параметры оценивания:</p>
       <div className="explanation__container">
         <div className="explanation__column">

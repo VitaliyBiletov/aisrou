@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {setValueItem} from '../../redux/actions/tasksActions'
 import Analysis from "../analysis/Analysis";
+import Explanation from "../explanation/Explanation";
 
 export function Task(props) {
   const {data, type, name, activeItem, setActiveItem} = props
@@ -57,6 +58,7 @@ export function generatedTask(Component, {...props}) {
       <div className='task__content-section'>
         <Component {...props} activeItem={activeItem} setActiveItem={setActiveItem}/>
       </div>
+      <Explanation hints={props.hints}/>
     </div>
   )
 }

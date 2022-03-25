@@ -69,6 +69,7 @@ export default function Diagnostic(){
                 title={s.title}
                 data={s.data}
                 type={s.type}
+                hints={s.hints}
             />
           </TabPanel>
         ))}
