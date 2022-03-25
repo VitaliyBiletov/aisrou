@@ -38,6 +38,7 @@ export default function Diagnostic(){
         setVisibleUp(false)
       }
     })
+    console.log(data.info.data.find(({name}) => name === 'classNumber').value + ' класс')
   }, [])
 
   const handleSelect = (index) => {

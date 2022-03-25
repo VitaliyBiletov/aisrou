@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import {faTrash, faKey, faPen, faListAlt} from "@fortawesome/free-solid-svg-icons/index";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 import PropTypes from 'prop-types'
@@ -9,7 +10,9 @@ import {RemoveForm} from "../../components/forms/RemoveForm";
 import {SetPasswordForm} from "../forms/SetPasswordForm";
 import { Line } from 'rc-progress'
 
+
 import {DIAGNOSTIC_ROUTE} from "../../utils/const";
+import {setInfoData} from "../../redux/actions/infoActions";
 
 
 const customStyle = {
@@ -27,6 +30,8 @@ function Table(props) {
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false)
   const [modalRemoveIsOpen, setModalRemoveIsOpen] = useState(false)
   const [modalPasswordIsOpen, setModalPasswordIsOpen] = useState(false)
+  const info = useSelector(state=>state.diagnostic.info)
+  const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
@@ -56,6 +61,12 @@ function Table(props) {
 
   function closeModalSetPassword() {
     setModalPasswordIsOpen(false)
+  }
+
+  function handleFillClick() {
+    const activeDiag = props.data.find(({id})=>id===activeItem)
+    dispatch(setInfoData(activeDiag.fieldsData))
+    navigate(DIAGNOSTIC_ROUTE)
   }
 
   if (props.data.length !== 0){
@@ -102,7 +113,7 @@ function Table(props) {
                   <td className={`tbody__td tbody__td_func`}>
                     <button
                       title='Заполнить'
-                      onClick={()=>navigate(DIAGNOSTIC_ROUTE)}
+                      onClick={handleFillClick}
                       className='tbody__button tbody__button_type_fill'>
                       <FontAwesomeIcon icon={faListAlt} />
                     </button>
