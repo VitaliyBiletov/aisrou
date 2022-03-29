@@ -69,8 +69,10 @@ function Table(props) {
     const activeDiag = props.data.find(({id})=>id===diagid)
     dispatch(setInfoData(activeDiag.fieldsData))
     const classNumber = activeDiag.fieldsData.find(({name})=>name === 'classNumber').value
+    const type = activeDiag.fieldsData.find(({name})=>name === 'type').value
     sessionStorage.setItem("student", JSON.stringify(info.student))
     sessionStorage.setItem("classNumber", classNumber)
+    sessionStorage.setItem("type", type)
     console.log(activeDiag)
     navigate(DIAGNOSTIC_ROUTE)
   }
@@ -82,8 +84,8 @@ function Table(props) {
           <table className='table__table'>
             <thead className='table__thead thead'>
             <tr className='thead__tr'>
-              {props.fields.map(({name, title})=>
-                <th key={name} className='thead__th'>{title}</th>
+              {props.fields.map(({name, title}, index)=>
+                <th key={index} className='thead__th'>{title}</th>
               )}
               {Object.values(props.functions).filter((val) => val).map((val, index)=>
                 <th key={index} className='thead__th'/>
@@ -98,11 +100,10 @@ function Table(props) {
                 onClick={()=>setActiveItem(item.id)}
                 className={`${activeItem === item.id ? 'tbody__tr_active' : null} tbody__tr`}
               >
-                {item.fieldsData.map((f)=>{
-                    return <td data-value={f.value} key={f.name} className='tbody__td'>{
+                {item.fieldsData.map((f, index)=>{
+                    return <td data-value={f.value} key={index} className='tbody__td'>{
                       String(f.name) === 'progress' ?
                       <Line
-                        key={f.name}
                         percent={f.value}
                         trailWidth="20"
                         strokeWidth="20"

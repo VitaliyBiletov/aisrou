@@ -11,9 +11,12 @@ import _ from 'lodash'
 import data from './data'
 
 let textTemplate = [
-  {classNum: 1, text: "Lorem ipsum dolor sitium 1"},
-  {classNum: 2, text: "Lorem ipsum dolor sitium 2"},
-  {classNum: 3, text: "Lorem ipsum dolor sitium 3"}
+  {classNum: 1, type: 0, text: "Lorem ipsum dolor sitium 1.0"},
+  {classNum: 1, type: 1, text: "Lorem ipsum dolor sitium 1.1"},
+  {classNum: 2, type: 0, text: "Lorem ipsum dolor sitium 2.0"},
+  {classNum: 2, type: 1, text: "Lorem ipsum dolor sitium 2.1"},
+  {classNum: 3, type: 0, text: "Lorem ipsum dolor sitium 3.0"},
+  {classNum: 3, type: 1, text: "Lorem ipsum dolor sitium 3.1"}
 ]
 
 export default function Analysis(props){
@@ -25,11 +28,12 @@ export default function Analysis(props){
   const [text, setText] = useState('')
   const [play] = useSound(soundStop)
   const classNumber = Number(sessionStorage.getItem("classNumber"))
+  const type = Number(sessionStorage.getItem("type"))
   const time = 2
 
   useEffect(()=>{
     console.log('analysis ', classNumber)
-    setText(textTemplate.find(text=>text.classNum === classNumber).text)
+    setText(textTemplate.find(text=>text.classNum === classNumber && text.type === type).text)
   }, [])
 
   const startTimer = (e) => {
