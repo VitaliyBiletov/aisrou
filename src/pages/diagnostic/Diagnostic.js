@@ -11,24 +11,31 @@ import { animateScroll as scroll } from 'react-scroll'
 import {check} from '../../http/userAPI'
 import {DIAGNOSTIC_MENU_ROUTE, LOGIN_ROUTE} from "../../utils/const";
 import {Header} from "../../components/header/Header";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {saveDiagnostic} from "../../http/diagnosticAPI";
+import _ from 'lodash'
+import {setStudent} from "../../redux/actions/infoActions";
 
-
-
-export default function Diagnostic(){
+export default function Diagnostic(props){
   const [activeTab, setActiveTab] = useState(0)
   const [isVisibleUp, setVisibleUp] = useState(false)
-  const {fullName} = useSelector(state=>state.user)
   const data = useSelector(state=>state.diagnostic)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(async ()=>{
+    if (!sessionStorage.getItem('student')){
+      return navigate(DIAGNOSTIC_MENU_ROUTE)
+    } else {
+      const student = JSON.parse(sessionStorage.getItem('student'))
+      dispatch(setStudent(student))
+    }
     const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
     setActiveTab(activeTab)
     try {
-      const res = await check()
+      await check()
     } catch (e) {
+      console.log(e)
       navigate(LOGIN_ROUTE)
     }
     window.addEventListener('scroll', (e) => {
@@ -38,7 +45,6 @@ export default function Diagnostic(){
         setVisibleUp(false)
       }
     })
-    console.log(data.info.data.find(({name}) => name === 'classNumber').value + ' класс')
   }, [])
 
   const handleSelect = (index) => {
@@ -57,7 +63,7 @@ export default function Diagnostic(){
 
   return (
     <div className="diagnostic" id="diagnostic">
-      <Header username={fullName}/>
+      <Header />
       <Tabs className='diagnostic__tabs' selectedIndex={activeTab} onSelect={handleSelect}>
         <TabList className='diagnostic__tab-list'>
           { DIAG_DATA.map((s)=><Tab key={s.name} className='diagnostic__item'>{s.title}</Tab>)}

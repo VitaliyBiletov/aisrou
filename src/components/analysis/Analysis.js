@@ -10,7 +10,11 @@ import soundStop from '../../sounds/stop.mp3'
 import _ from 'lodash'
 import data from './data'
 
-let textTemplate = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis cupiditate, dignissimos distinctio excepturi in laborum magnam nulla odit perspiciatis ratione, reprehenderit voluptates. Aliquid consequatur culpa, deserunt dolorem doloremque ea eligendi et eveniet, ex expedita iusto laboriosam laudantium molestias nihil nisi officiis omnis, quae rem reprehenderit tempora ullam ut voluptatum?"
+let textTemplate = [
+  {classNum: 1, text: "Lorem ipsum dolor sitium 1"},
+  {classNum: 2, text: "Lorem ipsum dolor sitium 2"},
+  {classNum: 3, text: "Lorem ipsum dolor sitium 3"}
+]
 
 export default function Analysis(props){
   const [count, setCount] = useState(0)
@@ -20,10 +24,12 @@ export default function Analysis(props){
   const [color, setColor] = useState('#6458a7')
   const [text, setText] = useState('')
   const [play] = useSound(soundStop)
+  const classNumber = Number(sessionStorage.getItem("classNumber"))
   const time = 2
 
   useEffect(()=>{
-    setText(textTemplate)
+    console.log('analysis ', classNumber)
+    setText(textTemplate.find(text=>text.classNum === classNumber).text)
   }, [])
 
   const startTimer = (e) => {

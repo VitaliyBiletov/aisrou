@@ -63,9 +63,15 @@ function Table(props) {
     setModalPasswordIsOpen(false)
   }
 
-  function handleFillClick() {
-    const activeDiag = props.data.find(({id})=>id===activeItem)
+  function handleFillClick(e) {
+
+    const diagid = Number(e.target.value)
+    const activeDiag = props.data.find(({id})=>id===diagid)
     dispatch(setInfoData(activeDiag.fieldsData))
+    const classNumber = activeDiag.fieldsData.find(({name})=>name === 'classNumber').value
+    sessionStorage.setItem("student", JSON.stringify(info.student))
+    sessionStorage.setItem("classNumber", classNumber)
+    console.log(activeDiag)
     navigate(DIAGNOSTIC_ROUTE)
   }
 
@@ -93,7 +99,7 @@ function Table(props) {
                 className={`${activeItem === item.id ? 'tbody__tr_active' : null} tbody__tr`}
               >
                 {item.fieldsData.map((f)=>{
-                    return <td key={f.name} className='tbody__td'>{
+                    return <td data-value={f.value} key={f.name} className='tbody__td'>{
                       String(f.name) === 'progress' ?
                       <Line
                         key={f.name}
@@ -104,7 +110,7 @@ function Table(props) {
                         trailColor="#e0ffe1"
                         strokeLinecap="square"
                         className="progress__line_main"
-                      /> : f.value}
+                      /> : f.title}
                       </td>
                 }
 
@@ -114,8 +120,9 @@ function Table(props) {
                     <button
                       title='Заполнить'
                       onClick={handleFillClick}
+                      value={item.id}
                       className='tbody__button tbody__button_type_fill'>
-                      <FontAwesomeIcon icon={faListAlt} />
+                      <FontAwesomeIcon className="tbody__icon" icon={faListAlt} />
                     </button>
                   </td> : null }
                 {isEdit ?

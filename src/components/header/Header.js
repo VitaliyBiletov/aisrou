@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {LOGIN_ROUTE} from "../../utils/const";
 import {useNavigate} from "react-router-dom/index";
+import {useSelector} from "react-redux";
 
 
 function Header(props) {
   const navigate = useNavigate()
+  const {fullName} = useSelector(state=>state.user)
 
   const handleExit = () =>{
     localStorage.removeItem('token')
@@ -17,9 +19,10 @@ function Header(props) {
         <span className='header__logo_span'>АИСРОУ</span>
       </div>
       <div className='header__header-menu'>
-        <div className='header__username'>
-          <span>{props.username}</span>
-        </div>
+        {fullName ?
+          <div className='header__username'>
+          <span>{fullName}</span>
+        </div> : null }
         <div className='header__logout'>
           <button
             className='header__button'
