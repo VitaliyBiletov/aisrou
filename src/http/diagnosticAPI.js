@@ -25,3 +25,8 @@ export async function removeDiagnostic(diagId) {
   const res = await $authHost.delete(`api/diagnostic/remove/${diagId}`)
   return res
 }
+
+export async function getDiagnostic(diagId) {
+    const res = await $authHost.get(`api/diagnostic/${diagId}`)
+    return res
+}

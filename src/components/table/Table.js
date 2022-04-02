@@ -13,6 +13,7 @@ import { Line } from 'rc-progress'
 
 import {DIAGNOSTIC_ROUTE} from "../../utils/const";
 import {setInfoData} from "../../redux/actions/infoActions";
+import {getDiagnostic} from "../../http/diagnosticAPI";
 
 
 const customStyle = {
@@ -63,18 +64,30 @@ function Table(props) {
     setModalPasswordIsOpen(false)
   }
 
-  function handleFillClick(e) {
+  async function handleFillClick(e) {
+    const diagId = Number(e.target.value)
+    try {
+      const res = await getDiagnostic(diagId)
+      console.log(res.data)
+      const {id, typeId, classNumber} = res.data
+      dispatch(setInfoData(res.data))
+      sessionStorage.setItem("diagInfo", JSON.stringify(res.data))
+      navigate(DIAGNOSTIC_ROUTE)
+    } catch (e) {
+      console.log('error: ', e.response.data.error)
+    }
 
-    const diagid = Number(e.target.value)
-    const activeDiag = props.data.find(({id})=>id===diagid)
-    dispatch(setInfoData(activeDiag.fieldsData))
-    const classNumber = activeDiag.fieldsData.find(({name})=>name === 'classNumber').value
-    const type = activeDiag.fieldsData.find(({name})=>name === 'type').value
-    sessionStorage.setItem("student", JSON.stringify(info.student))
-    sessionStorage.setItem("classNumber", classNumber)
-    sessionStorage.setItem("type", type)
-    console.log(activeDiag)
-    navigate(DIAGNOSTIC_ROUTE)
+
+
+    // const activeDiag = props.data.find(({id})=>id===diagId)
+    // dispatch(setInfoData([{name: 'id', value: diagId, title:'id'}, ...activeDiag.fieldsData]))
+    // const classNumber = activeDiag.fieldsData.find(({name})=>name === 'classNumber').value
+    // const type = activeDiag.fieldsData.find(({name})=>name === 'type').value
+    // sessionStorage.setItem("diagId", diagId)
+    // sessionStorage.setItem("student", JSON.stringify(info.student))
+    // sessionStorage.setItem("classNumber", classNumber)
+    // sessionStorage.setItem("type", type)
+    // navigate(DIAGNOSTIC_ROUTE)
   }
 
   if (props.data.length !== 0){

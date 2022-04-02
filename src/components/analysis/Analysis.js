@@ -19,12 +19,11 @@ export default function Analysis(props) {
   const [color, setColor] = useState('#6458a7')
   const [text, setText] = useState('')
   const [play] = useSound(soundStop)
-  const classNumber = Number(sessionStorage.getItem("classNumber"))
-  const type = Number(sessionStorage.getItem("type"))
+  const diagInfo = JSON.parse(sessionStorage.getItem('diagInfo'))
   const time = 2
 
   useEffect(() => {
-    setText(data[props.type].texts.find(text => text.classNum === classNumber && text.type === type).text)
+    setText(props.texts.find(text => text.classNum === diagInfo.classNumber && text.type === diagInfo.typeId).text)
   }, [])
 
   const startTimer = (e) => {
@@ -79,8 +78,9 @@ export default function Analysis(props) {
         <button className='print__button' onClick={handleMinus}><FontAwesomeIcon icon={faMinus}/></button>
         <button className='print__button' onClick={handlePrint}><FontAwesomeIcon icon={faPrint}/></button>
       </div>
-      {text ? <Text fontSize={fontSize} setCount={setCount} text={text}/> : null}
-
+      {text.title ? <p>{text.title}</p> : null }
+      {text.body ? props.type === 'reading' ? <Text fontSize={fontSize} setCount={setCount} text={text.body}/> : <div>{text.body}</div> : null}
+      {text.author ? <p>{text.author}</p> : null}
       <div className='analysis__panel'>
         {props.type === 'reading' ?
           <div className='analysis__timer timer'>
@@ -103,7 +103,7 @@ export default function Analysis(props) {
         <div className='analysis__skills'>
           <Tabs className="analysis__tabs" selectedTabClassName="analysis__tab_active">
             <TabList className='analysis__tab-list'>
-              {data[props.type].options.map(({name, title}) =>
+              {props.options.map(({name, title}) =>
                 <Tab
                   className='analysis__tab'
                   key={name}
@@ -111,7 +111,7 @@ export default function Analysis(props) {
                 >{title}</Tab>
               )}
             </TabList>
-            {data[props.type].options.map(({name, title, items}) =>
+            {props.options.map(({name, title, items}) =>
               <TabPanel
                 className="analysis__tab-panel"
                 selectedClassName="analysis__tab-panel_selected"

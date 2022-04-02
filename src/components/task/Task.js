@@ -5,6 +5,7 @@ import Analysis from "../analysis/Analysis";
 
 export function Task(props) {
   const {data, type, name, activeItem, setActiveItem} = props
+
   switch (type) {
     case 'text': {
       return (
@@ -31,10 +32,11 @@ export function Task(props) {
       )
     }
     case 'reading': {
-      return <Analysis type='reading'/>
+
+      return <Analysis type='reading' texts={props.texts} options={props.options}/>
     }
     case 'writing': {
-      return <Analysis type='writing'/>
+      return <Analysis type='writing' texts={props.texts} options={props.options}/>
     }
     default:
       return <div>{type}</div>
