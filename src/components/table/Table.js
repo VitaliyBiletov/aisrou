@@ -97,8 +97,8 @@ function Table(props) {
           <table className='table__table'>
             <thead className='table__thead thead'>
             <tr className='thead__tr'>
-              {props.fields.map(({name, title}, index)=>
-                <th key={index} className='thead__th'>{title}</th>
+              {props.fields.map((name, index)=>
+                <th key={index} className='thead__th'>{name}</th>
               )}
               {Object.values(props.functions).filter((val) => val).map((val, index)=>
                 <th key={index} className='thead__th'/>
@@ -113,18 +113,18 @@ function Table(props) {
                 onClick={()=>setActiveItem(item.id)}
                 className={`${activeItem === item.id ? 'tbody__tr_active' : null} tbody__tr`}
               >
-                {item.fieldsData.map((f, index)=>{
-                    return <td data-value={f.value} key={index} className='tbody__td'>{
-                      String(f.name) === 'progress' ?
+                {Object.keys(item).map((f, index)=>{
+                    return <td data-value={item[f]} key={index} className='tbody__td'>{
+                      String(f) === 'Прогресс' ?
                       <Line
-                        percent={f.value}
+                        percent={item[f]}
                         trailWidth="20"
                         strokeWidth="20"
                         strokeColor="#009d23"
                         trailColor="#e0ffe1"
                         strokeLinecap="square"
                         className="progress__line_main"
-                      /> : f.title}
+                      /> : item[f]}
                       </td>
                 }
 

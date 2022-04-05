@@ -67,8 +67,7 @@ export default function Diagnostic(props) {
   }
 
   const handleClick = (e) => {
-    // saveDiagnostic(data)
-    console.log(data)
+    saveDiagnostic({id: data.info.data.id, data: data.tasks.stateOfFunc})
   }
 
   const handleExit = () => {

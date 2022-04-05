@@ -4,10 +4,9 @@ import {Header} from "../../components/header/Header"
 import {getListGroups} from "../../http/groupAPI"
 import {getDiagnostics, createDiagnostic, removeDiagnostic, getTypes} from "../../http/diagnosticAPI"
 import Table from "../../components/table/Table"
-import { Line } from 'rc-progress'
 import Select from 'react-select'
 import Modal from 'react-modal'
-import {setStudent, setFormData} from "../../redux/actions/infoActions";
+import {setStudent} from "../../redux/actions/infoActions";
 
 const customStyleModal = {
   content: {
@@ -56,7 +55,6 @@ export default function DiagnosticMenu() {
 
   useEffect(()=>{
     if (id){
-      console.log(id)
       getListGroups(id).then(students=>{
         setStudents(students)
         setIsLoading(true)
@@ -76,6 +74,7 @@ export default function DiagnosticMenu() {
 
   const handleChangeStudent = (e) => {
       dispatch(setStudent({id: e.value, label: e.label}))
+      sessionStorage.setItem("student", JSON.stringify({id: e.value, label: e.label}))
       setActiveStudentId(e.value)
       getDiagnostics(e.value).then(diags=>{
         setFields(diags.fields)
@@ -111,7 +110,7 @@ export default function DiagnosticMenu() {
             styles={customStyles}
             onChange={handleChangeStudent}
             options={students.map(s=>
-              ({value: s.id, label: s.fullName})
+              ({value: s.id, label: s.lastName + " " + s.firstName})
             )}/>
         </div>
         {activeStudentId ?
@@ -127,7 +126,7 @@ export default function DiagnosticMenu() {
           <div className="diagnostic-menu__table">
             {data ?
             <Table
-              type='diagnostic'
+              type='diagnostics'
               functions={{isRemove: true, isFill: true, isEdit: true}}
               fields={fields}
               data={data}

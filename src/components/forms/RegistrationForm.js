@@ -53,10 +53,10 @@ function RegistrationForm(props) {
 
   async function handleClick() {
     const res = await registration(props.type, formData)
-    const record = {id: res.id, fieldsData: props.fields.map(field=>
-        ({name: field.name, value: formData[field.name]}))
-      }
-    props.setData([...props.data, record])
+    // const record = {id: res.id, fieldsData: props.fields.map(field=>
+    //     ({name: field.name, value: formData[field.name]}))
+    //   }
+    props.setData([...props.data, res])
     props.close()
   }
 

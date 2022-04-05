@@ -17,14 +17,14 @@ export default function Admin() {
       <div className='admin__container'>
         <div className='admin__menu'>
           <NavLink className={`admin__link`} to='users'>Пользователи</NavLink>
-          <NavLink className={`admin__link`} to='pupils'>Ученики</NavLink>
+          <NavLink className={`admin__link`} to='students'>Ученики</NavLink>
           <NavLink className={`admin__link`} to='groups'>Группы</NavLink>
           <NavLink className={`admin__link`} to='results'>Результаты</NavLink>
         </div>
         <div className='admin__content'>
           <Routes>
             <Route path='users' element={<UserManagement/>}/>
-            <Route path='pupils' element={<StudentManagement/>}/>
+            <Route path='students' element={<StudentManagement/>}/>
             <Route path='groups' element={<Groups />}/>
             <Route path='results' element={<Groups />}/>
             <Route path='*' element={<UserManagement/>}/>
@@ -35,8 +35,8 @@ export default function Admin() {
   )
 }
 
-const UserManagement = generateManagement(Management, {type: 'user', title: 'Пользователи'})
-const StudentManagement = generateManagement(Management, {type: 'student', title: 'Ученики'})
+const UserManagement = generateManagement(Management, {type: 'users', title: 'Пользователи'})
+const StudentManagement = generateManagement(Management, {type: 'students', title: 'Ученики'})
 
 function generateManagement(Component, props) {
   return () => {
@@ -63,13 +63,17 @@ function generateManagement(Component, props) {
       )
     }
 
+    const handleSetData = (data) => {
+      setData(data)
+    }
+
     if (data.length === 0){
       return null
     } else {
       return <Component
         data={data}
         fields={fields}
-        setData={setData}
+        setData={handleSetData}
         isLoading={isLoading}
         type={props.type}
         title={props.title} />

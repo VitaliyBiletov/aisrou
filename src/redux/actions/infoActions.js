@@ -1,4 +1,4 @@
-import {SET_DATE, SET_STUDENT, SET_INFO_DATA} from "../types/infoTypes";
+import {SET_STUDENT, SET_INFO_DATA} from "../types/infoTypes";
 
 export function setStudent(student) {
   return {
