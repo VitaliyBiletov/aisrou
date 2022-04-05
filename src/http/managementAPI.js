@@ -41,9 +41,9 @@ export async function edit(type, id, data) {
 }
 
 //userAPI
-export async function setUserPassword(id, data) {
+export async function setUserPassword(data) {
   try {
-    return await $authHost.post(`api/user/password-set/${id}`, data)
+    return await $authHost.post(`api/users/password/`, data)
   } catch (e) {
     console.log("managementAPI (setUserPassword) - ", e.response.data)
   }

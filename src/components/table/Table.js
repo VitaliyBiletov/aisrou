@@ -201,8 +201,8 @@ function Table(props) {
             <SetPasswordForm
               type={props.type}
               setData={props.setData}
-              activeItem={props.activeItem}
-              close={closeModalRemove}
+              activeItem={activeItem}
+              close={closeModalSetPassword}
             />
           </Modal> : null
         }
