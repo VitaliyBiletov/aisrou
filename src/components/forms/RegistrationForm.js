@@ -23,7 +23,7 @@ function RegistrationForm(props) {
   const [formData, setFormData] = useState({})
 
   useEffect(()=>{
-    if (props.type === 'user'){
+    if (props.type === 'users'){
       setData(USER_DATA)
       setFormData({
         firstName: '',
@@ -35,7 +35,7 @@ function RegistrationForm(props) {
         role: 'USER',
       })
     }
-    if (props.type === 'student'){
+    if (props.type === 'students'){
       setData(STUDENT_DATA)
       setFormData({
         firstName: '',
