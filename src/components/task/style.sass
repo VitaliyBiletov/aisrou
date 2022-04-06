@@ -65,8 +65,6 @@ $btn_status_size: 15px              //размер ячейки в статус�
   &__status-section
     +flex(inline-flex, row)
     background-color: $status_section_color
-    padding: 3px
-    border-radius: 5px
 
   &__btn-score
     +flex(flex, row)
@@ -74,18 +72,16 @@ $btn_status_size: 15px              //размер ячейки в статус�
   &__btn-status
     position: relative
     height: $btn_status_size
-    width: $btn_status_size
-    margin: 3px
+    margin: 1px
     background-color: #fff
     cursor: pointer
     border: none
-    border-radius: 2px
     &:hover
       outline: 1px #7a7a7a solid
     &:focus
-      outline: 2px #7a7a7a solid
+      outline: 1px #7a7a7a solid
     &_active
-      outline: 2px #7a7a7a solid
+      outline: 1px #7a7a7a solid
     &_red
       background-color: $red
 
@@ -146,4 +142,3 @@ $btn_status_size: 15px              //размер ячейки в статус�
     padding: 0 20px
     border-radius: 5px
     background: #e6e6fa
-

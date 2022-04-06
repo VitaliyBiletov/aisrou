@@ -21,7 +21,7 @@ function Header(props) {
       <div className='header__header-menu'>
         {fullName ?
           <div className='header__username'>
-          <span>{fullName}</span>
+          {fullName}
         </div> : null }
         <div className='header__logout'>
           <button
