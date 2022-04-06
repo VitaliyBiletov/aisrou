@@ -23,7 +23,7 @@ function RegistrationForm(props) {
   const [formData, setFormData] = useState({})
 
   useEffect(()=>{
-    if (props.type === 'user'){
+    if (props.type === 'users'){
       setData(USER_DATA)
       setFormData({
         firstName: '',
@@ -35,7 +35,7 @@ function RegistrationForm(props) {
         role: 'USER',
       })
     }
-    if (props.type === 'student'){
+    if (props.type === 'students'){
       setData(STUDENT_DATA)
       setFormData({
         firstName: '',
@@ -53,10 +53,10 @@ function RegistrationForm(props) {
 
   async function handleClick() {
     const res = await registration(props.type, formData)
-    const record = {id: res.id, fieldsData: props.fields.map(field=>
-        ({name: field.name, value: formData[field.name]}))
-      }
-    props.setData([...props.data, record])
+    // const record = {id: res.id, fieldsData: props.fields.map(field=>
+    //     ({name: field.name, value: formData[field.name]}))
+    //   }
+    props.setData([...props.data, res])
     props.close()
   }
 

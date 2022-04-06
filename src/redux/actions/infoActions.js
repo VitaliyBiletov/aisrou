@@ -1,4 +1,4 @@
-import {SET_DATE, SET_STUDENT, SET_FORM_DATA} from "../types/infoTypes";
+import {SET_STUDENT, SET_INFO_DATA} from "../types/infoTypes";
 
 export function setStudent(student) {
   return {
@@ -7,9 +7,9 @@ export function setStudent(student) {
   }
 }
 
-export function setFormData(data) {
+export function setInfoData(data) {
   return {
-    type: SET_FORM_DATA,
+    type: SET_INFO_DATA,
     payload: data
   }
 }

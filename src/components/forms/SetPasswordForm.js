@@ -18,7 +18,7 @@ function SetPasswordForm(props) {
     if (password !== password2){
       return console.log('Пароли не совпадают')
     }
-    await setUserPassword(props.activeItem, {password})
+    await setUserPassword({id: props.activeItem, password})
     props.close()
   }
 

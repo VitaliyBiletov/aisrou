@@ -4,12 +4,13 @@ import {remove} from "../../http/managementAPI";
 
 function RemoveForm(props) {
 
-  const handleRemove = async (e) => {
+  const handleRemove = (e) => {
     e.preventDefault()
-    await remove(props.type, props.activeItem)
+    remove(props.type, props.activeItem)
     const filteredData = props.data.filter(item=>item.id !== props.activeItem)
     props.setData(filteredData)
     props.close()
+
   }
 
   const handleClose = (e) => {

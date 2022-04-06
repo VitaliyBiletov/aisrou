@@ -23,12 +23,12 @@ function Management(props) {
 
   useEffect(()=>{
     switch (props.type){
-      case 'user': return setFunctions({
+      case 'users': return setFunctions({
           isEdit: true,
           isResetPassword: true,
           isRemove: true
         })
-      case 'student': return setFunctions({
+      case 'students': return setFunctions({
         isEdit: true,
         isResetPassword: false,
         isRemove: true

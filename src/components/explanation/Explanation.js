@@ -2,7 +2,6 @@ import React from 'react'
 
 
 export default function Explanation(props){
-  console.log('hints ',props.hints)
   return(
     <div className="explanation">
       <p className="explanation__header">Параметры оценивания:</p>

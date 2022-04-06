@@ -48,6 +48,10 @@ export function Groups(props) {
     setIsLoading(true)
   }, [])
 
+  const handleSetData = (data) => {
+    setData(data)
+  }
+
   const handleChangeUser = (e) => {
     const userId = e.value
     getGroups(userId).then(res=>{
@@ -69,12 +73,14 @@ export function Groups(props) {
       console.log('Ученик уже прикреплен')
       return
     }
+
     attachStudent(activeUserId, activeStudentId)
-      .then(()=>{
-        getGroups(activeUserId).then(res=>{
-          setData(res.data)
-          setFields(res.fields)
-        })
+      .then((res)=>{
+        setData([...data, res])
+        // getGroups(activeUserId).then(res=>{
+        //   setData(res.data)
+        //   setFields(res.fields)
+        // })
       })
       .catch(e=>console.log(e))
   }
@@ -119,17 +125,12 @@ export function Groups(props) {
             <Table
               data={data}
               fields={fields}
-              setData={setData}
-              type="group"
+              setData={handleSetData}
+              type="groups"
               functions={{isRemove: true}}
             /> : <p>Нет закрепленных учеников</p>}
           </div>
         </div> </>: null }
     </div>
   )
-}
-
-function userNameFormatting(user) {
-  const {firstName, lastName, patronymic} = user
-  return `${lastName} ${firstName[0]}. ${patronymic[0]}.`
 }

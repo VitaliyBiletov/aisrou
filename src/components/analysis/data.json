@@ -1,139 +1,167 @@
-[
-  {
-    "id": 0,
-    "name": "reading-method",
-    "title":"Способ чтения",
-    "items":[
-      {
-        "id": 0,
-        "name": "letterByLetter",
-        "title": "Побуквенное"
-      },
-      {
-        "id": 1,
-        "name": "bySyllables",
-        "title": "По слогам отрывисто"
-      },
-      {
-        "id": 2,
-        "name": "slowlyInSyllables",
-        "title": "По слогам плавно"
-      },
-      {
-        "id": 3,
-        "name": "wholeWords",
-        "title": "Целыми словами, в сложных случаях послоговое"
-      },
-      {
-        "id": 4,
-        "name": "phrases",
-        "title": "Словосочетаниями"
-      }
-    ]},
-  {
-    "id": 1,
-    "name": "right",
-    "title":"Правильность",
-    "items":[
-      {
-        "id": 0,
-        "name": "passes",
-        "title": "Пропуски"
-      },
-      {
-        "id": 1,
-        "name": "permutations",
-        "title": "Перестановки"
-      },
-      {
-        "id": 2,
-        "name": "substitutions",
-        "title": "Замены"
-      },
-      {
-        "id": 3,
-        "name": "additions",
-        "title": "Добавления"
-      },
-      {
-        "id": 4,
-        "name": "replays",
-        "title": "Повторы"
-      },
-      {
-        "id": 5,
-        "name": "sounds",
-        "title": "Звуков"
-      },
-      {
-        "id": 6,
-        "name": "syllables",
-        "title": "Слогов"
-      },
-      {
-        "id": 7,
-        "name": "words",
-        "title": "Слов"
-      },
-      {
-        "id": 8,
-        "name": "wrongEmphasis",
-        "title": "Неправильная постановка ударения"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "expressiveness",
-    "title":"Выразительность",
-    "items":[
-      {
-        "id": 0,
-        "name": "pausesOnPunctuationMarks",
-        "title": "Несоблюдение норм паузации"
-      },
-      {
-        "id": 1,
-        "name": "raiseAndLowerVoice",
-        "title": "Монотонное, не интонированное чтение"
-      },
-      {
-        "id": 2,
-        "name": "emphasizingImportantWords",
-        "title": "Неумение выделять голосом логические ударения"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "mindfulness",
-    "title":"Осознанность",
-    "items":[
-      {
-        "id": 0,
-        "name": "literalSense",
-        "title": "Непонимание значений слов в прямом значении"
-      },
-      {
-        "id": 1,
-        "name": "figurativeMeaning",
-        "title": "Непонимание значений слов в переносном значении"
-      },
-      {
-        "id": 2,
-        "name": "storyEventChains",
-        "title": "Нарушение понимания цепочки событий сюжета"
-      },
-      {
-        "id": 3,
-        "name": "mainIdea",
-        "title": "Неумение выделить основную мысль текста"
-      },
-      {
-        "id": 4,
-        "name": "factualData",
-        "title": "Искажение фактических данных текста"
-      }
-    ]
-  }
-]
+{
+  "reading": [
+    {
+    }
+  ],
+  "writing": [
+    {
+      "texts": [
+        {
+          "classNum": 1,
+          "type": 0,
+          "text": "Письмо 1 первичная"
+        },
+        {
+          "classNum": 1,
+          "type": 1,
+          "text": "Письмо 1 вторичная"
+        },
+        {
+          "classNum": 2,
+          "type": 0,
+          "text": "Письмо 2 первичная"
+        },
+        {
+          "classNum": 2,
+          "type": 1,
+          "text": "Письмо 2 вторичная"
+        },
+        {
+          "classNum": 3,
+          "type": 0,
+          "text": "Письмо 3 первичная"
+        },
+        {
+          "classNum": 3,
+          "type": 1,
+          "text": "Письмо 3 вторичная"
+        },
+        {
+          "classNum": 4,
+          "type": 0,
+          "text": "Письмо 4 первичная"
+        },
+        {
+          "classNum": 4,
+          "type": 1,
+          "text": "Письмо 4 вторичная"
+        }
+      ],
+      "options": [
+        {
+          "name": "reading-method",
+          "title": "Способ чтения",
+          "items": [
+            {
+              "name": "letterByLetter",
+              "title": "Побуквенное"
+            },
+            {
+              "name": "bySyllables",
+              "title": "По слогам отрывисто"
+            },
+            {
+              "name": "slowlyInSyllables",
+              "title": "По слогам плавно"
+            },
+            {
+              "name": "wholeWords",
+              "title": "Целыми словами, в сложных случаях послоговое"
+            },
+            {
+              "name": "phrases",
+              "title": "Словосочетаниями"
+            }
+          ]
+        },
+        {
+          "name": "right",
+          "title": "Правильность",
+          "items": [
+            {
+              "name": "passes",
+              "title": "Пропуски"
+            },
+            {
+              "name": "permutations",
+              "title": "Перестановки"
+            },
+            {
+              "name": "substitutions",
+              "title": "Замены"
+            },
+            {
+              "name": "additions",
+              "title": "Добавления"
+            },
+            {
+              "name": "replays",
+              "title": "Повторы"
+            },
+            {
+              "name": "sounds",
+              "title": "Звуков"
+            },
+            {
+              "id": 6,
+              "name": "syllables",
+              "title": "Слогов"
+            },
+            {
+              "name": "words",
+              "title": "Слов"
+            },
+            {
+              "name": "wrongEmphasis",
+              "title": "Неправильная постановка ударения"
+            }
+          ]
+        },
+        {
+          "name": "expressiveness",
+          "title": "Выразительность",
+          "items": [
+            {
+              "name": "pausesOnPunctuationMarks",
+              "title": "Несоблюдение норм паузации"
+            },
+            {
+              "name": "raiseAndLowerVoice",
+              "title": "Монотонное, не интонированное чтение"
+            },
+            {
+              "name": "emphasizingImportantWords",
+              "title": "Неумение выделять голосом логические ударения"
+            }
+          ]
+        },
+        {
+          "name": "mindfulness",
+          "title": "Осознанность",
+          "items": [
+            {
+              "name": "literalSense",
+              "title": "Непонимание значений слов в прямом значении"
+            },
+            {
+              "name": "figurativeMeaning",
+              "title": "Непонимание значений слов в переносном значении"
+            },
+            {
+              "name": "storyEventChains",
+              "title": "Нарушение понимания цепочки событий сюжета"
+            },
+            {
+              "name": "mainIdea",
+              "title": "Неумение выделить основную мысль текста"
+            },
+            {
+              "name": "factualData",
+              "title": "Искажение фактических данных текста"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

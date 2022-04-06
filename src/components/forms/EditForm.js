@@ -14,24 +14,36 @@ const STUDENT_DATA = [
   {name: 'enrollmentDate', type: 'date', placeholder: 'Дата зачисления'},
 ]
 
+const DIAGNOSTIC_DATA = [
+  {name: 'classNumber', type: 'text', placeholder: 'Класс'},
+  {name: 'createdAt', type: 'date', placeholder: 'Дата'}
+]
+
 function EditForm(props) {
   const [formData, setFormData] = useState({})
   const [type, setType] = useState('')
   const [fields, setFields] = useState({})
   const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(async () => {
+
+  useEffect(() => {
     try {
       setType(props.type)
-      if (props.type === 'user') {
+      if (props.type === 'users') {
         setFields(USER_DATA)
       }
-      if (props.type === 'student') {
+      if (props.type === 'students') {
         setFields(STUDENT_DATA)
       }
-      const data = await get(props.type, props.activeItem)
-      setFormData(data)
-      setIsLoading(true)
+      if (props.type === 'diagnostics') {
+        setFields(DIAGNOSTIC_DATA)
+      }
+      get(props.type, props.activeItem).then(data=>{
+        setFormData(data)
+        setIsLoading(true)
+      }
+      )
+
     } catch (e) {
       console.log("err", e)
     }
@@ -44,6 +56,7 @@ function EditForm(props) {
 
   async function handleClick(e) {
     e.preventDefault()
+    console.log(formData)
     const {data} = await edit(type, props.activeItem, formData)
     const updatedData = props.data.map(item => {
       if (item.id === Number(data.id)) {
@@ -72,7 +85,13 @@ function EditForm(props) {
                 value={formData[field.name]}
               />
             )}
-            {type === 'user' ?
+            {type === 'diagnostics' ?
+              <select className='form__input' onChange={handleChange} value={formData['typeId']} name="typeId">
+                <option value="0">Первичная</option>
+                <option value="1">Вторичная</option>
+              </select>
+              : null}
+            {type === 'users' ?
               <select className='form__input' onChange={handleChange} value={formData['role']} name="role">
                 <option value="ADMIN">Администратор</option>
                 <option value="USER">Пользователь</option>
