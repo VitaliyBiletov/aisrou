@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, Fragment} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {setSpeedReading, setReadingSkill} from '../../redux/actions/tasksActions'
 import {Circle} from 'rc-progress';
@@ -56,7 +56,8 @@ export default function Analysis(props) {
 
   const handlePrint = (e) => {
     const myWindow = window.open('PRINT', '')
-    myWindow.document.write(`<h1 style="text-align: center">Текст</h1><p>${text}</p></div>`)
+    const printText = text.body.replace("|","\n\t")
+    myWindow.document.write(`<div><h2 style="text-align: center">${text.title ? text.title : ''}</h2><p style="text-align: justify; white-space: break-spaces;">${printText}</p><p style="text-align: right">${text.author ? text.author : ''}</p></div>`)
     myWindow.print()
     myWindow.close()
   }
@@ -72,15 +73,17 @@ export default function Analysis(props) {
   }
 
   return (
-    <div>
+    <div className='analysis'>
       <div className='print__container'>
         <button className='print__button' onClick={handlePlus}><FontAwesomeIcon icon={faPlus}/></button>
         <button className='print__button' onClick={handleMinus}><FontAwesomeIcon icon={faMinus}/></button>
         <button className='print__button' onClick={handlePrint}><FontAwesomeIcon icon={faPrint}/></button>
       </div>
-      {text.title ? <p>{text.title}</p> : null }
-      {text.body ? props.type === 'reading' ? <Text fontSize={fontSize} setCount={setCount} text={text.body}/> : <div>{text.body}</div> : null}
-      {text.author ? <p>{text.author}</p> : null}
+      <div className="analysis__content">
+        {text.title ? <p className='analysis__title'>{text.title}</p> : null }
+        {text.body ? props.type === 'reading' ? <Text fontSize={fontSize} setCount={setCount} text={text.body}/> : <p className='analysis__text'>{text.body}</p> : null}
+        {text.author ? <p className='analysis__author'>{text.author}</p> : null}
+      </div>
       <div className='analysis__panel'>
         {props.type === 'reading' ?
           <div className='analysis__timer timer'>
@@ -161,19 +164,44 @@ function Text(props) {
 
   const handleClick = (e) => {
     setActiveWord(e.target.dataset.index)
-    props.setCount(Number(e.target.dataset.index) + 1)
-    dispatch(setSpeedReading(Number(e.target.dataset.index) + 1))
+    props.setCount(Number(e.target.dataset.count) + 1)
+    dispatch(setSpeedReading(Number(e.target.dataset.count) + 1))
   }
 
-  return <div className='text'>
-    {text.trim().split(' ').map((i, index) =>
-      <span
-        key={index}
-        style={{fontSize: props.fontSize}}
-        className={index === Number(activeWord) ? "active-word" : null}
-        data-index={index}
-        onClick={handleClick}>
+  let count = 0
+  return <p className='analysis__text'>
+    {text.trim().split(" ").map((i, index) => {
+      if (i === "-"){
+        count ++
+        return i
+      }
+      if (i[0] === "|"){
+        i = i.slice(1)
+        return (
+          <React.Fragment key={index}>
+            <br/>
+            <span
+              key={index}
+              style={{fontSize: props.fontSize, marginLeft: "20px"}}
+              className={`analysis__word ${index === Number(activeWord) ? "active-word" : null}`}
+              data-index={index}
+              data-count={index - count}
+              onClick={handleClick}>
         {i}</span>
+          </React.Fragment>
+        )
+      }
+        return (
+          <span
+            key={index}
+            style={{fontSize: props.fontSize}}
+            className={`analysis__word ${index === Number(activeWord) ? "active-word" : null}`}
+            data-index={index}
+            data-count={index - count}
+            onClick={handleClick}>
+        {i}</span>
+        )
+    }
     )}
-  </div>
+  </p>
 }

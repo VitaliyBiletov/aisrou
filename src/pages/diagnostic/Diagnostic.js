@@ -80,20 +80,31 @@ export default function Diagnostic(props) {
       <Header/>
       <Tabs className='diagnostic__tabs' selectedIndex={activeTab} onSelect={handleSelect}>
         <TabList className='diagnostic__tab-list'>
-          {DIAG_DATA.map((s) => <Tab key={s.name} className='diagnostic__item'>{s.title}</Tab>)}
+          {DIAG_DATA.map((s) =>{
+            if (data.info.data.classNumber === 0 && (s.name === "writing" || s.name === "reading")){
+              return null
+            }
+            return <Tab key={s.name} className='diagnostic__item'>{s.title}</Tab>
+          })}
         </TabList>
 
-        {DIAG_DATA.map((s) => (
-          <TabPanel key={s.name} className='diagnostic__tab-panel'>
-            <Section
+        {DIAG_DATA.map((s) => {
+          if (data.info.data.classNumber === 0 && (s.name === "writing" || s.name === "reading")){
+            return null
+          }
+          return (
+            <TabPanel key={s.name} className='diagnostic__tab-panel'>
+              <Section
                 name={s.name}
                 title={s.title}
                 data={s.data}
                 type={s.type}
                 hints={s.hints}
-            />
-          </TabPanel>
-        ))}
+              />
+            </TabPanel>
+          )
+        }
+        )}
       </Tabs>
       {
         isVisibleUp ?
@@ -112,10 +123,10 @@ export default function Diagnostic(props) {
         <button
           className='diagnostic__btn diagnostic__btn_cancel'
           onClick={() => {
+            sessionStorage.removeItem('activeTab')
             navigate(DIAGNOSTIC_MENU_ROUTE)
           }}
-        >Отмена
-        </button>
+        >Отмена</button>
         <Progress/>
       </div>
     </div>

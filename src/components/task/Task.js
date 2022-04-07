@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {setValueItem} from '../../redux/actions/tasksActions'
 import Analysis from "../analysis/Analysis";
@@ -45,12 +45,31 @@ export function Task(props) {
 }
 
 export function generatedTask(Component, {...props}) {
-  const {title, instruction} = props
+  const {type} = props
   const [activeItem, setActiveItem] = useState(0)
+  const [title, setTitle] = useState('')
+  const [instruction, setInstruction] = useState('')
+  const {typeId, classNumber} = useSelector(state => state.diagnostic.info.data)
+
+  useEffect(()=>{
+    if (props.type === "writing" && Array.isArray(props.title)){
+      const {title} = props.title.find(t=>t.classNumber === classNumber && t.typeId === typeId)
+      setTitle(title)
+    } else {
+      setTitle(props.title)
+    }
+    if (props.type === "writing" && Array.isArray(props.instruction)){
+      const {instruction} = props.instruction.find(t=>t.classNumber === classNumber && t.typeId === typeId)
+      setInstruction(instruction)
+    } else {
+      setInstruction(props.instruction)
+    }
+  },[])
 
   return (
     <div className='task'>
       <div className="task__header">
+
         <h2 className='task__header_h2'>{title}</h2>
       </div>
       <div className="task__description">
@@ -61,8 +80,7 @@ export function generatedTask(Component, {...props}) {
       <div className='task__content-section'>
         <Component {...props} activeItem={activeItem} setActiveItem={setActiveItem}/>
       </div>
-      {props.hints ?
-      <Explanation hints={props.hints}/> : null }
+      {props.hints ? <Explanation hints={props.hints}/> : null }
     </div>
   )
 }

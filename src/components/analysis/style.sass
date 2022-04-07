@@ -17,17 +17,37 @@
     border-right: 1px solid lightgray
   &__skills
     flex: 3
-  &__text
+  &__content
+    width: 600px
+    margin: 0 auto
     font-family: Cambria
+  &__title
+    font-weight: bold
+  &__text
+    white-space: pre-wrap
     overflow: hidden
     resize: none
-    text-indent: 20px
-    width: 100%
     text-align: justify
     border: none
     outline: none
+  &__word
+    display: inline-block
+    padding: 0 3px
+    &:first-child
+      margin-left: 30px
     &:hover
       cursor: pointer
+      border-radius: 5px
+      color: #fff
+      text-shadow: 1px 1px #4e4583
+      background-color: #c8c8f4
+  .active-word
+    background-color: #7e87de
+    border-radius: 5px
+    color: #fff
+    text-shadow: 1px 1px #4e4583
+  &__author
+    text-align: right
 
   &__speed
     display: flex
@@ -110,27 +130,6 @@
         background-color: #ff5255
     &:hover
       cursor: pointer
-
-.text
-  font-family: Cambria
-  text-align: justify
-  user-select: none
-  span
-    display: inline-block
-    padding: 3px
-    &:first-child
-      margin-left: 20px
-    &:hover
-      cursor: pointer
-      border-radius: 5px
-      color: #fff
-      text-shadow: 1px 1px #4e4583
-      background-color: #c8c8f4
-  .active-word
-    background-color: #7e87de
-    border-radius: 5px
-    color: #fff
-    text-shadow: 1px 1px #4e4583
 
 .skills
   display: flex
