@@ -11,7 +11,13 @@ export async function createDiagnostic(userId, studentId, date, typeId, classNum
   return res
 }
 
+export async function tasksLoading(id) {
+  const {data} = await $authHost.get(`api/diagnostics/tasks/${id}`)
+  return data
+}
+
 export async function saveDiagnostic(data) {
+  console.log(data)
   const res = await $authHost.post(`api/diagnostics/save`, {data})
   return res
 }

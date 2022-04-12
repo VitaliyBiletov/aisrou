@@ -1471,6 +1471,120 @@
     "name": "reading",
     "title": "Чтение",
     "type": "analysis",
+    "options": [
+      {
+        "name": "reading-method",
+        "title": "Способ чтения",
+        "items": [
+          {
+            "name": "letterByLetter",
+            "title": "Побуквенное"
+          },
+          {
+            "name": "bySyllables",
+            "title": "По слогам отрывисто"
+          },
+          {
+            "name": "slowlyInSyllables",
+            "title": "По слогам плавно"
+          },
+          {
+            "name": "wholeWords",
+            "title": "Целыми словами, в сложных случаях послоговое"
+          },
+          {
+            "name": "phrases",
+            "title": "Словосочетаниями"
+          }
+        ]
+      },
+      {
+        "name": "right",
+        "title": "Правильность",
+        "items": [
+          {
+            "name": "passes",
+            "title": "Пропуски"
+          },
+          {
+            "name": "permutations",
+            "title": "Перестановки"
+          },
+          {
+            "name": "substitutions",
+            "title": "Замены"
+          },
+          {
+            "name": "additions",
+            "title": "Добавления"
+          },
+          {
+            "name": "replays",
+            "title": "Повторы"
+          },
+          {
+            "name": "sounds",
+            "title": "Звуков"
+          },
+          {
+            "name": "syllables",
+            "title": "Слогов"
+          },
+          {
+            "name": "words",
+            "title": "Слов"
+          },
+          {
+            "name": "wrongEmphasis",
+            "title": "Неправильная постановка ударения"
+          }
+        ]
+      },
+      {
+        "name": "expressiveness",
+        "title": "Выразительность",
+        "items": [
+          {
+            "name": "pausesOnPunctuationMarks",
+            "title": "Несоблюдение норм паузации"
+          },
+          {
+            "name": "raiseAndLowerVoice",
+            "title": "Монотонное, не интонированное чтение"
+          },
+          {
+            "name": "emphasizingImportantWords",
+            "title": "Неумение выделять голосом логические ударения"
+          }
+        ]
+      },
+      {
+        "name": "mindfulness",
+        "title": "Осознанность",
+        "items": [
+          {
+            "name": "literalSense",
+            "title": "Непонимание значений слов в прямом значении"
+          },
+          {
+            "name": "figurativeMeaning",
+            "title": "Непонимание значений слов в переносном значении"
+          },
+          {
+            "name": "storyEventChains",
+            "title": "Нарушение понимания цепочки событий сюжета"
+          },
+          {
+            "name": "mainIdea",
+            "title": "Неумение выделить основную мысль текста"
+          },
+          {
+            "name": "factualData",
+            "title": "Искажение фактических данных текста"
+          }
+        ]
+      }
+    ],
     "data": [
       {
         "id": 0,
@@ -1551,120 +1665,6 @@
               "author": "Л.Н. Толстой"
             }
           }
-        ],
-        "options": [
-          {
-            "name": "reading-method",
-            "title": "Способ чтения",
-            "items": [
-              {
-                "name": "letterByLetter",
-                "title": "Побуквенное"
-              },
-              {
-                "name": "bySyllables",
-                "title": "По слогам отрывисто"
-              },
-              {
-                "name": "slowlyInSyllables",
-                "title": "По слогам плавно"
-              },
-              {
-                "name": "wholeWords",
-                "title": "Целыми словами, в сложных случаях послоговое"
-              },
-              {
-                "name": "phrases",
-                "title": "Словосочетаниями"
-              }
-            ]
-          },
-          {
-            "name": "right",
-            "title": "Правильность",
-            "items": [
-              {
-                "name": "passes",
-                "title": "Пропуски"
-              },
-              {
-                "name": "permutations",
-                "title": "Перестановки"
-              },
-              {
-                "name": "substitutions",
-                "title": "Замены"
-              },
-              {
-                "name": "additions",
-                "title": "Добавления"
-              },
-              {
-                "name": "replays",
-                "title": "Повторы"
-              },
-              {
-                "name": "sounds",
-                "title": "Звуков"
-              },
-              {
-                "name": "syllables",
-                "title": "Слогов"
-              },
-              {
-                "name": "words",
-                "title": "Слов"
-              },
-              {
-                "name": "wrongEmphasis",
-                "title": "Неправильная постановка ударения"
-              }
-            ]
-          },
-          {
-            "name": "expressiveness",
-            "title": "Выразительность",
-            "items": [
-              {
-                "name": "pausesOnPunctuationMarks",
-                "title": "Несоблюдение норм паузации"
-              },
-              {
-                "name": "raiseAndLowerVoice",
-                "title": "Монотонное, не интонированное чтение"
-              },
-              {
-                "name": "emphasizingImportantWords",
-                "title": "Неумение выделять голосом логические ударения"
-              }
-            ]
-          },
-          {
-            "name": "mindfulness",
-            "title": "Осознанность",
-            "items": [
-              {
-                "name": "literalSense",
-                "title": "Непонимание значений слов в прямом значении"
-              },
-              {
-                "name": "figurativeMeaning",
-                "title": "Непонимание значений слов в переносном значении"
-              },
-              {
-                "name": "storyEventChains",
-                "title": "Нарушение понимания цепочки событий сюжета"
-              },
-              {
-                "name": "mainIdea",
-                "title": "Неумение выделить основную мысль текста"
-              },
-              {
-                "name": "factualData",
-                "title": "Искажение фактических данных текста"
-              }
-            ]
-          }
         ]
       }
     ]
@@ -1673,6 +1673,114 @@
     "name": "writing",
     "title": "Письмо",
     "type": "analysis",
+    "options": [
+      {
+        "name": "pronunciationOfSounds",
+        "title": "Неправильное произношение звуков речи",
+        "items": [
+          {
+            "name": "substitutions",
+            "title": "Замены, соответствующие заменам звуков в устной речи"
+          },
+          {
+            "name": "confusion",
+            "title": "Смешения, соответствующие смешениям звуков в устной речи"
+          },
+          {
+            "name": "letterGaps",
+            "title": "Пропуски букв, соответствующие пропускам звуков в устной речи"
+          }
+        ]
+      },
+      {
+        "name": "undisturbedPronunciation",
+        "title": "Трудности различия близких звуков на слух при ненарушенном произношении",
+        "items": [
+          {
+            "name": "letterSubstitutions",
+            "title": "Замены букв, обозначающих близкие звуки"
+          },
+          {
+            "name": "softnessDesignationErrors",
+            "title": "Ошибки обозначения мягкости согласных на письме "
+          }
+        ]
+      },
+      {
+        "name": "violationForms",
+        "title": "Нарушение различных форм языкового анализа и синтеза",
+        "items": [
+          {
+            "name": "passes",
+            "title": "Пропуски"
+          },
+          {
+            "name": "permutations",
+            "title": "Перестановки"
+          },
+          {
+            "name": "addingLetters",
+            "title": "Добавления букв в слове"
+          },
+          {
+            "name": "addingSyllables",
+            "title": "Добавления слогов в слове"
+          },
+          {
+            "name": "consolidatedSpelling",
+            "title": "Слитное написание двух и более слов"
+          },
+          {
+            "name": "separateSpelling",
+            "title": "Раздельное написание частей одного слова"
+          },
+          {
+            "name": "missingMark",
+            "title": "Отсутствие знака препинания в конце предложения"
+          }
+        ]
+      },
+      {
+        "name": "underdevelopmentGrammatical",
+        "title": "Недоразвитие грамматического строя речи",
+        "items": [
+          {
+            "name": "morphologicalDisorders",
+            "title": "Морфологические нарушения"
+          },
+          {
+            "name": "syntaxViolations",
+            "title": "Синтаксические нарушения"
+          },
+          {
+            "name": "textLevel",
+            "title": "На уровне текста"
+          }
+        ]
+      },
+      {
+        "name": "visuospatialFunctions",
+        "title": "Недостаточная сформированность зрительно-пространственных функций",
+        "items": [
+          {
+            "name": "mirrorSpelling",
+            "title": "Зеркальное написание"
+          },
+          {
+            "name": "addingLetterElements",
+            "title": "Недописывание элементов букв"
+          },
+          {
+            "name": "diffNumElements",
+            "title": "Замены графически сходных букв состоящих из различного количества одинаковых элементов"
+          },
+          {
+            "name": "sameNumElements",
+            "title": "Замены графически сходных букв состоящих из одинаковых элементов, но различно расположенных в пространстве"
+          }
+        ]
+      }
+    ],
     "data": [
       {
         "id": 0,
@@ -1742,120 +1850,6 @@
               "body": "\tИз всех певчих самая близкая к человеку птица – это скворец. Кто не видел, не знает скворцов, не слышал их весеннего пения! С давних пор русские люди устраивали для скворцов деревянные домики – скворечники.  Они украшали их затейливой резьбой, укрепляли под крыши своих домов, подвешивали на шестах и стволах деревьев. \n\tПрилетают скворцы ранней весной. Ещё в полях лежит снег. После прилёта скворцы торопливо начинают устраивать свои гнёзда. Они носят в клювах былинки и мягкую подстилку. Каких только звуков не услышишь в скворцовой песне!",
               "author": "(По И. Соколову - Микитову)"
             }
-          }
-        ],
-        "options": [
-          {
-            "name": "reading-method",
-            "title": "Способ чтения",
-            "items": [
-              {
-                "name": "letterByLetter",
-                "title": "Побуквенное"
-              },
-              {
-                "name": "bySyllables",
-                "title": "По слогам отрывисто"
-              },
-              {
-                "name": "slowlyInSyllables",
-                "title": "По слогам плавно"
-              },
-              {
-                "name": "wholeWords",
-                "title": "Целыми словами, в сложных случаях послоговое"
-              },
-              {
-                "name": "phrases",
-                "title": "Словосочетаниями"
-              }
-            ]
-          },
-          {
-            "name": "right",
-            "title": "Правильность",
-            "items": [
-              {
-                "name": "passes",
-                "title": "Пропуски"
-              },
-              {
-                "name": "permutations",
-                "title": "Перестановки"
-              },
-              {
-                "name": "substitutions",
-                "title": "Замены"
-              },
-              {
-                "name": "additions",
-                "title": "Добавления"
-              },
-              {
-                "name": "replays",
-                "title": "Повторы"
-              },
-              {
-                "name": "sounds",
-                "title": "Звуков"
-              },
-              {
-                "name": "syllables",
-                "title": "Слогов"
-              },
-              {
-                "name": "words",
-                "title": "Слов"
-              },
-              {
-                "name": "wrongEmphasis",
-                "title": "Неправильная постановка ударения"
-              }
-            ]
-          },
-          {
-            "name": "expressiveness",
-            "title": "Выразительность",
-            "items": [
-              {
-                "name": "pausesOnPunctuationMarks",
-                "title": "Несоблюдение норм паузации"
-              },
-              {
-                "name": "raiseAndLowerVoice",
-                "title": "Монотонное, не интонированное чтение"
-              },
-              {
-                "name": "emphasizingImportantWords",
-                "title": "Неумение выделять голосом логические ударения"
-              }
-            ]
-          },
-          {
-            "name": "mindfulness",
-            "title": "Осознанность",
-            "items": [
-              {
-                "name": "literalSense",
-                "title": "Непонимание значений слов в прямом значении"
-              },
-              {
-                "name": "figurativeMeaning",
-                "title": "Непонимание значений слов в переносном значении"
-              },
-              {
-                "name": "storyEventChains",
-                "title": "Нарушение понимания цепочки событий сюжета"
-              },
-              {
-                "name": "mainIdea",
-                "title": "Неумение выделить основную мысль текста"
-              },
-              {
-                "name": "factualData",
-                "title": "Искажение фактических данных текста"
-              }
-            ]
           }
         ]
       },
@@ -1929,121 +1923,6 @@
               "body": "\tБыстрый ручей звонко журчал в зарослях черёмухи. Но вот он выбежал на широкий луг. Заблестела на утреннем солнце вода. Ручей спешил вперёд. Со всех сторон к шумному ручью стекались другие ручьи. Он становился шире и глубже. Течение его замедлилось. Наш ручей стал речкой. В мягком иле поселились различные животные. На  поверхности воды закачались белые кувшинки. Птицы свили гнездо на высоком берегу.\n\tВода несёт жизнь людям, растениям, птицам, животным. Чистая вода - главное богатство природы. Берегите воду!"
             }
           }
-        ],
-        "options": [
-          {
-            "name": "reading-method",
-            "title": "Способ чтения",
-            "items": [
-              {
-                "name": "letterByLetter",
-                "title": "Побуквенное"
-              },
-              {
-                "name": "bySyllables",
-                "title": "По слогам отрывисто"
-              },
-              {
-                "name": "slowlyInSyllables",
-                "title": "По слогам плавно"
-              },
-              {
-                "name": "wholeWords",
-                "title": "Целыми словами, в сложных случаях послоговое"
-              },
-              {
-                "name": "phrases",
-                "title": "Словосочетаниями"
-              }
-            ]
-          },
-          {
-            "name": "right",
-            "title": "Правильность",
-            "items": [
-              {
-                "name": "passes",
-                "title": "Пропуски"
-              },
-              {
-                "name": "permutations",
-                "title": "Перестановки"
-              },
-              {
-                "name": "substitutions",
-                "title": "Замены"
-              },
-              {
-                "name": "additions",
-                "title": "Добавления"
-              },
-              {
-                "name": "replays",
-                "title": "Повторы"
-              },
-              {
-                "name": "sounds",
-                "title": "Звуков"
-              },
-              {
-                "id": 6,
-                "name": "syllables",
-                "title": "Слогов"
-              },
-              {
-                "name": "words",
-                "title": "Слов"
-              },
-              {
-                "name": "wrongEmphasis",
-                "title": "Неправильная постановка ударения"
-              }
-            ]
-          },
-          {
-            "name": "expressiveness",
-            "title": "Выразительность",
-            "items": [
-              {
-                "name": "pausesOnPunctuationMarks",
-                "title": "Несоблюдение норм паузации"
-              },
-              {
-                "name": "raiseAndLowerVoice",
-                "title": "Монотонное, не интонированное чтение"
-              },
-              {
-                "name": "emphasizingImportantWords",
-                "title": "Неумение выделять голосом логические ударения"
-              }
-            ]
-          },
-          {
-            "name": "mindfulness",
-            "title": "Осознанность",
-            "items": [
-              {
-                "name": "literalSense",
-                "title": "Непонимание значений слов в прямом значении"
-              },
-              {
-                "name": "figurativeMeaning",
-                "title": "Непонимание значений слов в переносном значении"
-              },
-              {
-                "name": "storyEventChains",
-                "title": "Нарушение понимания цепочки событий сюжета"
-              },
-              {
-                "name": "mainIdea",
-                "title": "Неумение выделить основную мысль текста"
-              },
-              {
-                "name": "factualData",
-                "title": "Искажение фактических данных текста"
-              }
-            ]
-          }
         ]
       },
       {
@@ -2051,42 +1930,42 @@
         "name": "writing",
         "title": [
           {
-            "classNumber" : 1,
+            "classNumber": 1,
             "typeId": 0,
             "title": "Списывание с письменного текста"
           },
           {
-            "classNumber" : 1,
+            "classNumber": 1,
             "typeId": 1,
             "title": "Деформированное предложение"
           },
           {
-            "classNumber" : 2,
+            "classNumber": 2,
             "typeId": 0,
             "title": "Деформированное предложение"
           },
           {
-            "classNumber" : 2,
+            "classNumber": 2,
             "typeId": 1,
             "title": "Составление связного текста из деформированных предложений"
           },
           {
-            "classNumber" : 3,
+            "classNumber": 3,
             "typeId": 0,
             "title": "Изложение"
           },
           {
-            "classNumber" : 3,
+            "classNumber": 3,
             "typeId": 1,
             "title": "Изложение"
           },
           {
-            "classNumber" : 4,
+            "classNumber": 4,
             "typeId": 0,
             "title": "Изложение"
           },
           {
-            "classNumber" : 4,
+            "classNumber": 4,
             "typeId": 1,
             "title": "Изложение"
           }
@@ -2094,42 +1973,42 @@
         "type": "writing",
         "instruction": [
           {
-            "classNumber" : 1,
+            "classNumber": 1,
             "typeId": 0,
             "instruction": "Спиши текст"
           },
           {
-            "classNumber" : 1,
+            "classNumber": 1,
             "typeId": 1,
             "instruction": "Составь предложение из слов и запиши его"
           },
           {
-            "classNumber" : 2,
+            "classNumber": 2,
             "typeId": 0,
             "instruction": "Составь предложение из слов, а из предложений текст и запиши его"
           },
           {
-            "classNumber" : 2,
+            "classNumber": 2,
             "typeId": 1,
             "instruction": "Составь и запиши текст из предложений"
           },
           {
-            "classNumber" : 3,
+            "classNumber": 3,
             "typeId": 0,
             "instruction": "Послушай текст и запиши его по памяти"
           },
           {
-            "classNumber" : 3,
+            "classNumber": 3,
             "typeId": 1,
             "instruction": "Послушай текст и запиши его по памяти"
           },
           {
-            "classNumber" : 4,
+            "classNumber": 4,
             "typeId": 0,
             "instruction": "Послушай текст и запиши его по памяти"
           },
           {
-            "classNumber" : 4,
+            "classNumber": 4,
             "typeId": 1,
             "instruction": "Послушай текст и запиши его по памяти"
           }
@@ -2193,121 +2072,6 @@
             "text": {
               "body": "\tНа лесной вырубке случился пожар. Люди погасили огонь.\n\tЛесник стал обходить вырубку. Вдруг он услышал тихий плач. Около пенька лежал колючий комочек. Правый бок обуглился. Зверек привалился к холодной земельке. По щекам протянулись две влажные полоски. Ёжик плакал.\n\tЛесник взял беднягу домой. Он смазал бок пахучей мазью. Ёж больше не стонал. Лесник покормил ежа из пипетки молоком. К вечеру он вынес больного на свежий воздух. Зверек сладко уснул под шелест дождя в моховой постельке. Теперь дело пойдёт на поправку."
             }
-          }
-        ],
-        "options": [
-          {
-            "name": "reading-method",
-            "title": "Способ чтения",
-            "items": [
-              {
-                "name": "letterByLetter",
-                "title": "Побуквенное"
-              },
-              {
-                "name": "bySyllables",
-                "title": "По слогам отрывисто"
-              },
-              {
-                "name": "slowlyInSyllables",
-                "title": "По слогам плавно"
-              },
-              {
-                "name": "wholeWords",
-                "title": "Целыми словами, в сложных случаях послоговое"
-              },
-              {
-                "name": "phrases",
-                "title": "Словосочетаниями"
-              }
-            ]
-          },
-          {
-            "name": "right",
-            "title": "Правильность",
-            "items": [
-              {
-                "name": "passes",
-                "title": "Пропуски"
-              },
-              {
-                "name": "permutations",
-                "title": "Перестановки"
-              },
-              {
-                "name": "substitutions",
-                "title": "Замены"
-              },
-              {
-                "name": "additions",
-                "title": "Добавления"
-              },
-              {
-                "name": "replays",
-                "title": "Повторы"
-              },
-              {
-                "name": "sounds",
-                "title": "Звуков"
-              },
-              {
-                "id": 6,
-                "name": "syllables",
-                "title": "Слогов"
-              },
-              {
-                "name": "words",
-                "title": "Слов"
-              },
-              {
-                "name": "wrongEmphasis",
-                "title": "Неправильная постановка ударения"
-              }
-            ]
-          },
-          {
-            "name": "expressiveness",
-            "title": "Выразительность",
-            "items": [
-              {
-                "name": "pausesOnPunctuationMarks",
-                "title": "Несоблюдение норм паузации"
-              },
-              {
-                "name": "raiseAndLowerVoice",
-                "title": "Монотонное, не интонированное чтение"
-              },
-              {
-                "name": "emphasizingImportantWords",
-                "title": "Неумение выделять голосом логические ударения"
-              }
-            ]
-          },
-          {
-            "name": "mindfulness",
-            "title": "Осознанность",
-            "items": [
-              {
-                "name": "literalSense",
-                "title": "Непонимание значений слов в прямом значении"
-              },
-              {
-                "name": "figurativeMeaning",
-                "title": "Непонимание значений слов в переносном значении"
-              },
-              {
-                "name": "storyEventChains",
-                "title": "Нарушение понимания цепочки событий сюжета"
-              },
-              {
-                "name": "mainIdea",
-                "title": "Неумение выделить основную мысль текста"
-              },
-              {
-                "name": "factualData",
-                "title": "Искажение фактических данных текста"
-              }
-            ]
           }
         ]
       }

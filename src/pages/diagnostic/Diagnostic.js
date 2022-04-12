@@ -12,13 +12,15 @@ import {check} from '../../http/userAPI'
 import {DIAGNOSTIC_MENU_ROUTE, LOGIN_ROUTE} from "../../utils/const";
 import {Header} from "../../components/header/Header";
 import {useSelector, useDispatch} from "react-redux";
-import {saveDiagnostic} from "../../http/diagnosticAPI";
-import _ from 'lodash'
+import {saveDiagnostic, tasksLoading} from "../../http/diagnosticAPI";
 import {setInfoData, setStudent} from "../../redux/actions/infoActions";
+import {stateLoading} from "../../redux/actions/tasksActions";
 
 export default function Diagnostic(props) {
   const [activeTab, setActiveTab] = useState(0)
   const [isVisibleUp, setVisibleUp] = useState(false)
+  const [fixed, setFixed] = useState(false)
+  const [heightMenu, setHeightMenu] = useState(0)
   const data = useSelector(state => state.diagnostic)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -38,6 +40,8 @@ export default function Diagnostic(props) {
       return navigate(DIAGNOSTIC_MENU_ROUTE)
     } else {
       dispatch(setInfoData(diagInfo))
+      tasksLoading(diagInfo.id).then(data =>
+        dispatch(stateLoading({data})))
     }
 
     const activeTab = !sessionStorage.getItem('activeTab') ? 0 : Number(sessionStorage.getItem('activeTab'))
@@ -48,16 +52,20 @@ export default function Diagnostic(props) {
       navigate(LOGIN_ROUTE)
     }
     window.addEventListener('scroll', fadeInUpper)
-    return ()=>{
+    return () => {
       window.removeEventListener("scroll", fadeInUpper)
     }
   }, [])
 
   const fadeInUpper = () => {
-    if (window.scrollY > 150) {
-      setVisibleUp(true)
+    if (window.scrollY > 30) {
+      const menu = document.getElementsByClassName("diagnostic__tab-list")
+      setHeightMenu(menu[0].offsetHeight)
+      setFixed(true)
+      // setVisibleUp(true)
     } else {
-      setVisibleUp(false)
+      setFixed(false)
+      // setVisibleUp(false)
     }
   }
 
@@ -67,7 +75,8 @@ export default function Diagnostic(props) {
   }
 
   const handleClick = (e) => {
-    saveDiagnostic({id: data.info.data.id, data: data.tasks.stateOfFunc})
+    const {progress} = data.info.data
+    saveDiagnostic({id: data.info.data.id, progress, data: data.tasks.stateOfFunc})
   }
 
   const handleExit = () => {
@@ -78,10 +87,10 @@ export default function Diagnostic(props) {
   return (
     <div className="diagnostic" id="diagnostic">
       <Header/>
-      <Tabs className='diagnostic__tabs' selectedIndex={activeTab} onSelect={handleSelect}>
-        <TabList className='diagnostic__tab-list'>
-          {DIAG_DATA.map((s) =>{
-            if (data.info.data.classNumber === 0 && (s.name === "writing" || s.name === "reading")){
+      <Tabs className={`diagnostic__tabs`} selectedIndex={activeTab} onSelect={handleSelect}>
+        <TabList className={`diagnostic__tab-list ${fixed ? 'fixed' : ''}`}>
+          {DIAG_DATA.map((s) => {
+            if (data.info.data.classNumber === 0 && (s.name === "writing" || s.name === "reading")) {
               return null
             }
             return <Tab key={s.name} className='diagnostic__item'>{s.title}</Tab>
@@ -89,21 +98,23 @@ export default function Diagnostic(props) {
         </TabList>
 
         {DIAG_DATA.map((s) => {
-          if (data.info.data.classNumber === 0 && (s.name === "writing" || s.name === "reading")){
-            return null
+            if (data.info.data.classNumber === 0 && (s.name === "writing" || s.name === "reading")) {
+              return null
+            }
+            return (
+              <TabPanel style={fixed ? {marginTop: `${heightMenu + 20}px`} : {marginTop: "10px"}} key={s.name}
+                        className={`diagnostic__tab-panel`}>
+                <Section
+                  name={s.name}
+                  title={s.title}
+                  data={s.data}
+                  type={s.type}
+                  hints={s.hints}
+                  options={s.options}
+                />
+              </TabPanel>
+            )
           }
-          return (
-            <TabPanel key={s.name} className='diagnostic__tab-panel'>
-              <Section
-                name={s.name}
-                title={s.title}
-                data={s.data}
-                type={s.type}
-                hints={s.hints}
-              />
-            </TabPanel>
-          )
-        }
         )}
       </Tabs>
       {
@@ -126,7 +137,8 @@ export default function Diagnostic(props) {
             sessionStorage.removeItem('activeTab')
             navigate(DIAGNOSTIC_MENU_ROUTE)
           }}
-        >Отмена</button>
+        >Отмена
+        </button>
         <Progress/>
       </div>
     </div>

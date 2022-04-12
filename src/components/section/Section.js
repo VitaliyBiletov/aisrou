@@ -1,29 +1,29 @@
 import React from 'react'
 import {Task, generatedTask} from "../task/Task";
 import StateFunc from "../stateFunc/StateFunc";
+import SkillsPanel from "../skillsPanel/SkillsPanel";
 
-
-export default function Section(props){
-  const {title, name, type, data} = props
-  switch (type){
+export default function Section(props) {
+  const {name, type, data} = props
+  switch (type) {
     case "info":
       return <div className={`section ${name} `}>
-        {/*<h1 className="section__header animate__animated animate__fadeInDown">{title}</h1>*/}
         <div className="section__container animate__animated animate__fadeIn">
           <StateFunc data={data}/>
         </div>
       </div>
     default: {
-      return(
+      return (
         <div className={`section ${name} animate__animated animate__fadeIn`}>
-          {/*<h1 className="section__header animate__animated animate__fadeInDown">{title}</h1>*/}
           <div className="section__container animate__animated animate__fadeIn">
             {data.map((items, index) => {
-              return <div key={index}>
-                {generatedTask(Task, {...items, nameSection: props.name})}
+              return <div className="task__container" key={index}>
+                {generatedTask(Task, {...items, nameSection: props.name, options: props.options})}
               </div>
             })
             }
+            {props.type === "analysis" ? <SkillsPanel type={props.type} name={props.name} options={props.options}/>
+              : null}
           </div>
         </div>
       )
@@ -31,3 +31,4 @@ export default function Section(props){
   }
 
 }
+

@@ -10,13 +10,12 @@
     margin: 10px 0
     border-radius: 20px
     display: flex
+    align-items: center
     flex-direction: row
   &__timer
     flex: 1
     margin: 10px 0
     border-right: 1px solid lightgray
-  &__skills
-    flex: 3
   &__content
     width: 600px
     margin: 0 auto
@@ -48,107 +47,16 @@
     text-shadow: 1px 1px #4e4583
   &__author
     text-align: right
-
   &__speed
     display: flex
     flex-direction: column
+    flex: 1
   &__speed-count
-    font-size: 1.5em
+    font-size: 2.3em
     color: #4e4583
 
-  &__tabs
-    margin: 10px
 
-  &__tab-panel
-    background-color: #fff
-    border-radius: 10px
-    &_selected
-      padding: 10px
-  &__tab-list
-    display: flex
-    justify-content: space-between
-    list-style-type: none
-    padding: 5px
-    border-radius: 20px
-    font-size: 0.7em
-    background-color: #e1e1f9
-    align-items: center
-  &__tab
-    margin: 0 1px
-    padding: 5px 10px
-    border-radius: 20px
-    &_active
-      background-color: #7e87de
-      color: #fff
-      text-shadow: 1px 1px gray
-    &:hover
-      cursor: pointer
-      background-color: #b2b7eb
-      color: #fff
-      text-shadow: 1px 1px gray
 
-  &__checkbox
-    display: flex
-    align-items: center
-    margin: 5px
-    background-color: #c2ecff
-    border-radius: 5px
-    color: #003147
-    padding: 5px
-    label
-      cursor: pointer
-      flex: 10
-      width: 100%
-      display: inline-block
-      text-align: left
-      font-size: 0.7em
-    input
-      cursor: pointer
-      flex: 1
-    &:hover
-      cursor: pointer
-      background-color: #61ceff
-      color: #fff
-
-.timer
-  &__progress
-    width: 100px
-    margin: 10px auto
-  &__button
-    margin: 5px
-    border: none
-    color: #fff
-    padding: 10px
-    border-radius: 5px
-    &_start
-      background-color: #1ebe1e
-      &:hover
-        background-color: #5ce65c
-    &_stop
-      background-color: #ff0005
-      &:hover
-        background-color: #ff5255
-    &:hover
-      cursor: pointer
-
-.skills
-  display: flex
-  flex-direction: row
-  justify-content: space-between
-  &__column
-    flex: 1
-
-.print
-  &__button
-    margin: 5px
-  &__container
-    text-align: right
-    button
-      background-color: #ff9494
-      color: #fff
-      border: none
-      padding: 5px 10px
-      border-radius: 5px
-      &:hover
-        cursor: pointer
-        background-color: #ff2e2e
+@media screen and (max-width: 770px)
+  .analysis
+    width: 600px

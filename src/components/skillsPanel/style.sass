@@ -1,0 +1,78 @@
+.skills-panel
+  min-width: 660px
+  max-width: 1000px
+  background-color: #b2b7eb
+  border: 1px lightgray solid
+  border-radius: 15px
+  margin: 10px auto
+  z-index: 5
+  &__tabs
+    margin: 10px
+
+  &__tab-panel
+    background-color: #fff
+    border-radius: 10px
+    &_selected
+      padding: 10px
+  &__tab-list
+    display: flex
+    justify-content: space-between
+    list-style-type: none
+    padding: 5px
+    border-radius: 20px
+    font-size: 0.7em
+    background-color: #e1e1f9
+    align-items: center
+  &__tab
+    margin: 0 1px
+    padding: 5px 10px
+    border-radius: 20px
+    &_active
+      background-color: #7e87de
+      color: #fff
+      text-shadow: 1px 1px gray
+    &:hover
+      cursor: pointer
+      background-color: #b2b7eb
+      color: #fff
+      text-shadow: 1px 1px gray
+
+
+.skills-list
+  &__checkbox
+    display: flex
+    align-items: center
+    margin: 5px
+    background-color: #c2ecff
+    border-radius: 5px
+    color: #003147
+    padding: 5px
+    label
+      cursor: pointer
+      flex: 10
+      width: 100%
+      display: inline-block
+      text-align: left
+      font-size: 0.7em
+    input
+      cursor: pointer
+      flex: 1
+    &:hover
+      cursor: pointer
+      background-color: #61ceff
+      color: #fff
+
+.print
+  &__button
+    margin: 5px
+  &__container
+    text-align: right
+    button
+      background-color: #ff9494
+      color: #fff
+      border: none
+      padding: 5px 10px
+      border-radius: 5px
+      &:hover
+        cursor: pointer
+        background-color: #ff2e2e

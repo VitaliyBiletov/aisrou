@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import {useSelector} from 'react-redux'
+import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {setProgress} from '../../redux/actions/infoActions'
 import { Line } from 'rc-progress';
 import {TASKS_COUNT} from './progressData'
 import {getCountOfCompleted} from './progressUtils'
@@ -8,6 +9,11 @@ import {getCountOfCompleted} from './progressUtils'
 export default function Progress(){
   const [isVisible, setVisible] = useState(false)
   const [percentAll, setPercentAll] = useState(0)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(setProgress(percentAll))
+  },[percentAll])
 
   const progressInPercent = useSelector(state=> {
     const {tasks} = state.diagnostic
@@ -22,11 +28,9 @@ export default function Progress(){
       }
       }
     )
-
-
-
     //Считаем общий процент решеных упражнений
     const countCompletedAll = sectionsData.reduce((sum, sec) => sum + Number(sec.percent), 0) / sectionsData.length
+
 
     if (percentAll !== countCompletedAll){
       setPercentAll(countCompletedAll)

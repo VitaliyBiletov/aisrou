@@ -121,7 +121,7 @@ function Table(props) {
                         strokeColor="#009d23"
                         trailColor="#e0ffe1"
                         strokeLinecap="square"
-                        className="progress__line_main"
+                        className="progress__menu"
                       /> : item[f]}
                       </td>
                 }

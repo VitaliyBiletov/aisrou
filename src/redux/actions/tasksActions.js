@@ -1,4 +1,10 @@
-import {SET_VALUE_ITEM, SET_VALUE_STATE_FUNC, SET_SPEED_READING, SET_READING_SKILL} from "../types/tasksTypes";
+import {
+  SET_VALUE_ITEM,
+  SET_VALUE_STATE_FUNC,
+  SET_SPEED_READING,
+  SET_SKILL,
+  STATE_LOADING
+} from "../types/tasksTypes";
 
 
 export function setValueItem(id, section, name, value){
@@ -22,10 +28,17 @@ export function setSpeedReading(value) {
   }
 }
 
-export function setReadingSkill(name, value) {
+export function setSkill(type, name, value) {
   return {
-    type: SET_READING_SKILL,
-    payload: {name, value}
+    type: SET_SKILL,
+    payload: {type, name, value}
+  }
+}
+
+export function stateLoading(data) {
+  return {
+    type: STATE_LOADING,
+    payload: data
   }
 }
 

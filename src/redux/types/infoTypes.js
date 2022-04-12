@@ -1,3 +1,3 @@
-export const SET_DATE = 'INFO/SET_DATE'
-export const SET_INFO_DATA = 'INFO/SET_FORM_DATA'
+export const SET_PROGRESS_DATA = 'INFO/SET_PROGRESS_DATA'
+export const SET_INFO_DATA = 'INFO/SET_INFO_DATA'
 export const SET_STUDENT = 'INFO/SET_STUDENT'

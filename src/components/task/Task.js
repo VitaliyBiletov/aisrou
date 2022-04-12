@@ -33,11 +33,10 @@ export function Task(props) {
       )
     }
     case 'reading': {
-
       return <Analysis type='reading' texts={props.texts} options={props.options}/>
     }
     case 'writing': {
-      return <Analysis type='writing' texts={props.texts} options={props.options}/>
+      return <Analysis type='writing' texts={props.texts}/>
     }
     default:
       return <div>{type}</div>
