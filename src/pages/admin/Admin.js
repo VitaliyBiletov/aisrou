@@ -67,17 +67,13 @@ function generateManagement(Component, props) {
       setData(data)
     }
 
-    if (data.length === 0){
-      return null
-    } else {
-      return <Component
-        data={data}
-        fields={fields}
-        setData={handleSetData}
-        isLoading={isLoading}
-        type={props.type}
-        title={props.title} />
-    }
+    return <Component
+      data={data}
+      fields={fields}
+      setData={handleSetData}
+      isLoading={isLoading}
+      type={props.type}
+      title={props.title} />
   }
 }
 
