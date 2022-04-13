@@ -76,7 +76,7 @@ export default function Diagnostic(props) {
 
   const handleClick = (e) => {
     const {progress} = data.info.data
-    saveDiagnostic({id: data.info.data.id, progress, data: data.tasks.stateOfFunc})
+    saveDiagnostic({id: data.info.data.id, progress, results: data.tasks})
   }
 
   const handleExit = () => {
