@@ -4,9 +4,7 @@
   "description": "client",
   "main": "index.js",
   "scripts": {
-    "server-back": "cd ../aisrou-server && npm run dev",
-    "server-front": "webpack-dev-server --mode development --open",
-    "start": "concurrently \"npm:server-front\" \"npm:server-back\"",
+    "start": "webpack-dev-server --mode development --open",
     "dev": "NODE_ENV='development' webpack",
     "build": "NODE_ENV='production' webpack",
     "watch": "webpack --watch"

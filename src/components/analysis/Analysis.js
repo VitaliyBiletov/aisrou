@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {setSpeedReading} from '../../redux/actions/tasksActions'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPrint, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +11,7 @@ export default function Analysis(props) {
   const [fontSize, setFontSize] = useState('1em')
   const [text, setText] = useState('')
   const diagInfo = JSON.parse(sessionStorage.getItem('diagInfo'))
+  const {speed} = useSelector(state=>state.diagnostic.tasks.reading)
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function Analysis(props) {
       </div>
       <div className="analysis__content">
         {text.title ? <p className='analysis__title'>{text.title}</p> : null}
-        {text.body ? props.type === 'reading' ? <Text fontSize={fontSize} setCount={setCount} text={text.body}/> :
+        {text.body ? props.type === 'reading' ? <Text fontSize={fontSize} text={text.body}/> :
           <p className='analysis__text'>{text.body}</p> : null}
         {text.author ? <p className='analysis__author'>{text.author}</p> : null}
       </div>
@@ -52,9 +53,9 @@ export default function Analysis(props) {
       <div className='analysis__panel'>
         <Timer />
         <div className='analysis__speed'>
-          {count ?
+          {speed ?
             <>
-              <span>Скорость:</span><span className='analysis__speed-count'>{count} сл/мин</span>
+              <span>Скорость:</span><span className='analysis__speed-count'>{speed} сл/мин</span>
             </> :
             <span>Выберите слово</span>
           }
@@ -71,7 +72,6 @@ function Text(props) {
 
   const handleClick = (e) => {
     setActiveWord(e.target.dataset.index)
-    props.setCount(Number(e.target.dataset.count) + 1)
     dispatch(setSpeedReading(Number(e.target.dataset.count) + 1))
   }
 

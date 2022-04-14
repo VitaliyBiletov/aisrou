@@ -54,176 +54,53 @@ const initialState = {
   },
   "reading": {
     "speed": 0,
-    "skills": [
-      {
-        name: "letterByLetter",
-        value: false
-      },
-      {
-        name: "bySyllables",
-        value: false
-      },
-      {
-        name: "slowlyInSyllables",
-        value: false
-      },
-      {
-        name: "wholeWords",
-        value: false
-      },
-      {
-        name: "phrases",
-        value: false
-      },
-      {
-        name: "passes",
-        value: false
-      },
-      {
-        name: "permutations",
-        value: false
-      },
-      {
-        name: "substitutions",
-        value: false
-      },
-      {
-        name: "additions",
-        value: false
-      },
-      {
-        name: "replays",
-        value: false
-      },
-      {
-        name: "sounds",
-        value: false
-      },
-      {
-        name: "syllables",
-        value: false
-      },
-      {
-        name: "words",
-        value: false
-      },
-      {
-        name: "wrongEmphasis",
-        value: false
-      },
-      {
-        name: "pausesOnPunctuationMarks",
-        value: false
-      },
-      {
-        name: "raiseAndLowerVoice",
-        value: false
-      },
-      {
-        name: "emphasizingImportantWords",
-        value: false
-      },
-      {
-        name: "literalSense",
-        value: false
-      },
-      {
-        name: "figurativeMeaning",
-        value: false
-      },
-      {
-        name: "storyEventChains",
-        value: false
-      },
-      {
-        name: "mainIdea",
-        value: false
-      },
-      {
-        name: "factualData",
-        value: false
-      }
-    ]
+    "skills": {
+      "letterByLetter": false,
+      "bySyllables": false,
+      "slowlyInSyllables": false,
+      "wholeWords": false,
+      "phrases": false,
+      "passes": false,
+      "permutations": false,
+      "substitutions": false,
+      "additions": false,
+      "replays": false,
+      "sounds": false,
+      "syllables": false,
+      "words": false,
+      "wrongEmphasis": false,
+      "pausesOnPunctuationMarks": false,
+      "raiseAndLowerVoice": false,
+      "emphasizingImportantWords": false,
+      "literalSense": false,
+      "figurativeMeaning": false,
+      "storyEventChains": false,
+      "mainIdea": false,
+      "factualData": false
+    }
   },
   "writing": {
-    "skills": [
-      {
-        name: "substitutions",
-        value: false
-      },
-      {
-        name: "confusion",
-        value: false
-      },
-      {
-        name: "letterGaps",
-        value: false
-      },
-      {
-        name: "letterSubstitutions",
-        value: false
-      },
-      {
-        name: "softnessDesignationErrors",
-        value: false
-      },
-      {
-        name: "passes",
-        value: false
-      },
-      {
-        name: "permutations",
-        value: false
-      },
-      {
-        name: "addingLetters",
-        value: false
-      },
-      {
-        name: "addingSyllables",
-        value: false
-      },
-      {
-        name: "consolidatedSpelling",
-        value: false
-      },
-      {
-        name: "separateSpelling",
-        value: false
-      },
-      {
-        name: "missingMark",
-        value: false
-      },
-      {
-        name: "morphologicalDisorders",
-        value: false
-      },
-      {
-        name: "syntaxViolations",
-        value: false
-      },
-      {
-        name: "textLevel",
-        value: false
-      },
-      {
-        name: "mirrorSpelling",
-        value: false
-      },
-      {
-        name: "addingLetterElements",
-        value: false
-      },
-      {
-        name: "diffNumElements",
-        value: false
-      },
-      {
-        name: "sameNumElements",
-        value: false
-      }
-    ]
+    "skills": {
+      "substitutions": false,
+      "confusion": false,
+      "letterGaps": false,
+      "letterSubstitutions": false,
+      "softnessDesignationErrors": false,
+      "passes": false,
+      "permutations": false,
+      "addingLetters": false,
+      "addingSyllables": false,
+      "consolidatedSpelling": false,
+      "separateSpelling": false,
+      "missingMark": false,
+      "morphologicalDisorders": false,
+      "syntaxViolations": false,
+      "textLevel": false,
+      "mirrorSpelling": false,
+      "addingLetterElements": false,
+      "diffNumElements": false,
+      "sameNumElements": false
+    }
   }
 }
 
@@ -244,13 +121,11 @@ export function TasksReducer(state = initialState, action) {
       return Object.assign({}, state, {
         [action.payload.type]: {
           ...state[action.payload.type],
-          skills: state[action.payload.type].skills.map(item => {
-            if (action.payload.name === item.name) {
-              return {name: action.payload.name, value: action.payload.value}
-            }
-            return item
-          })
-        }
+          skills: {
+            ...state[action.payload.type].skills,
+            [action.payload.name]: action.payload.value
+          }
+          }
       })
     case STATE_LOADING:
       return Object.assign({}, state, {...action.payload.data})

@@ -102,7 +102,8 @@ export default function Diagnostic(props) {
               return null
             }
             return (
-              <TabPanel style={fixed ? {marginTop: `${heightMenu + 20}px`} : {marginTop: "10px"}} key={s.name}
+              <TabPanel style={fixed ? {marginTop: `${heightMenu + 20}px`} : {marginTop: "10px"}}
+                        key={s.name}
                         className={`diagnostic__tab-panel`}>
                 <Section
                   name={s.name}

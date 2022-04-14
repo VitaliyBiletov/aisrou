@@ -50,9 +50,11 @@ function SkillList(props) {
       {chunk.map((c, index) => {
         return <div key={index} className='skills-list__column'>
           {c.map(({name, title}) => {
-            const skill = analysis.skills.find((skill) => skill.name === name)
+            const checked = analysis.skills[name]
             return <div key={name} className='skills-list__checkbox'>
-              <input type="checkbox" defaultChecked={skill ? skill.value : false} onClick={handleChecked(props.name, name)}
+              <input type="checkbox"
+                     checked={checked}
+                     onChange={handleChecked(props.name, name)}
                      id={name}
                      name={name}/>
               <label htmlFor={name}>{title}</label>

@@ -17,7 +17,6 @@ export async function tasksLoading(id) {
 }
 
 export async function saveDiagnostic(data) {
-  console.log(data)
   const res = await $authHost.post(`api/diagnostics/save`, {data})
   return res
 }

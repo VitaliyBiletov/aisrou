@@ -6,7 +6,7 @@ export function getCountOfCompleted(data, type) {
       return Object.values(data).filter(i=>i).length
     }
     case 'analysis':{
-      return data.skills.find(item=>item.value) ? 1 : 0
+      return Object.values(data.skills).includes(true) ? 1 : 0
     }
     case 'tasks':{
       return getCountOfTasks(data)
