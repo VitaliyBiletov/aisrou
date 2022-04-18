@@ -64,7 +64,7 @@ export default function Progress(){
                   percent={progress.percent}
                   trailWidth="4"
                   strokeWidth="4"
-                  strokeColor="#a32f37"
+                  strokeColor="#cd5b45"
                   trailColor="#f7e3e5"
                   strokeLinecap="square"
                   className="progress__line_main"
@@ -79,7 +79,7 @@ export default function Progress(){
         percent={percentAll}
         trailWidth="4"
         strokeWidth="4"
-        strokeColor="#a32f37"
+        strokeColor="#cd5b45"
         trailColor="#fff"
         strokeLinecap="square"
         className="progress__line_main"
