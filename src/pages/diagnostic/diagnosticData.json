@@ -549,7 +549,7 @@
         "id": 2,
         "name": "diminutiveForm",
         "title": "Образование существительных с уменьшительно-ласкательным значением",
-        "instruction": "Назови кто (что) это?",
+        "instruction": "Кто (что) это?",
         "data": [
           {
             "id": 0,
@@ -931,7 +931,7 @@
         "id": 0,
         "name": "generalizing",
         "title": "Подбор обобщающего слова к группе предметов.",
-        "instruction": "Назови одним словом",
+        "instruction": "Назови, что изображено на картинке, одним словом",
         "data": [
           {
             "id": 0,
@@ -1099,7 +1099,7 @@
         "id": 3,
         "name": "concrete",
         "title": "Называние конкретных существительных",
-        "instruction": "Назови что изображено на картинке?",
+        "instruction": "Что изображено на картинке?",
         "data": [
           {
             "id": 0,
@@ -1347,8 +1347,8 @@
         "name": "soundExtraction",
         "title": "Выделение звука на фоне слова",
         "instruction": [
-          "Скажи, есть ли звук [м] в слове",
-          "Скажи, есть ли звук [л] в слове"
+          "Есть ли звук [м] в слове ...",
+          "Есть ли звук [л] в слове ..."
         ],
         "data": [
           {
@@ -1503,40 +1503,64 @@
         "title": "Правильность",
         "items": [
           {
-            "name": "passes",
-            "title": "Пропуски"
+            "name": "passesSounds",
+            "title": "Пропуски звуков"
           },
           {
-            "name": "permutations",
-            "title": "Перестановки"
+            "name": "passesSyllables",
+            "title": "Пропуски слогов"
           },
           {
-            "name": "substitutions",
-            "title": "Замены"
+            "name": "permutationsSounds",
+            "title": "Перестановки звуков"
           },
           {
-            "name": "additions",
-            "title": "Добавления"
+            "name": "permutationsSyllables",
+            "title": "Перестановки слогов"
           },
           {
-            "name": "replays",
-            "title": "Повторы"
+            "name": "replaceGSSounds",
+            "title": "Замены графически сходных звуков (п-б, ц-с)"
           },
           {
-            "name": "sounds",
-            "title": "Звуков"
+            "name": "replaceFSSounds",
+            "title": "Замены фонематически сходных звуков (л-м, ц-щ)"
           },
           {
-            "name": "syllables",
-            "title": "Слогов"
+            "name": "substitutionsSyllables",
+            "title": "Замены слогов"
           },
           {
-            "name": "words",
-            "title": "Слов"
+            "name": "substitutionsWords",
+            "title": "Замены слов"
+          },
+          {
+            "name": "additionsSounds",
+            "title": "Добавления (вставки) звуков"
+          },
+          {
+            "name": "additionsSyllables",
+            "title": "Добавления (вставки) слогов"
+          },
+          {
+            "name": "replaysSounds",
+            "title": "Повторы звуков"
+          },
+          {
+            "name": "replaysSyllables",
+            "title": "Повторы слогов"
+          },
+          {
+            "name": "replaysWords",
+            "title": "Повторы слов"
           },
           {
             "name": "wrongEmphasis",
             "title": "Неправильная постановка ударения"
+          },
+          {
+            "name": "aggrammRading",
+            "title": "Агграмматизмы при чтении"
           }
         ]
       },

@@ -1,4 +1,4 @@
-
+import _ from 'lodash'
 //Считает общее количество заполненных упражнений в разделе
 export function getCountOfCompleted(data, type) {
   switch (type){
@@ -16,6 +16,8 @@ export function getCountOfCompleted(data, type) {
 }
 
 function getCountOfTasks(data) {
-  const count = Object.values(data).reduce((previousValue, currentValue)=> previousValue + currentValue.length, 0)
+  let count = 0
+  count = _.concat([],...Object.values(data)).filter(i=>i.value).length
+  // const count = Object.values(data).reduce((previousValue, currentValue)=> previousValue + currentValue.length, 0)
   return count
 }

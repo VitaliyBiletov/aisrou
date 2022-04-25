@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {LOGIN_ROUTE} from "../../utils/const";
 import {useNavigate} from "react-router-dom/index";
 import {useSelector} from "react-redux";

@@ -3,23 +3,48 @@ import {useDispatch, useSelector} from 'react-redux'
 import {setValueItem} from '../../redux/actions/tasksActions'
 import Analysis from "../analysis/Analysis";
 import Explanation from "../explanation/Explanation";
+import {faPrint} from "@fortawesome/free-solid-svg-icons/index";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 export function Task(props) {
   const {data, type, name, activeItem, setActiveItem} = props
 
+
   switch (type) {
     case 'text': {
+      const text = data.find(({id}) => id === activeItem)
+      const handlePrint = (e) => {
+        const myWindow = window.open('PRINT', '')
+        myWindow.document.write(`<div><h2 style="text-align: center">${text.title ? text.title : ''}</h2><p style="text-align: justify; white-space: break-spaces;">${text.text}</p></div>`)
+        myWindow.print()
+        myWindow.close()
+      }
       return (
         <>
-          {data.map((item, index) => <p key={index} className='task__text'>{item.text}</p>)}
+          <div className='print__container'>
+            <button className='print__button' onClick={handlePrint}><FontAwesomeIcon icon={faPrint}/></button>
+          </div>
+          {data.map((item, index) =>
+            <>
+              <h3>{item.title}</h3>
+              <p key={index} className='task__text'>{item.text}</p>
+            </>
+          )}
           <Status {...props} activeItem={activeItem} setActiveItem={setActiveItem}/>
         </>
       )
     }
     case 'img': {
+      let title = null
+      if (name === "syllable" || name === "antonyms") {
+        const item = data.find(({id}) => id === activeItem)
+        title = item.title
+      }
+
       return (
         <>
-          <img src={`http://localhost:3000/static/images/${name}/${activeItem}.jpg`}/>
+          {title ? <h3>{title}</h3> : null}
+          <img className="task__img" src={`http://localhost:3000/static/images/${name}/${activeItem}.jpg`}/>
           <Status {...props} activeItem={activeItem} setActiveItem={setActiveItem}/>
         </>
       )
@@ -50,20 +75,20 @@ export function generatedTask(Component, {...props}) {
   const [instruction, setInstruction] = useState('')
   const {typeId, classNumber} = useSelector(state => state.diagnostic.info.data)
 
-  useEffect(()=>{
-    if (props.type === "writing" && Array.isArray(props.title)){
-      const {title} = props.title.find(t=>t.classNumber === classNumber && t.typeId === typeId)
+  useEffect(() => {
+    if (props.type === "writing" && Array.isArray(props.title)) {
+      const {title} = props.title.find(t => t.classNumber === classNumber && t.typeId === typeId)
       setTitle(title)
     } else {
       setTitle(props.title)
     }
-    if (props.type === "writing" && Array.isArray(props.instruction)){
-      const {instruction} = props.instruction.find(t=>t.classNumber === classNumber && t.typeId === typeId)
+    if (props.type === "writing" && Array.isArray(props.instruction)) {
+      const {instruction} = props.instruction.find(t => t.classNumber === classNumber && t.typeId === typeId)
       setInstruction(instruction)
     } else {
       setInstruction(props.instruction)
     }
-  },[])
+  }, [])
 
   return (
     <div className='task'>
@@ -79,7 +104,7 @@ export function generatedTask(Component, {...props}) {
       <div className='task__content-section'>
         <Component {...props} activeItem={activeItem} setActiveItem={setActiveItem}/>
       </div>
-      {props.hints ? <Explanation hints={props.hints}/> : null }
+      {props.hints ? <Explanation hints={props.hints}/> : null}
     </div>
   )
 }
@@ -118,7 +143,7 @@ function Status({...props}) {
       <div className="status__status-section">
         {data.map((item, index) => {
             const result = state.find(i => i.id === item.id)
-            const color = result ? buttonsData.find(b => result.value === b.id).color : 'white'
+            const color = result.value === 0 || result.value ? buttonsData.find(b => result.value === b.id).color : 'white'
             return (
               <button
                 className={`status__btn-status status__btn-status_${color} ${activeItem === item.id ? 'status__btn-status status__btn-status_active' : ''}`}

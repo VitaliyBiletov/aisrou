@@ -40,6 +40,7 @@ const customStyles = {
 
 export default function DiagnosticMenu() {
   const {id, fullName} = useSelector(state=>state.user)
+  const {tasks} = useSelector(state=>state.diagnostic)
   const [students, setStudents] = useState([])
   const [types, setTypes] = useState([])
   const [diagnostics, setDiagnostics] = useState(null)
@@ -51,7 +52,6 @@ export default function DiagnosticMenu() {
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
   const formRef = useRef()
-
 
   useEffect(()=>{
     if (id){
@@ -92,7 +92,7 @@ export default function DiagnosticMenu() {
   const handleCreate = (e) => {
     e.preventDefault()
     const {type, classNumber, date} = diagInfo
-    createDiagnostic(id, activeStudentId, date, type, classNumber).then((result)=>{
+    createDiagnostic(id, activeStudentId, date, type, classNumber, tasks).then((result)=>{
       setData([...data, result.data])
       setModalCreateDiagIsOpen(false)
     })

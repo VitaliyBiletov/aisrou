@@ -3,7 +3,8 @@ import {
   SET_VALUE_STATE_FUNC,
   SET_SPEED_READING,
   SET_SKILL,
-  STATE_LOADING
+  STATE_LOADING,
+  RESET_TASKS
 } from "../types/tasksTypes";
 
 
@@ -39,6 +40,12 @@ export function stateLoading(data) {
   return {
     type: STATE_LOADING,
     payload: data
+  }
+}
+
+export function resetState() {
+  return {
+    type: RESET_TASKS
   }
 }
 

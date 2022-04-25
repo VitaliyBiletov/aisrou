@@ -6,8 +6,8 @@ export async function getDiagnostics(studentId) {
   return data
 }
 
-export async function createDiagnostic(userId, studentId, date, typeId, classNumber) {
-  const res = await $authHost.post(`api/diagnostics/create`, {userId, studentId, typeId, date, classNumber})
+export async function createDiagnostic(userId, studentId, date, typeId, classNumber, tasks) {
+  const res = await $authHost.post(`api/diagnostics/create`, {userId, studentId, typeId, date, classNumber, tasks})
   return res
 }
 
@@ -34,4 +34,9 @@ export async function removeDiagnostic(diagId) {
 export async function getDiagnostic(diagId) {
     const res = await $authHost.get(`api/diagnostics/${diagId}`)
     return res
+}
+
+export async function getResult(diagId) {
+  const res = await $authHost.get(`api/diagnostics/result/${diagId}`)
+  return res
 }

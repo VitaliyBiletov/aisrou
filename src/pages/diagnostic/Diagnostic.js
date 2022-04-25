@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import Progress from '../../components/progress/Progress'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -6,7 +6,6 @@ import {faAngleUp} from '@fortawesome/free-solid-svg-icons'
 import DIAG_DATA from './diagnosticData'
 import Section from '../../components/section/Section'
 import {useNavigate} from 'react-router-dom'
-import {useState, useEffect} from 'react'
 import {animateScroll as scroll} from 'react-scroll'
 import {check} from '../../http/userAPI'
 import {DIAGNOSTIC_MENU_ROUTE, LOGIN_ROUTE} from "../../utils/const";
@@ -14,7 +13,8 @@ import {Header} from "../../components/header/Header";
 import {useSelector, useDispatch} from "react-redux";
 import {saveDiagnostic, tasksLoading} from "../../http/diagnosticAPI";
 import {setInfoData, setStudent} from "../../redux/actions/infoActions";
-import {stateLoading} from "../../redux/actions/tasksActions";
+import {stateLoading, resetState} from "../../redux/actions/tasksActions";
+import Result from "../result/Result";
 
 export default function Diagnostic(props) {
   const [activeTab, setActiveTab] = useState(0)
@@ -95,6 +95,7 @@ export default function Diagnostic(props) {
             }
             return <Tab key={s.name} className='diagnostic__item'>{s.title}</Tab>
           })}
+          <Tab className='diagnostic__item diagnostic__result'>Результаты</Tab>
         </TabList>
 
         {DIAG_DATA.map((s) => {
@@ -117,6 +118,9 @@ export default function Diagnostic(props) {
             )
           }
         )}
+        <TabPanel>
+          <Result />
+        </TabPanel>
       </Tabs>
       {
         isVisibleUp ?
@@ -136,6 +140,7 @@ export default function Diagnostic(props) {
           className='diagnostic__btn diagnostic__btn_cancel'
           onClick={() => {
             sessionStorage.removeItem('activeTab')
+            dispatch(resetState())
             navigate(DIAGNOSTIC_MENU_ROUTE)
           }}
         >Отмена

@@ -3,7 +3,8 @@ import {
   SET_VALUE_STATE_FUNC,
   SET_SPEED_READING,
   SET_SKILL,
-  STATE_LOADING
+  STATE_LOADING,
+  RESET_TASKS
 } from "../types/tasksTypes";
 
 const initialState = {
@@ -18,39 +19,39 @@ const initialState = {
     "additionalInformation": ''
   },
   "sensMotor": {
-    "artic": [],
-    "phonemics": [],
-    "sounds": [],
-    "syllable": [],
+    "artic": emptyTemplate(8),
+    "phonemics": emptyTemplate(13),
+    "sounds": emptyTemplate(42),
+    "syllable": emptyTemplate(9),
   },
   "grammatic": {
-    "pluralNominative": [],
-    "pluralGenitive": [],
-    "diminutiveForm": [],
-    "prepositions": [],
-    "relativeAdjectives": [],
-    "possessiveAdjectives": [],
-    "qualityAdjectives": [],
-    "draftingProposals": [],
-    "proposalVerification": []
+    "pluralNominative": emptyTemplate(4),
+    "pluralGenitive": emptyTemplate(4),
+    "diminutiveForm": emptyTemplate(5),
+    "prepositions": emptyTemplate(6),
+    "relativeAdjectives": emptyTemplate(6),
+    "possessiveAdjectives": emptyTemplate(5),
+    "qualityAdjectives": emptyTemplate(5),
+    "draftingProposals": emptyTemplate(6),
+    "proposalVerification": emptyTemplate(6)
   },
   "lexis": {
-    "generalizing": [],
-    "antonyms": [],
-    "actions": [],
-    "concrete": []
+    "generalizing": emptyTemplate(8),
+    "antonyms": emptyTemplate(6),
+    "actions": emptyTemplate(6),
+    "concrete": emptyTemplate(8)
   },
   "coherentSpeech": {
-    "paraphrase": [],
-    "story": []
+    "paraphrase": emptyTemplate(1),
+    "story": emptyTemplate(1)
   },
   "langAnalysis": {
-    "compositionProposal": [],
-    "syllabicAnalysis": [],
-    "syllabicSynthesis": [],
-    "soundExtraction": [],
-    "soundNumber": [],
-    "phonemicSynthesis": []
+    "compositionProposal": emptyTemplate(2),
+    "syllabicAnalysis": emptyTemplate(2),
+    "syllabicSynthesis": emptyTemplate(2),
+    "soundExtraction": emptyTemplate(2),
+    "soundNumber": emptyTemplate(3),
+    "phonemicSynthesis": emptyTemplate(2)
   },
   "reading": {
     "speed": 0,
@@ -60,15 +61,21 @@ const initialState = {
       "slowlyInSyllables": false,
       "wholeWords": false,
       "phrases": false,
-      "passes": false,
-      "permutations": false,
-      "substitutions": false,
-      "additions": false,
-      "replays": false,
-      "sounds": false,
-      "syllables": false,
-      "words": false,
+      "passesSounds": false,
+      "passesSyllables": false,
+      "permutationsSounds": false,
+      "permutationsSyllables": false,
+      "replaceGSSounds": false,
+      "replaceFSSounds": false,
+      "substitutionsSyllables": false,
+      "substitutionsWords": false,
+      "additionsSounds": false,
+      "additionsSyllables": false,
+      "replaysSounds": false,
+      "replaysSyllables": false,
+      "replaysWords": false,
       "wrongEmphasis": false,
+      "aggrammRading": false,
       "pausesOnPunctuationMarks": false,
       "raiseAndLowerVoice": false,
       "emphasizingImportantWords": false,
@@ -129,6 +136,8 @@ export function TasksReducer(state = initialState, action) {
       })
     case STATE_LOADING:
       return Object.assign({}, state, {...action.payload.data})
+    case RESET_TASKS:
+      return Object.assign({}, initialState)
     default:
       return state
   }
@@ -145,4 +154,12 @@ function updateItems(state, action) {
     copySection[name] = [...copySection[name], ({id: id, value: value})]
     return Object.assign({}, state, {[section]: copySection})
   }
+}
+
+function emptyTemplate(num) {
+  let arr = []
+  for (let i=0; i < num; i++){
+    arr.push({id: i, value: null})
+  }
+  return arr
 }
