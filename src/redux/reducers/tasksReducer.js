@@ -100,25 +100,35 @@ const initialState = {
   },
   "writing": {
     "skills": {
-      "substitutions": false,
-      "confusion": false,
-      "letterGaps": false,
-      "letterSubstitutions": false,
-      "softnessDesignationErrors": false,
-      "passes": false,
-      "permutations": false,
-      "addingLetters": false,
-      "addingSyllables": false,
-      "consolidatedSpelling": false,
-      "separateSpelling": false,
-      "missingMark": false,
-      "morphologicalDisorders": false,
-      "syntaxViolations": false,
-      "textLevel": false,
-      "mirrorSpelling": false,
-      "addingLetterElements": false,
-      "diffNumElements": false,
-      "sameNumElements": false
+      "pronunciationOfSounds":{
+        "substitutions": false,
+        "confusion": false,
+        "letterGaps": false,
+      },
+      "undisturbedPronunciation":{
+        "letterSubstitutions": false,
+        "softnessDesignationErrors": false,
+      },
+      "violationForms":{
+        "passes": false,
+        "permutations": false,
+        "addingLetters": false,
+        "addingSyllables": false,
+        "consolidatedSpelling": false,
+        "separateSpelling": false,
+        "missingMark": false,
+      },
+      "underdevelopmentGrammatical":{
+        "morphologicalDisorders": false,
+        "syntaxViolations": false,
+        "textLevel": false,
+      },
+      "visuospatialFunctions":{
+        "mirrorSpelling": false,
+        "addingLetterElements": false,
+        "diffNumElements": false,
+        "sameNumElements": false
+      }
     }
   }
 }
@@ -148,20 +158,21 @@ export function TasksReducer(state = initialState, action) {
     case STATE_LOADING:
       return Object.assign({}, state, {...action.payload.data})
     case RESET_SKILLS:
+      const tmp = {}
       const obj = Object.assign({},state[action.payload.type].skills[action.payload.taskName])
       const skills = Object.keys(obj).map(skill=>{
         if (skill === action.payload.name){
-          return {[skill]: true}
+          Object.assign(tmp, {[skill]: action.payload.value})
+          return {[skill]: action.payload.value}
         }
+        Object.assign(tmp, {[skill]: false})
         return {[skill]: false}
       })
-
-      console.log("skills ", skills)
-      console.log("Object", Object.assign(
+      return Object.assign(
         {},
         state,
-        {[type]: {...state[type], skills: {...skills}}}))
-      return state
+        {[action.payload.type]: {...state[action.payload.type], skills: {...state[action.payload.type].skills,
+              [action.payload.taskName]: tmp  }}})
     case RESET_TASKS:
       return Object.assign({}, initialState)
     default:

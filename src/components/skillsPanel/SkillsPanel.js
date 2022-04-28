@@ -42,12 +42,11 @@ function SkillList(props) {
   const dispatch = useDispatch()
 
   const handleChecked = (type, name, taskName) => (e) => {
-    const names = ['noErrorsRight']
+    const names = ['noErrorsRight','intonedReading']
     if (names.includes(name)){
       dispatch(resetSkills(type, name, taskName, e.target.checked))
     } else {
       dispatch(setSkill(type, name, taskName, e.target.checked))
-
     }
   }
 
