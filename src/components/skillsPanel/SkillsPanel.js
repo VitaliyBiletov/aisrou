@@ -1,4 +1,4 @@
-import {setSkill} from "../../redux/actions/tasksActions";
+import {setSkill, resetSkills} from "../../redux/actions/tasksActions";
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {TabList, Tab, Tabs, TabPanel} from 'react-tabs'
@@ -27,7 +27,7 @@ export default function SkillsPanel(props) {
             className="skills-panel__tab-panel"
             selectedClassName="skills-panel__tab-panel_selected"
             key={name}>
-            <SkillList data={items} name={props.name} nameSec={name}/>
+            <SkillList items={items} name={props.name} nameSec={name}/>
           </TabPanel>)}
       </Tabs>
     </div>
@@ -36,31 +36,31 @@ export default function SkillsPanel(props) {
 
 function SkillList(props) {
 
-  const {data} = props
-  const chunk = _.chunk(data, 5)
-  console.log(props)
+  const {items} = props
+  // const chunk = _.chunk(data, 5)
   const analysis = useSelector(({diagnostic}) => diagnostic.tasks[props.name])
   const dispatch = useDispatch()
 
-  const handleChecked = (type, name) => (e) => {
-    dispatch(setSkill(type, name, e.target.checked))
+  const handleChecked = (type, name, taskName) => (e) => {
+    const names = ['noErrorsRight']
+    if (names.includes(name)){
+      dispatch(resetSkills(type, name, taskName, e.target.checked))
+    } else {
+      dispatch(setSkill(type, name, taskName, e.target.checked))
+
+    }
   }
 
-  return (
-    <div className='skills-list'>
-      {chunk.map((c, index) => {
-        return <div key={index} className='skills-list__column'>
-          {c.map(({name, title, type}) => {
-            const checked = analysis.skills[name]
-            return <div key={name} className={`skills-list__checkbox ${type ? type : ''}`}>
-              <input type="checkbox"
-                     checked={checked}
-                     onChange={handleChecked(props.name, name)}
-                     id={name}
-                     name={name}/>
-              <label htmlFor={name}>{title}</label>
-            </div>
-          })}
+  return (<div className='skills-list'>
+      {items.map(({name, title, type}, index) => {
+        const checked = analysis.skills[props.nameSec][name]
+        return <div key={name} className={`skills-list__checkbox ${type ? type : ''}`}>
+          <input type="checkbox"
+                 checked={checked}
+                 onChange={handleChecked(props.name, name, props.nameSec)}
+                 id={name}
+                 name={name}/>
+          <label htmlFor={name}>{title}</label>
         </div>
       })}
     </div>

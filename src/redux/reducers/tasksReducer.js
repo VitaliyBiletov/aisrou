@@ -3,6 +3,7 @@ import {
   SET_VALUE_STATE_FUNC,
   SET_SPEED_READING,
   SET_SKILL,
+  RESET_SKILLS,
   STATE_LOADING,
   RESET_TASKS
 } from "../types/tasksTypes";
@@ -56,38 +57,45 @@ const initialState = {
   "reading": {
     "speed": 0,
     "skills": {
-      "letterByLetter": false,
-      "bySyllables": false,
-      "slowlyInSyllables": false,
-      "wholeWords": false,
-      "passesSounds": false,
-      "passesSyllables": false,
-      "permutationsSounds": false,
-      "permutationsSyllables": false,
-      "replaceGSSounds": false,
-      "replaceFSSounds": false,
-      "substitutionsSyllables": false,
-      "substitutionsWords": false,
-      "additionsSounds": false,
-      "additionsSyllables": false,
-      "replaysSounds": false,
-      "replaysSyllables": false,
-      "replaysWords": false,
-      "wrongEmphasis": false,
-      "aggrammRading": false,
-      "pausesOnPunctuationMarks": false,
-      "raiseAndLowerVoice": false,
-      "emphasizingImportantWords": false,
-      "literalSense": false,
-      "figurativeMeaning": false,
-      "storyEventChains": false,
-      "mainIdea": false,
-      "factualData": false,
-      "noErrorsRight": false,
-      "intonedReading": false,
-      "persistentErrors": false,
-      "understanding": false,
-
+      "readingMethod":{
+        "letterByLetter": false,
+        "bySyllables": false,
+        "slowlyInSyllables": false,
+        "wholeWords": false
+      },
+      "right":{
+        "passesSounds": false,
+        "passesSyllables": false,
+        "permutationsSounds": false,
+        "permutationsSyllables": false,
+        "replaceGSSounds": false,
+        "replaceFSSounds": false,
+        "substitutionsSyllables": false,
+        "substitutionsWords": false,
+        "additionsSounds": false,
+        "additionsSyllables": false,
+        "replaysSounds": false,
+        "replaysSyllables": false,
+        "replaysWords": false,
+        "wrongEmphasis": false,
+        "aggrammRading": false,
+        "persistentErrors": false,
+        "noErrorsRight": false
+      },
+      "expressiveness":{
+        "pausesOnPunctuationMarks": false,
+        "raiseAndLowerVoice": false,
+        "emphasizingImportantWords": false,
+        "intonedReading": false,
+      },
+      "mindfulness":{
+        "literalSense": false,
+        "figurativeMeaning": false,
+        "storyEventChains": false,
+        "mainIdea": false,
+        "factualData": false,
+        "understanding": false,
+      }
     }
   },
   "writing": {
@@ -129,17 +137,31 @@ export function TasksReducer(state = initialState, action) {
     case SET_SPEED_READING:
       return Object.assign({}, state, {reading: {...state.reading, speed: action.payload}})
     case SET_SKILL:
-      return Object.assign({}, state, {
-        [action.payload.type]: {
-          ...state[action.payload.type],
-          skills: {
-            ...state[action.payload.type].skills,
-            [action.payload.name]: action.payload.value
-          }
-          }
-      })
+      const {type, name, taskName, value} = action.payload
+      return Object.assign(
+        {},
+        state,
+        {[type]: {...state[type],
+            skills: {...state[type].skills,
+              [taskName]:{...state[type].skills[taskName], [name]:value}}
+          }})
     case STATE_LOADING:
       return Object.assign({}, state, {...action.payload.data})
+    case RESET_SKILLS:
+      const obj = Object.assign({},state[action.payload.type].skills[action.payload.taskName])
+      const skills = Object.keys(obj).map(skill=>{
+        if (skill === action.payload.name){
+          return {[skill]: true}
+        }
+        return {[skill]: false}
+      })
+
+      console.log("skills ", skills)
+      console.log("Object", Object.assign(
+        {},
+        state,
+        {[type]: {...state[type], skills: {...skills}}}))
+      return state
     case RESET_TASKS:
       return Object.assign({}, initialState)
     default:

@@ -4,7 +4,7 @@ import {
   SET_SPEED_READING,
   SET_SKILL,
   STATE_LOADING,
-  RESET_TASKS
+  RESET_TASKS, RESET_SKILLS
 } from "../types/tasksTypes";
 
 
@@ -29,10 +29,18 @@ export function setSpeedReading(value) {
   }
 }
 
-export function setSkill(type, name, value) {
+export function setSkill(type, name, taskName, value) {
+  console.log({type, name, taskName, value})
   return {
     type: SET_SKILL,
-    payload: {type, name, value}
+    payload: {type, name, taskName, value}
+  }
+}
+
+export function resetSkills(type, name, taskName, value) {
+  return {
+    type: RESET_SKILLS,
+    payload: {type, name, taskName, value}
   }
 }
 
