@@ -8,8 +8,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 export function Task(props) {
   const {data, type, name, activeItem, setActiveItem} = props
-
-
   switch (type) {
     case 'text': {
       const text = data.find(({id}) => id === activeItem)
@@ -58,10 +56,10 @@ export function Task(props) {
       )
     }
     case 'reading': {
-      return <Analysis type='reading' texts={props.texts} options={props.options}/>
+      return <Analysis type={type} texts={props.texts} />
     }
     case 'writing': {
-      return <Analysis type='writing' texts={props.texts}/>
+      return <Analysis type={type} texts={props.texts}/>
     }
     default:
       return <div>{type}</div>

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, PureComponent } from 'react';
-import {Header} from "../../components/header/Header";
+import React, {useState, useEffect} from 'react';
 import {DIAGNOSTIC_MENU_ROUTE, DIAGNOSTIC_ROUTE} from "../../utils/const";
 import {useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from "react-redux";
-import {getResult} from "../../http/diagnosticAPI"
+import {useSelector} from "react-redux";
+import translateTitle from "./translatedTitles"
+
 
 import {
   XAxis,
@@ -16,99 +16,92 @@ import {
 } from 'recharts';
 
 const renderCustomizedLabel = (props) => {
-  const { x, y, width, height, value } = props;
+  const {x, y, width, value} = props;
   return (
-      <g>
-        <text style={{textShadow: "2px 2px #c7e3ff"}} x={width + x + 30} y={y + 25} fill="#1e90ff" textAnchor="middle" dominantBaseline="middle">
-          {value}%
-        </text>
-      </g>
-    )
+    <g>
+      <text style={{textShadow: "2px 2px #c7e3ff"}} x={width + x + 30} y={y + 25} fill="#1e90ff" textAnchor="middle"
+            dominantBaseline="middle">
+        {value}%
+      </text>
+    </g>
+  )
 
 };
 
-const stateOfFuncNames = {
-  hearing: "Слух",
-  vision: "Зрение",
-  breath: "Дыхание",
-  voice: "Голос",
-  prosody: "Просодика",
-  articulationApparatus: "Артикулляционный аппарат",
-  motorSkills: "Моторика",
-  additionalInformation: "Дополнительная информация"
-}
-
-const sectionsNames = {
-  artic: "Артикуляционная моторика",
-  phonemics: "Фонематическое восприятие",
-  sounds: "Звукопроизношение",
-  syllable: "Звуко-слоговая структура"
-}
-
-const diagSections = {
-  grammatic: "Грамматика",
-  lexis: "Лексика",
-  coherentSpeech: "Связная речь",
-  langAnalysis: "Языковой анализ"
-}
-
 export default function Result(props) {
   const navigate = useNavigate()
-  // const diagInfo = useSelector(state=>state.diagnostic.info.data)
-  const diagInfo = JSON.parse(sessionStorage.getItem("diagInfo"))
-  const [data, setData] = useState({})
   const [diagramData, setDiagramData] = useState([])
-  const state = useSelector(state=>state.diagnostic.tasks)
+  const [readingResult, setReadingResult] = useState([])
+  const state = useSelector(state => state.diagnostic.tasks)
 
-  useEffect(()=>{
-    const stateOfFunc = state.stateOfFunc
-    console.log(stateOfFunc)
-    const sensMotorResult = Object.keys(state.sensMotor).map(section=>{
+  useEffect(() => {
+
+    const sensMotorResult = Object.keys(state.sensMotor).map(section => {
       const result = calcResult(state.sensMotor[section])
-      return {name: sectionsNames[section], "Результат": result}
+      return {name: translateTitle.sensMotor[section], "Результат": result}
     })
 
-    const otherResult = Object.keys(diagSections).map(section=>{
-      return {name: diagSections[section], "Результат": calcSectionResult(state[section])}
+    const otherResult = Object.keys(translateTitle.otherSections).map(section => {
+      return {name: translateTitle.otherSections[section], "Результат": calcSectionResult(state[section])}
     })
+
+    const readingResult = state.reading.skills
+    setReadingResult(Object.entries(readingResult).filter(res=>res[1]))
+
 
     setDiagramData(_.union(sensMotorResult, otherResult))
-  },[state.sensMotor.artic])
+  }, [state.sensMotor.artic])
 
-  return(
+  return (
     <div className="result">
       <div className="result__container">
-        <h2>Результаты</h2>
+        <h2 className="result__header">Результаты</h2>
         {state.stateOfFunc ?
           <div className="result__stateOfFunc">
             {Object.keys(state.stateOfFunc)
-              .map((key, index)=>{
-                const value = state.stateOfFunc[key]
-                return <p key={index}>{stateOfFuncNames[key]} : {value ? value : <span style={{"color": "gray"}}>Не заполнено</span>}</p>
-              }
+              .map((key, index) => {
+                  const value = state.stateOfFunc[key]
+                return <p key={index}><b>{translateTitle.stateOfFunc[key]}</b> : {value ? value :
+                    <span style={{"color": "gray"}}>Не заполнено</span>}</p>
+                }
               )}
           </div>
-        : null }
+          : null}
         {diagramData ?
-        <div className="result__diagram" >
-          <BarChart barCategoryGap={5} layout="vertical" width={800} height={500} data={diagramData}
-                     margin={{ top: 5, right: 60, left: 110, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" domain={[0, 100]}/>
-            <YAxis
-              dataKey="name"
-              interval={0}
-              type="category"
-            />
-            <Tooltip />
-            {/*<Legend />*/}
-            {/*<Line type="monotone" dataKey="pv" stroke="#8884d8" />*/}
-            <Bar background={{ fill: '#dff1e6' }} minPointSize={5} type="monotone" dataKey="Результат" fill="#4cb373" >
-              <LabelList dataKey="Результат" content={renderCustomizedLabel} />
-            </Bar>
-          </BarChart>
-        </div> : null }
-        </div>
+          <div className="result__diagram">
+            <BarChart barCategoryGap={5} layout="vertical" width={800} height={500} data={diagramData}
+                      margin={{top: 5, right: 60, left: 110, bottom: 5}}>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <XAxis type="number" domain={[0, 100]}/>
+              <YAxis
+                dataKey="name"
+                interval={0}
+                type="category"
+              />
+              <Tooltip/>
+              <Bar background={{fill: '#dff1e6'}} minPointSize={5} type="monotone" dataKey="Результат" fill="#4cb373">
+                <LabelList dataKey="Результат" content={renderCustomizedLabel}/>
+              </Bar>
+            </BarChart>
+          </div> : null}
+          <div>
+            <p><b>Скорость чтения</b> {state.reading.speed} сл/мин</p>
+            {Object.keys(translateTitle.reading).map((key, index)=>{
+              const results = readingResult.map((res, index)=>{
+                  if(translateTitle.reading[key].data[res[0]]){
+                    return <li key={index}>{translateTitle.reading[key].data[res[0]]}</li>
+                  }
+                  return null
+                }
+              ).filter(item=>item !== null)
+              return <div key={index}><b>{translateTitle.reading[key].title}</b>
+                <ul>{results.length !== 0 ?
+                  results : <span style={{color: "gray"}}>Не заполнено</span>
+              }</ul>
+                </div>
+            })}
+          </div>
+      </div>
       <div className='diagnostic__bottom-section'>
         <button
           className='diagnostic__btn diagnostic__btn_cancel'
@@ -131,23 +124,23 @@ export default function Result(props) {
   )
 }
 
-function calcResult(data){
-  if (data.length === 0){
+function calcResult(data) {
+  if (data.length === 0) {
     return 0
   }
-  const tmp = data.reduce((sum, current)=>{
+  const tmp = data.reduce((sum, current) => {
     return sum + current.value
   }, 0)
   const result = Number((tmp / (data.length * 3)) * 100).toFixed(2)
   return parseFloat(result)
 }
 
-  function calcSectionResult(list){
-  const subsections = Object.keys(list).map(item=>{
+function calcSectionResult(list) {
+  const subsections = Object.keys(list).map(item => {
     return calcResult(list[item])
-  }).reduce((sum, current)=>{
-        return sum + current
-      }, 0)
+  }).reduce((sum, current) => {
+    return sum + current
+  }, 0)
 
   return parseFloat((subsections / Object.keys(list).length).toFixed(2))
   // const sections = await Promise.all(Object.keys(list).map(async function(item){

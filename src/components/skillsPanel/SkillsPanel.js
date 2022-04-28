@@ -27,7 +27,7 @@ export default function SkillsPanel(props) {
             className="skills-panel__tab-panel"
             selectedClassName="skills-panel__tab-panel_selected"
             key={name}>
-            <SkillList data={items} name={props.name} type={props.type}/>
+            <SkillList data={items} name={props.name} nameSec={name}/>
           </TabPanel>)}
       </Tabs>
     </div>
@@ -38,6 +38,7 @@ function SkillList(props) {
 
   const {data} = props
   const chunk = _.chunk(data, 5)
+  console.log(props)
   const analysis = useSelector(({diagnostic}) => diagnostic.tasks[props.name])
   const dispatch = useDispatch()
 
@@ -49,9 +50,9 @@ function SkillList(props) {
     <div className='skills-list'>
       {chunk.map((c, index) => {
         return <div key={index} className='skills-list__column'>
-          {c.map(({name, title}) => {
+          {c.map(({name, title, type}) => {
             const checked = analysis.skills[name]
-            return <div key={name} className='skills-list__checkbox'>
+            return <div key={name} className={`skills-list__checkbox ${type ? type : ''}`}>
               <input type="checkbox"
                      checked={checked}
                      onChange={handleChecked(props.name, name)}

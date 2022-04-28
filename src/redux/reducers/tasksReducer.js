@@ -60,7 +60,6 @@ const initialState = {
       "bySyllables": false,
       "slowlyInSyllables": false,
       "wholeWords": false,
-      "phrases": false,
       "passesSounds": false,
       "passesSyllables": false,
       "permutationsSounds": false,
@@ -83,7 +82,12 @@ const initialState = {
       "figurativeMeaning": false,
       "storyEventChains": false,
       "mainIdea": false,
-      "factualData": false
+      "factualData": false,
+      "noErrorsRight": false,
+      "intonedReading": false,
+      "persistentErrors": false,
+      "understanding": false,
+
     }
   },
   "writing": {

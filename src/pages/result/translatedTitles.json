@@ -1,0 +1,78 @@
+{
+  "stateOfFunc": {
+    "hearing": "Слух",
+    "vision": "Зрение",
+    "breath": "Дыхание",
+    "voice": "Голос",
+    "prosody": "Просодика",
+    "articulationApparatus": "Артикулляционный аппарат",
+    "motorSkills": "Моторика",
+    "additionalInformation": "Дополнительная информация"
+  },
+  "sensMotor":{
+    "artic": "Артикуляционная моторика",
+    "phonemics": "Фонематическое восприятие",
+    "sounds": "Звукопроизношение",
+    "syllable": "Звуко-слоговая структура"
+  },
+  "otherSections": {
+    "grammatic": "Грамматика",
+    "lexis": "Лексика",
+    "coherentSpeech": "Связная речь",
+    "langAnalysis": "Языковой анализ"
+  },
+  "reading":{
+    "readingMethod":{
+      "title": "Чтение ",
+      "data": {
+        "letterByLetter": "побуквенное.",
+        "bySyllables": "отрывистое слоговое.",
+        "slowlyInSyllables": "плавное слоговое.",
+        "wholeWords": "целыми словами и группами слов."
+      }
+    },
+    "right":{
+      "title": "Типичные ошибки при чтении: ",
+      "data": {
+        "passesSounds": "Пропуски звуков",
+        "passesSyllables": "Пропуски слогов",
+        "permutationsSounds": "Перестановки звуков",
+        "permutationsSyllables": "Перестановки слогов",
+        "replaceGSSounds": "Замены графически сходных звуков (п-б, ц-с)",
+        "replaceFSSounds": "Замены фонематически сходных звуков (л-м, ц-щ)",
+        "substitutionsSyllables": "Замены слогов",
+        "substitutionsWords": "Замены слов",
+        "additionsSounds": "Добавления (вставки) звуков",
+        "additionsSyllables": "Добавления (вставки) слогов",
+        "replaysSounds": "Повторы звуков",
+        "replaysSyllables": "Повторы слогов",
+        "replaysWords": "Повторы слов",
+        "wrongEmphasis": "Неправильная постановка ударения",
+        "aggrammRading": "Агграмматизмы",
+        "persistentErrors": "Типичные ошибки стойкие, повторяющиеся",
+        "noErrorsRight": "Ошибок не выявлено"
+      }
+    },
+    "expressiveness":{
+      "title": "Особенности выразительности:",
+      "data": {
+        "pausesOnPunctuationMarks": "Несоблюдение норм паузации",
+        "raiseAndLowerVoice": "Монотонное, не интонированное чтение",
+        "emphasizingImportantWords": "Неумение выделять голосом логические ударения",
+        "intonedКeading": "Чтение интонированное, с соблюдением логического ударения и норм паузации, передающих замысел автора"
+      }
+    },
+    "mindfulness":{
+      "title": "Особенности осознанности чтения:",
+      "data": {
+        "literalSense": "Непонимание значений слов в прямом значении",
+        "figurativeMeaning": "Непонимание значений слов в переносном значении",
+        "storyEventChains": "Нарушение понимания цепочки событий сюжета",
+        "mainIdea": "Неумение выделить основную мысль текста",
+        "factualData": "Искажение фактических данных текста",
+        "understanding": "Понимание значения отдельных слов, предложений и текста не нарушено."
+      }
+    }
+
+  }
+}
