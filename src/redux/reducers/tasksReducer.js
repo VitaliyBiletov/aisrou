@@ -144,35 +144,52 @@ export function TasksReducer(state = initialState, action) {
           [action.payload.name]: action.payload.value
         }
       })
+
     case SET_SPEED_READING:
       return Object.assign({}, state, {reading: {...state.reading, speed: action.payload}})
-    case SET_SKILL:
-      const {type, name, taskName, value} = action.payload
-      return Object.assign(
-        {},
-        state,
-        {[type]: {...state[type],
-            skills: {...state[type].skills,
-              [taskName]:{...state[type].skills[taskName], [name]:value}}
-          }})
-    case STATE_LOADING:
-      return Object.assign({}, state, {...action.payload.data})
-    case RESET_SKILLS:
+
+    case SET_SKILL:{
       const tmp = {}
-      const obj = Object.assign({},state[action.payload.type].skills[action.payload.taskName])
-      const skills = Object.keys(obj).map(skill=>{
-        if (skill === action.payload.name){
-          Object.assign(tmp, {[skill]: action.payload.value})
-          return {[skill]: action.payload.value}
+      const {type, name, taskName, value} = action.payload
+      const obj = Object.assign({},state[type].skills[taskName])
+      const names = ['noErrorsRight','intonedReading','understanding']
+      Object.keys(obj).forEach(skill=>{
+        if (names.includes(skill)){
+          return Object.assign(tmp, {[skill]: false})
         }
-        Object.assign(tmp, {[skill]: false})
-        return {[skill]: false}
+        if (skill === name){
+          Object.assign(tmp, {[skill]: value})
+        } else {
+          Object.assign(tmp, {[skill]: obj[skill]})
+        }
       })
       return Object.assign(
         {},
         state,
-        {[action.payload.type]: {...state[action.payload.type], skills: {...state[action.payload.type].skills,
-              [action.payload.taskName]: tmp  }}})
+        {[type]: {...state[type], skills: {...state[type].skills,
+              [taskName]: tmp }}})
+    }
+
+    case STATE_LOADING:{
+      return Object.assign({}, state, {...action.payload.data})
+    }
+
+    case RESET_SKILLS:{
+      const tmp = {}
+      const {type, name, taskName, value} = action.payload
+      const obj = Object.assign({},state[type].skills[taskName])
+      Object.keys(obj).forEach(skill=>{
+        if (skill === name){
+          return Object.assign(tmp, {[skill]: value})
+        }
+        return Object.assign(tmp, {[skill]: false})
+      })
+      return Object.assign(
+        {},
+        state,
+        {[type]: {...state[type], skills: {...state[type].skills, [taskName]: tmp }}})
+    }
+
     case RESET_TASKS:
       return Object.assign({}, initialState)
     default:

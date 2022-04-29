@@ -30,7 +30,6 @@ export function setSpeedReading(value) {
 }
 
 export function setSkill(type, name, taskName, value) {
-  console.log({type, name, taskName, value})
   return {
     type: SET_SKILL,
     payload: {type, name, taskName, value}
