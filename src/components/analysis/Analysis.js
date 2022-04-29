@@ -39,9 +39,9 @@ export default function Analysis(props) {
   return (
     <div className='analysis'>
       <div className='print__container'>
-        <button className='print__button' onClick={handlePlus}><FontAwesomeIcon icon={faPlus}/></button>
-        <button className='print__button' onClick={handleMinus}><FontAwesomeIcon icon={faMinus}/></button>
-        <button className='print__button' onClick={handlePrint}><FontAwesomeIcon icon={faPrint}/></button>
+        <button className='print__button status__btn-point' onClick={handlePlus}><FontAwesomeIcon icon={faPlus}/></button>
+        <button className='print__button status__btn-point' onClick={handleMinus}><FontAwesomeIcon icon={faMinus}/></button>
+        <button className='print__button status__btn-point' onClick={handlePrint}><FontAwesomeIcon icon={faPrint}/></button>
       </div>
       <div className="analysis__content">
         {text.title ? <p className='analysis__title'>{text.title}</p> : null}

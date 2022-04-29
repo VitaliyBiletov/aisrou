@@ -41,12 +41,14 @@ export default function Timer(props) {
 
   return (
     <div className='analysis__timer timer'>
-      <button className='timer__button timer__button_start' onClick={startTimer}><FontAwesomeIcon icon={faPlay}/>
-      </button>
-      <button className='timer__button timer__button_stop' onClick={stopTimer}><FontAwesomeIcon icon={faStop}/>
-      </button>
-      <div className="timer__progress">
-        <Circle percent={sec} strokeWidth="7" strokeColor={color}/>
+      <div className="timer__container">
+        <button className='timer__button timer__button_start status__btn-point' onClick={startTimer}><FontAwesomeIcon icon={faPlay}/>
+        </button>
+        <button className='timer__button timer__button_stop status__btn-point' onClick={stopTimer}><FontAwesomeIcon icon={faStop}/>
+        </button>
+        <div className="timer__progress">
+          <Circle percent={sec} strokeWidth="7" strokeColor={color}/>
+        </div>
       </div>
     </div>
   )

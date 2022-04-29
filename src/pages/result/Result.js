@@ -87,18 +87,16 @@ export default function Result(props) {
           <div>
             <p><b>Скорость чтения</b> {state.reading.speed} сл/мин</p>
             {Object.keys(translateTitle.reading).map((key, index)=>{
-              const results = readingResult.map((res, index)=>{
-                  if(translateTitle.reading[key].data[res[0]]){
-                    return <li key={index}>{translateTitle.reading[key].data[res[0]]}</li>
-                  }
-                  return null
-                }
-              ).filter(item=>item !== null)
-              return <div key={index}><b>{translateTitle.reading[key].title}</b>
-                <ul>{results.length !== 0 ?
-                  results : <span style={{color: "gray"}}>Не заполнено</span>
-              }</ul>
+              return (
+                <div key={index}>
+                  <p>{translateTitle.reading[key].title}</p>
+                  <ul>
+                    {Object.keys(translateTitle.reading[key].data).map((name, index)=>{
+                      return state.reading.skills[key][name] ? <li key={index}>{translateTitle.reading[key].data[name]}</li> : null
+                    })}
+                  </ul>
                 </div>
+                )
             })}
           </div>
       </div>
