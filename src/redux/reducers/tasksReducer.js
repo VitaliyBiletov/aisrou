@@ -104,10 +104,12 @@ const initialState = {
         "substitutions": false,
         "confusion": false,
         "letterGaps": false,
+        "noErrors": false
       },
       "undisturbedPronunciation":{
         "letterSubstitutions": false,
         "softnessDesignationErrors": false,
+        "noErrors": false
       },
       "violationForms":{
         "passes": false,
@@ -117,17 +119,23 @@ const initialState = {
         "consolidatedSpelling": false,
         "separateSpelling": false,
         "missingMark": false,
+        "noErrors": false
       },
       "underdevelopmentGrammatical":{
-        "morphologicalDisorders": false,
-        "syntaxViolations": false,
-        "textLevel": false,
+        "writingViolations": false,
+        "skipWords": false,
+        "wrongOrder": false,
+        "passes": false,
+        "permutationsOfParts": false,
+        "violationOfMeaning": false,
+        "noErrors": false
       },
       "visuospatialFunctions":{
         "mirrorSpelling": false,
         "addingLetterElements": false,
         "diffNumElements": false,
-        "sameNumElements": false
+        "sameNumElements": false,
+        "noErrors": false
       }
     }
   }
@@ -152,7 +160,7 @@ export function TasksReducer(state = initialState, action) {
       const tmp = {}
       const {type, name, taskName, value} = action.payload
       const obj = Object.assign({},state[type].skills[taskName])
-      const names = ['noErrorsRight','intonedReading','understanding']
+      const names = ['noErrorsRight','intonedReading','understanding','noErrors']
       Object.keys(obj).forEach(skill=>{
         if (names.includes(skill)){
           return Object.assign(tmp, {[skill]: false})

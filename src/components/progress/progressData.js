@@ -16,7 +16,7 @@ export const TASKS_COUNT = DIAG_DATA.map(section => {
   }
 
   if (section.type === 'analysis') {
-    return {name: section.name, title: section.title, type: section.type, count: 1}
+    return {name: section.name, title: section.title, type: section.type, count: section.options.length}
   }
 })
 

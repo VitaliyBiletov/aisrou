@@ -7,7 +7,10 @@ export function getCountOfCompleted(data, type) {
       return Object.values(data).filter(i => i).length
     }
     case 'analysis': {
-      return Object.values(data.skills).includes(true) ? 1 : 0
+      return Object.values(Object.values(data.skills)).reduce((sum, current) => {
+        let tmp = Object.values(current).includes(true) ? 1 : 0
+        return sum + tmp
+      }, 0)
     }
     case 'tasks': {
       return _.concat([], ...Object.values(data)).filter(i => Number.isInteger(i.value)).length

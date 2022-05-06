@@ -8,6 +8,8 @@ import Select from 'react-select'
 import Modal from 'react-modal'
 import {setStudent} from "../../redux/actions/infoActions";
 
+const typesWords = ["Первичная", "Вторичная"]
+
 const customStyleModal = {
   content: {
     position: 'relative',
@@ -59,7 +61,7 @@ export default function DiagnosticMenu() {
         setStudents(students)
         setIsLoading(true)
       })
-      getTypes().then(({data})=>setTypes(data))
+      // getTypes().then(({data})=>setTypes(data))
     }
 
   },[])
@@ -77,8 +79,12 @@ export default function DiagnosticMenu() {
       sessionStorage.setItem("student", JSON.stringify({id: e.value, label: e.label}))
       setActiveStudentId(e.value)
       getDiagnostics(e.value).then(diags=>{
+        const data = diags.data.map(item=>{
+          item["Тип"] = typesWords[item["Тип"]]
+          return item
+        })
         setFields(diags.fields)
-        setData(diags.data)
+        setData(data)
       }).catch(e=>console.log(e))
   }
 
@@ -147,6 +153,7 @@ export default function DiagnosticMenu() {
                     className='form__input'
                     type="date"
                     onChange={handleChange}
+                    required
                   />
                 </label>
 
@@ -155,13 +162,12 @@ export default function DiagnosticMenu() {
                   <select
                     name="type"
                     className='form__input'
+                    size={2}
                     onChange={handleChange}
+                    required
                   >
-                    {
-                      types.map(type=>
-                        <option key={type.id} value={type.id}>{type.title}</option>
-                      )
-                    }
+                    <option value="0">Первичная</option>
+                    <option value="1">Вторичная</option>
                   </select>
                 </label>
                 <label>
@@ -173,14 +179,14 @@ export default function DiagnosticMenu() {
                     type="number"
                     onChange={handleChange}
                     max="5"
-                    min="0"/>
+                    min="0"
+                    required
+                  />
                 </label>
               <button onClick={handleCreate} className='form__button'>Создать</button>
             </form>
           </div>
-
         </div>
-
       </Modal>
     </div>
   )

@@ -50,6 +50,7 @@ export default function Result(props) {
 
 
     setDiagramData(_.union(sensMotorResult, otherResult))
+
   }, [state.sensMotor.artic])
 
   return (
@@ -85,11 +86,12 @@ export default function Result(props) {
             </BarChart>
           </div> : null}
           <div>
+            <h3>Результаты чтения</h3>
             <p><b>Скорость чтения</b> {state.reading.speed} сл/мин</p>
             {Object.keys(translateTitle.reading).map((key, index)=>{
               return (
                 <div key={index}>
-                  <p>{translateTitle.reading[key].title}</p>
+                  <p><b>{translateTitle.reading[key].title}</b></p>
                   <ul>
                     {Object.keys(translateTitle.reading[key].data).map((name, index)=>{
                       return state.reading.skills[key][name] ? <li key={index}>{translateTitle.reading[key].data[name]}</li> : null
@@ -97,6 +99,21 @@ export default function Result(props) {
                   </ul>
                 </div>
                 )
+            })}
+          </div>
+          <div>
+            <h3>Результаты письма</h3>
+            {Object.keys(translateTitle.writing).map((key, index)=>{
+              return (
+                <div key={index}>
+                  <p><b>{translateTitle.writing[key].title}</b></p>
+                  <ul>
+                    {Object.keys(translateTitle.writing[key].data).map((name, index)=>{
+                      return state.writing.skills[key][name] ? <li key={index}>{translateTitle.writing[key].data[name]}</li> : null
+                    })}
+                  </ul>
+                </div>
+              )
             })}
           </div>
       </div>

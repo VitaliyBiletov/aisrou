@@ -78,7 +78,7 @@ $btn_status_size: 15px              //размер ячейки в статус�
     padding: 5px
     border-radius: 10px
     height: 20px
-    background-color: $status_section_color
+    background-color: #eafaff
 
   &__btn-score
     +flex(flex, row)
@@ -87,18 +87,29 @@ $btn_status_size: 15px              //размер ячейки в статус�
     position: relative
     height: $btn_status_size
     flex: 1
+    max-width: 100px
     border-radius: 3px
     box-shadow: 1px 1px darkgrey
     margin: 1px
     background-color: #fff
     cursor: pointer
     border: none
-    transition: 100ms
+    transition: 500ms
     &:hover
-      margin-bottom: 5px
+      filter: brightness(1.2)
     &_active
-      height: 20px
-      animation: flash 300ms linear
+      //height: 20px
+      animation: flash 100ms linear
+      &:after
+        content: " "
+        position: absolute
+        top: 140%
+        left: 0
+        width: 100%
+        height: 30%
+        border-bottom-right-radius: 10px
+        border-bottom-left-radius: 10px
+        background-color: coral
     &_red
       background-color: $red
 

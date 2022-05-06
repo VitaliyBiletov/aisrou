@@ -9,13 +9,13 @@ import Timer from "../timer/Timer";
 
 export default function Analysis(props) {
   const [fontSize, setFontSize] = useState('1em')
-  const [text, setText] = useState('')
+  const [text, setText] = useState({})
   const diagInfo = JSON.parse(sessionStorage.getItem('diagInfo'))
   const {speed} = useSelector(state=>state.diagnostic.tasks.reading)
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    setText(props.texts.find(text => text.classNum === diagInfo.classNumber && text.type === diagInfo.typeId).text)
+    setText(props.texts.find(text => text.classNum === diagInfo.classNumber && text.type === diagInfo.type).text)
   }, [])
 
   const handlePrint = (e) => {

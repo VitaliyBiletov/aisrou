@@ -67,21 +67,21 @@ export function Task(props) {
 }
 
 export function generatedTask(Component, {...props}) {
-  const {type} = props
   const [activeItem, setActiveItem] = useState(0)
   const [title, setTitle] = useState('')
   const [instruction, setInstruction] = useState('')
-  const {typeId, classNumber} = useSelector(state => state.diagnostic.info.data)
+  const {type, classNumber} = useSelector(state => state.diagnostic.info.data)
+
 
   useEffect(() => {
     if (props.type === "writing" && Array.isArray(props.title)) {
-      const {title} = props.title.find(t => t.classNumber === classNumber && t.typeId === typeId)
+      const {title} = props.title.find(t => t.classNumber === classNumber && t.typeId === type)
       setTitle(title)
     } else {
       setTitle(props.title)
     }
     if (props.type === "writing" && Array.isArray(props.instruction)) {
-      const {instruction} = props.instruction.find(t => t.classNumber === classNumber && t.typeId === typeId)
+      const {instruction} = props.instruction.find(t => t.classNumber === classNumber && t.typeId === type)
       setInstruction(instruction)
     } else {
       setInstruction(props.instruction)

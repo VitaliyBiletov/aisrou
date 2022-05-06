@@ -1730,6 +1730,11 @@
           {
             "name": "letterGaps",
             "title": "Пропуски букв, соответствующие пропускам звуков в устной речи"
+          },
+          {
+            "name": "noErrors",
+            "title": "Ошибки отсутствуют",
+            "type": "right"
           }
         ]
       },
@@ -1744,6 +1749,11 @@
           {
             "name": "softnessDesignationErrors",
             "title": "Ошибки обозначения мягкости согласных на письме "
+          },
+          {
+            "name": "noErrors",
+            "title": "Ошибки отсутствуют",
+            "type": "right"
           }
         ]
       },
@@ -1778,6 +1788,11 @@
           {
             "name": "missingMark",
             "title": "Отсутствие знака препинания в конце предложения"
+          },
+          {
+            "name": "noErrors",
+            "title": "Ошибки отсутствуют",
+            "type": "right"
           }
         ]
       },
@@ -1786,16 +1801,33 @@
         "title": "Недоразвитие грамматического строя речи",
         "items": [
           {
-            "name": "morphologicalDisorders",
-            "title": "Морфологические нарушения"
+            "name": "writingViolations",
+            "title": "Нарушения на письме словоизменения и словообразования"
           },
           {
-            "name": "syntaxViolations",
-            "title": "Синтаксические нарушения"
+            "name": "skipWords",
+            "title": "Пропуск слов в предложении"
           },
           {
-            "name": "textLevel",
-            "title": "На уровне текста"
+            "name": "wrongOrder",
+            "title": "Неправильный порядок слов в предложении"
+          },
+          {
+            "name": "passes",
+            "title": "Пропуски"
+          },
+          {
+            "name": "permutationsOfParts",
+            "title": "Перестановки частей текста"
+          },
+          {
+            "name": "violationOfMeaning",
+            "title": "Нарушение смысла текста"
+          },
+          {
+            "name": "noErrors",
+            "title": "Ошибки отсутствуют",
+            "type": "right"
           }
         ]
       },
@@ -1818,6 +1850,11 @@
           {
             "name": "sameNumElements",
             "title": "Замены графически сходных букв состоящих из одинаковых элементов, но различно расположенных в пространстве"
+          },
+          {
+            "name": "noErrors",
+            "title": "Ошибки отсутствуют",
+            "type": "right"
           }
         ]
       }
