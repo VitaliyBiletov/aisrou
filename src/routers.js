@@ -4,12 +4,13 @@ import { ADMIN_ROUTE,
         LOGIN_ROUTE,
         APP_ROUTE,
         DIAGNOSTIC_MENU_ROUTE,
+        DYNAMIC_ROUTE
         } from "./utils/const";
 import Auth from "./pages/auth/Auth";
 import Diagnostic from "./pages/diagnostic/Diagnostic";
 import DiagnosticMenu from "./pages/diagnostic-menu/DiagnosticMenu";
 import Admin from "./pages/admin/Admin";
-import Result from "./pages/result/Result";
+import Dynamic from "./pages/dynamic/Dynamic";
 
 export const adminRouters = [
   {
@@ -26,6 +27,10 @@ export const authRouters = [
   {
     path: DIAGNOSTIC_ROUTE,
     element: <Diagnostic/>
+  },
+  {
+    path: DYNAMIC_ROUTE,
+    element: <Dynamic/>
   }
 ]
 

@@ -25,7 +25,6 @@ const renderCustomizedLabel = (props) => {
       </text>
     </g>
   )
-
 };
 
 export default function Result(props) {

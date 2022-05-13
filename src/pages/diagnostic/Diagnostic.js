@@ -15,6 +15,7 @@ import {saveDiagnostic, tasksLoading} from "../../http/diagnosticAPI";
 import {setInfoData, setStudent} from "../../redux/actions/infoActions";
 import {stateLoading, resetState} from "../../redux/actions/tasksActions";
 import Result from "../result/Result";
+import {Footer} from "../../components/footer/Footer";
 
 export default function Diagnostic(props) {
   const [activeTab, setActiveTab] = useState(0)
@@ -134,7 +135,7 @@ export default function Diagnostic(props) {
           </button>
           : null
       }
-      <div className='diagnostic__bottom-section'>
+      <Footer>
         <button className='diagnostic__btn diagnostic__btn_save' onClick={handleClick}>Сохранить</button>
         <button
           className='diagnostic__btn diagnostic__btn_cancel'
@@ -146,7 +147,7 @@ export default function Diagnostic(props) {
         >Отмена
         </button>
         <Progress/>
-      </div>
+      </Footer>
     </div>
   )
 }

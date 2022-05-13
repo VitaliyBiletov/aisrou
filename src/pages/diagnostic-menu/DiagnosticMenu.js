@@ -2,11 +2,15 @@ import React, {useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Header} from "../../components/header/Header"
 import {getListGroups} from "../../http/groupAPI"
-import {getDiagnostics, createDiagnostic, removeDiagnostic, getTypes} from "../../http/diagnosticAPI"
+import {getDiagnostics, createDiagnostic} from "../../http/diagnosticAPI"
 import Table from "../../components/table/Table"
 import Select from 'react-select'
 import Modal from 'react-modal'
+import {useNavigate} from 'react-router-dom'
+import {DYNAMIC_ROUTE} from "../../utils/const";
 import {setStudent} from "../../redux/actions/infoActions";
+import {faChartLine} from "@fortawesome/free-solid-svg-icons/index";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome/index.es";
 
 const typesWords = ["Первичная", "Вторичная"]
 
@@ -50,8 +54,10 @@ export default function DiagnosticMenu() {
   const [data, setData] = useState(null)
   const [diagInfo, setDiagInfo] = useState({})
   const [activeStudentId, setActiveStudentId] = useState(null)
+  const [defaultStudent, setDefaultStudent] = useState(null)
   const [modalCreateDiagIsOpen, setModalCreateDiagIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const formRef = useRef()
 
@@ -61,6 +67,21 @@ export default function DiagnosticMenu() {
         setStudents(students)
         setIsLoading(true)
       })
+      const student = JSON.parse(sessionStorage.getItem("student"))
+      console.log(student)
+      if (student){
+        setActiveStudentId(student.id)
+        setDefaultStudent(student)
+        getDiagnostics(student.id).then(diags=>{
+          const data = diags.data.map(item=>{
+            item["Тип"] = typesWords[item["Тип"]]
+            return item
+          })
+          setFields(diags.fields)
+          setData(data)
+        }).catch(e=>console.log(e))
+      }
+
       // getTypes().then(({data})=>setTypes(data))
     }
 
@@ -112,6 +133,7 @@ export default function DiagnosticMenu() {
         <h1 className='diagnostic-menu__h1'>Выберите ученика</h1>
         <div className='diagnostic-menu__select'>
           <Select
+            defaultValue={{value: defaultStudent.id, label: defaultStudent.label}}
             placeholder="Выберите ученика"
             styles={customStyles}
             onChange={handleChangeStudent}
@@ -124,10 +146,17 @@ export default function DiagnosticMenu() {
           <h3 className='diagnostic-menu__h3'>
             Обследования
             <button
-              className='diagnostic-menu__button_type_add'
+              className='diagnostic-menu__button diagnostic-menu__button_type_add'
               onClick={openModalCreateDiag}
               title='Добавить'
             >+</button>
+            <button
+              className='diagnostic-menu__button diagnostic-menu__button_type_compare'
+              onClick={()=>navigate(DYNAMIC_ROUTE)}
+              title='Динамика'
+            >
+              <FontAwesomeIcon className="tbody__icon" icon={faChartLine} />
+            </button>
           </h3>
           <div className="diagnostic-menu__table">
             {data ?

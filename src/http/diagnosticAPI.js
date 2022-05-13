@@ -6,6 +6,11 @@ export async function getDiagnostics(studentId) {
   return data
 }
 
+export async function getDiagnosticsList(studentId) {
+  const {data} = await $authHost.get(`api/diagnostics/list?studentId=${studentId}`)
+  return data
+}
+
 export async function createDiagnostic(userId, studentId, date, typeId, classNumber, tasks) {
   const res = await $authHost.post(`api/diagnostics/create`, {userId, studentId, typeId, date, classNumber, tasks})
   return res
@@ -21,22 +26,12 @@ export async function saveDiagnostic(data) {
   return res
 }
 
-export async function getTypes() {
-  const res = await $authHost.get(`api/diagnostics/types`)
-  return res
-}
-
-export async function removeDiagnostic(diagId) {
-  const res = await $authHost.delete(`api/diagnostics/remove/${diagId}`)
-  return res
-}
-
 export async function getDiagnostic(diagId) {
     const res = await $authHost.get(`api/diagnostics/${diagId}`)
     return res
 }
 
-export async function getResult(diagId) {
-  const res = await $authHost.get(`api/diagnostics/result/${diagId}`)
+export async function compare(diagId1, diagId2) {
+  const res = await $authHost.get(`api/diagnostics/compare?id1=${diagId1}&id2=${diagId2}`)
   return res
 }

@@ -133,17 +133,20 @@ $btn_status_size: 15px              //размер ячейки в статус�
     font-family: MusticaproSemibold
     text-align: center
     position: absolute
-    top: -40px
-    left: 0
+    top: -20px
+    left: 50%
+    transform: translate(-50%, 0)
     width: max-content
     background-color: #9696ea
     color: #fff
     padding: 5px
     border-radius: 5px
     opacity: 0
+    pointer-events: none
     transition: 200ms
 
   [data-tooltip]:hover:before
+    top: -40px
     opacity: 1
 
   &__points-section
