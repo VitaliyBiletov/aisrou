@@ -23,9 +23,8 @@
   &__container
     font-family: Arial
     width: 850px
-    margin: 0 auto
-
-  &__stateOfFunc
+    margin: 50px auto
+  &__section-container
     display: flex
     flex-direction: row
   &__column
@@ -38,4 +37,34 @@
         background-color: #dff1e6
       &_1
         background-color: #ffeae0
-  &__title
+  &__section-title
+    text-align: center
+
+.print
+  @media print
+    display: block
+    .header, .footer
+      display: none
+    .dynamic-data
+      &__container
+        font-family: Arial
+        width: 850px
+        margin: 50px auto
+      &__section-container
+        display: flex
+        flex-direction: row
+      &__column
+        flex: 1
+        padding: 10px 20px
+        margin: 10px
+        border-radius: 10px
+        &_num
+          &_0
+            background-color: #fff
+          &_1
+            background-color: #fff
+      &__stateOfFunc, &__diagramm, &__reading
+        page-break-after: always
+    .dynamic__container
+      display: none
+

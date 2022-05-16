@@ -6,6 +6,8 @@ import Select from 'react-select'
 import {compare} from '../../http/diagnosticAPI'
 import {useSelector, useDispatch} from 'react-redux'
 import {getDiagnosticsList} from '../../http/diagnosticAPI'
+import translateTitle from "../result/translatedTitles"
+
 import {
   XAxis,
   YAxis,
@@ -79,7 +81,9 @@ export default function Dynamic(props) {
     setDiagnosticId2(e.value)
   }
 
-  return <div className="dynamic">
+  console.log(data.readingResults)
+
+  return <div className="dynamic print">
     <Header/>
     <h2 className="result__header">Динамика</h2>
     <div className="dynamic__container">
@@ -104,38 +108,69 @@ export default function Dynamic(props) {
     {Object.keys(data).length !== 0 ?
       <div className="dynamic-data">
         <div className="dynamic-data__container">
-          <div className="dynamic-data__stateOfFunc">
-            {data.stateOfFunc.data.map((item, index) => {
-              return <div key={index} className={`dynamic-data__column dynamic-data__column_num_${index}`}>
-                {Object.entries(item).map(([key, value], index) => <p key={index}><b>{key}</b>: {value}</p>)}
-              </div>
-            })}
+          <div className="dynamic-data__stateOfFunc stateOfFunc">
+            <h3 className='dynamic-data__section-title'>Состояние функций</h3>
+            <div className='dynamic-data__section-container'>
+              {data.stateOfFunc.data.map((item, index) => {
+                return <div key={index} className={`dynamic-data__column dynamic-data__column_num_${index}`}>
+                  {Object.entries(item).map(([key, value], index) => <p key={index}><b>{key}</b>: {value}</p>)}
+                </div>
+              })}
+            </div>
           </div>
-          <div className="dynamic__diagramm">
-            <BarChart barCategoryGap={5} layout="vertical" width={800} height={800} data={data.sectionsResults}
-                      margin={{top: 5, right: 60, left: 110, bottom: 5}}>
-              <CartesianGrid strokeDasharray="3 3"/>
-              <XAxis type="number" domain={[0, 100]}/>
-              <YAxis
-                dataKey="name"
-                interval={0}
-                type="category"
-              />
-              <Bar background={{fill: '#dff1e6'}} minPointSize={5} type="monotone" dataKey="uv" fill="#4cb373">
-                <LabelList dataKey="uv" content={renderCustomizedLabel}/>
-              </Bar>
-              <Bar background={{fill: '#ffeae0'}} minPointSize={5} type="monotone" dataKey="pv" fill="#ff7f50">
-                <LabelList dataKey="pv" content={renderCustomizedLabel}/>
-              </Bar>
-            </BarChart>
+          <div className="dynamic-data__diagramm diagramm">
+            <h3 className='dynamic-data__section-title'>Динамика результатов логопедической работы</h3>
+            <div className="diagramm__container">
+              <BarChart barCategoryGap={5} layout="vertical" width={800} height={800} data={data.sectionsResults}
+                        margin={{top: 5, right: 60, left: 110, bottom: 5}}>
+                <CartesianGrid strokeDasharray="3 3"/>
+                <XAxis type="number" domain={[0, 100]}/>
+                <YAxis
+                  dataKey="name"
+                  interval={0}
+                  type="category"
+                />
+                <Bar background={{fill: '#dff1e6'}} minPointSize={5} type="monotone" dataKey="uv" fill="#4cb373">
+                  <LabelList dataKey="uv" content={renderCustomizedLabel}/>
+                </Bar>
+                <Bar background={{fill: '#ffeae0'}} minPointSize={5} type="monotone" dataKey="pv" fill="#ff7f50">
+                  <LabelList dataKey="pv" content={renderCustomizedLabel}/>
+                </Bar>
+              </BarChart>
+            </div>
+          </div>
+          <div className='dynamic-data__reading '>
+            <h3 className='dynamic-data__section-title'>Чтение</h3>
+            <div className='dynamic-data__section-container'>
+              {data.readingResults.map((item, index) => {
+                return <div key={index} className={`dynamic-data__column dynamic-data__column_num_${index}`}>
+                  <p><b>Скорость чтения:</b> {item.speed}</p>
+                  {Object.keys(translateTitle.reading).map((key, index) => {
+                    return (
+                      <div key={index}>
+                        <p><b>{translateTitle.reading[key].title}</b></p>
+                        <ul>
+                          {Object.keys(translateTitle.reading[key].data).map((name, index) => {
+                            return item.skills[key][name] ?
+                              <li key={index}>{translateTitle.reading[key].data[name]}</li> : null
+                          })}
+                        </ul>
+                      </div>
+                    )
+                  })}
+                </div>
+              })
+              }
+            </div>
           </div>
         </div>
       </div> : null}
-      <Footer>
-        <button
-          className='diagnostic__btn diagnostic__btn_cancel'
-          onClick={() => navigate(DIAGNOSTIC_MENU_ROUTE)
-                }>Назад</button>
-      </Footer>
+    <Footer>
+      <button
+        className='diagnostic__btn diagnostic__btn_cancel'
+        onClick={() => navigate(DIAGNOSTIC_MENU_ROUTE)
+        }>Назад
+      </button>
+    </Footer>
   </div>
 }

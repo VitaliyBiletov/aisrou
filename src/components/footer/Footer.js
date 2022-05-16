@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Footer(props) {
-  return <div className='diagnostic__bottom-section'>
+  return <div className='diagnostic__bottom-section footer'>
     {props.children}
   </div>
 }
