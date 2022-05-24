@@ -35,3 +35,8 @@ export async function compare(diagId1, diagId2) {
   const res = await $authHost.get(`api/diagnostics/compare?id1=${diagId1}&id2=${diagId2}`)
   return res
 }
+
+export async function getResults(year, classNumber) {
+  const res = await $authHost.post(`api/diagnostics/results`, {year, classNumber})
+  return res
+}
