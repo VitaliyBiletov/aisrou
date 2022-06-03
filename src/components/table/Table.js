@@ -9,8 +9,6 @@ import {EditForm} from "../../components/forms/EditForm";
 import {RemoveForm} from "../../components/forms/RemoveForm";
 import {SetPasswordForm} from "../forms/SetPasswordForm";
 import { Line } from 'rc-progress'
-
-
 import {DIAGNOSTIC_ROUTE} from "../../utils/const";
 import {setInfoData} from "../../redux/actions/infoActions";
 import {getDiagnostic} from "../../http/diagnosticAPI";

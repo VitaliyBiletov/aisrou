@@ -26,9 +26,14 @@
     width: 100%
     margin: 20px
 
-.title
-  margin: 0
-  color: $title_color
+.admin-section
+  &__button
+    @extend %button
+    color: $text_color
+
+  &__title
+    margin: 0px 0px 10px 0px
+    color: $title_color
 
 .active
   color: $text_active

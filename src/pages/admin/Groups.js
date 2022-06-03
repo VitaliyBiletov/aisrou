@@ -86,8 +86,8 @@ export function Groups(props) {
   }
 
   return (
-    <div className='groups'>
-      <h2 className='groups__title title'>Группы</h2>
+    <div className='admin-section groups'>
+      <h2 className='admin-section__title'>Группы</h2>
       {isLoading ?
         <>
         <form className='groups__form'>
@@ -116,7 +116,7 @@ export function Groups(props) {
         </form>
       <button
         onClick={handleAttach}
-        className='groups__button'
+        className='admin-section__button'
       >Прикрепить</button>
         <div className='attached-students'>
           <h3 className='attached-students__h4'>Закреплённые ученики</h3>
