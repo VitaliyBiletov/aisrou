@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {Routes, Route, NavLink} from 'react-router-dom'
-import {Management} from "./Management";
+import Management from "./Management";
 import {getAll} from "../../http/managementAPI";
 import {Groups} from "./Groups";
 import {TailSpin} from 'react-loader-spinner'
-import {Header} from "../../components/header/Header";
+import Header from "../../components/header/Header";
 import ResultsForClass from "../../components/resultsForClass/ResultsForClass";
 
 

@@ -1,6 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 
+//Панель расшифровки результатов по цветам
 export default function Explanation(props){
   return(
     <div className="explanation">
@@ -29,4 +31,8 @@ export default function Explanation(props){
       </div>
     </div>
   )
+}
+
+Explanation.propTypes = {
+  hints: PropTypes.array
 }

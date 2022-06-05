@@ -2,8 +2,10 @@
   border-radius: 20px
   width: 700px
   margin: 0 auto
+
   &__description
     margin: 0
+
   &__panel
     background-color: #f7f7fd
     border: 1px solid lightgray
@@ -12,16 +14,20 @@
     display: flex
     align-items: center
     flex-direction: row
+
   &__timer
     flex: 1
     margin: 10px 0
     border-right: 1px solid lightgray
+
   &__content
     width: 600px
     margin: 0 auto
     font-family: Cambria
+
   &__title
     font-weight: bold
+
   &__text
     white-space: pre-wrap
     overflow: hidden
@@ -29,41 +35,48 @@
     text-align: justify
     border: none
     outline: none
+
   &__word
     display: inline-block
     padding: 0 3px
+
     &:first-child
       margin-left: 30px
+
     &:hover
       cursor: pointer
       border-radius: 5px
       color: #fff
       text-shadow: 1px 1px #4e4583
       background-color: #c8c8f4
+
   .active-word
     background-color: #7e87de
     border-radius: 5px
     color: #fff
     text-shadow: 1px 1px #4e4583
+
   &__author
     text-align: right
+
   &__speed
     display: flex
     flex-direction: column
     flex: 1
+
   &__speed-count
     font-size: 2.3em
     color: #4e4583
-
-
 
 @media screen and (max-width: 770px)
   .analysis
     width: 600px
 
 .print
+
   &__container
     text-align: right
+
   &__button
     margin: 5px
     background-color: #ff9494
@@ -71,6 +84,7 @@
     border: none
     padding: 5px 10px
     border-radius: 5px
+
     &:hover
       cursor: pointer
       background-color: #ff2e2e

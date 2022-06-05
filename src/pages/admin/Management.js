@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Table from "../../components/table/Table";
 import {getAll} from "../../http/userAPI";
-import {RegistrationForm} from "../../components/forms/RegistrationForm";
+import RegistrationForm from "../../components/forms/RegistrationForm";
 import Modal from 'react-modal'
 
 
@@ -16,7 +16,7 @@ const customStyle = {
 
 Modal.setAppElement('#root')
 
-function Management(props) {
+export default function Management(props) {
     const [functions, setFunctions] = useState({})
     const [modalRegistrationIsOpen, setModalRegistrationIsOpen] = useState(false)
 
@@ -79,5 +79,3 @@ function Management(props) {
         </div>
     )
 }
-
-export {Management}

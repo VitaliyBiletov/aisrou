@@ -2,12 +2,8 @@ import {$authHost} from './index'
 
 //userAPI and studentAPI
 export async function registration(type, data) {
-  try {
     const res = await $authHost.put(`api/${type}/`, data)
     return res.data
-  } catch (e) {
-    console.log("managementAPI (registration) - ",e.response.data)
-  }
 }
 
 //userAPI and studentAPI

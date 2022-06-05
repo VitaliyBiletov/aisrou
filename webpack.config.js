@@ -10,7 +10,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
-                use:{
+                use: {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env', '@babel/preset-react']
@@ -42,14 +42,14 @@ module.exports = {
         filename: 'index_[contenthash].js',
         publicPath: '/',
     },
-    plugins:[
+    plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
         new CleanWebpackPlugin(),
         new Dotenv()
     ],
-    devServer:{
+    devServer: {
         port: 8000,
         static: {
             directory: path.join(__dirname, './dist'),

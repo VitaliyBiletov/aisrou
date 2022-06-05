@@ -53,7 +53,7 @@ export default function ResultsForClass(props) {
             draggable: true,
             progress: undefined,
         }
-        switch(type){
+        switch (type) {
             case "success":
                 toast.success(text, options)
                 break

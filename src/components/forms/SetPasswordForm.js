@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import {setUserPassword} from "../../http/managementAPI";
+import PropTypes from 'prop-types';
 
-function SetPasswordForm(props) {
+//Форма изменения пароля
+export default function SetPasswordForm(props) {
   const [password, setPassword] = useState(null)
   const [password2, setPassword2] = useState(null)
 
@@ -35,5 +37,3 @@ function SetPasswordForm(props) {
     </div>
   )
 }
-
-export {SetPasswordForm}

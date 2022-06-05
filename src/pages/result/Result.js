@@ -28,7 +28,7 @@ const renderCustomizedLabel = (props) => {
     )
 };
 
-export default function Result(props) {
+export default function Result() {
     const navigate = useNavigate()
     const [diagramData, setDiagramData] = useState([])
     const [readingResult, setReadingResult] = useState([])
@@ -161,14 +161,4 @@ function calcSectionResult(list) {
     }, 0)
 
     return parseFloat((subsections / Object.keys(list).length).toFixed(2))
-    // const sections = await Promise.all(Object.keys(list).map(async function(item){
-    //   const result = list[item].map(item=>{
-    //     return calcResult(item)
-    //   }).reduce((sum, current)=>{
-    //     return sum + current
-    //   }, 0)
-    // return {result}
-    // }))
-    // console.log(sections)
-    // return {}
 }

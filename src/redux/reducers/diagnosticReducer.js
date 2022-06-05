@@ -4,6 +4,6 @@ import {InfoReducer} from "./infoReducer";
 
 
 export const DiagnosticReducer = combineReducers({
-  info: InfoReducer,
-  tasks: TasksReducer,
+    info: InfoReducer,
+    tasks: TasksReducer,
 })

@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {Header} from "../../components/header/Header"
+import Header from "../../components/header/Header"
 import {getListGroups} from "../../http/groupAPI"
 import {getDiagnostics, createDiagnostic} from "../../http/diagnosticAPI"
 import Table from "../../components/table/Table"

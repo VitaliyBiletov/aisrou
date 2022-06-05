@@ -4,35 +4,14 @@ import {useNavigate} from 'react-router-dom';
 import {login} from '../../http/userAPI'
 import {ADMIN_USERS_ROUTE, DIAGNOSTIC_MENU_ROUTE} from "../../utils/const";
 import {setUser} from "../../redux/actions/userActions";
-import {ToastContainer, toast} from "react-toastify";
+import {ToastContainer} from "react-toastify";
+import {notify} from '../../utils/notify'
 
 export default function LoginForm() {
     const [email, setEmail] = useState('vitaxa17@yandex.ru')
     const [password, setPassword] = useState('1234')
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
-    const notify = (type, text) => {
-        const options = {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        }
-        switch (type) {
-            case "success":
-                toast.success(text, options)
-                break
-            case "error":
-                toast.error(text, options)
-                break
-            default:
-                toast.info('Неизвестная ошибка', options)
-        }
-    }
 
     const handleClick = async (e) => {
         e.preventDefault()

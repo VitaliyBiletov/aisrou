@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom'
 import {DIAGNOSTIC_MENU_ROUTE} from "../../utils/const";
-import {Header} from "../../components/header/Header";
+import Header from "../../components/header/Header";
 import Select from 'react-select'
 import {compare} from '../../http/diagnosticAPI'
-import {useSelector, useDispatch} from 'react-redux'
 import {getDiagnosticsList} from '../../http/diagnosticAPI'
 import translateTitle from "../result/translatedTitles"
 
@@ -53,20 +52,18 @@ const customStyles = {
     }
 }
 
-export default function Dynamic(props) {
+export default function Dynamic() {
     const [data, setData] = useState({})
     const [listDignostics, setListDiagnosttics] = useState([])
     const [diagnosticId1, setDiagnosticId1] = useState()
     const [diagnosticId2, setDiagnosticId2] = useState()
     const navigate = useNavigate()
-    const state = useSelector(state => state.diagnostic.info)
 
     useEffect(() => {
         const studentId = JSON.parse(sessionStorage.getItem("student")).id
         getDiagnosticsList(studentId).then(list => {
             setListDiagnosttics(list)
         })
-
     }, [])
 
     const handleCompare = async (e) => {

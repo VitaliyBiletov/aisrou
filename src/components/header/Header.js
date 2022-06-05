@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom/index";
 import {useSelector} from "react-redux";
 
 
-function Header(props) {
+export default function Header(props) {
   const navigate = useNavigate()
   const {fullName} = useSelector(state=>state.user)
 
@@ -34,5 +34,3 @@ function Header(props) {
     </header>
   )
 }
-
-export {Header}
